@@ -6,24 +6,66 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
 
 class ListOrdersViewController: UIViewController {
-
+    
+    @IBOutlet weak var tableView: UITableView!
+    
+    var viewModel: ListOrdersViewModel!
+    var disposeBag = DisposeBag()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        title = viewModel.title
+        subscribeToLoading()
+        registerCells()
+        subscribeToResponse()
+        subscribeToSelection()
+        viewModel.getData()
     }
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    func subscribeToLoading() {
+        viewModel.loadingBehavior.subscribe(onNext: { [weak self] (isLoading) in
+            guard let self = self else {return}
+            if isLoading {
+                self.showSpinner()
+            } else {
+                self.hideSpinner()
+            }
+        }).disposed(by: disposeBag)
     }
-    */
-
+    
+    private func registerCells() {
+        tableView.register(UINib(nibName: DishListTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: DishListTableViewCell.identifier)
+    }
+    
+    func subscribeToResponse(){
+        //
+        viewModel.orders.bind(to: tableView
+                                .rx
+                                .items(cellIdentifier: DishListTableViewCell.identifier,
+                                       cellType: DishListTableViewCell.self)){ row, order, cell in
+            cell.setup(dish: order.dish!)
+            
+        }.disposed(by: disposeBag)
+        
+    }
+    
+    func subscribeToSelection() {
+        tableView.rx.modelSelected(Order.self)
+            .bind {[weak self] order in
+                guard let self = self else {return}
+                
+                self.viewModel.selected(dish: order.dish!)
+            }
+            .disposed(by: disposeBag)
+    }
+    
+    deinit{
+        print("deinit ListOrdersViewController")
+    }
 }
+

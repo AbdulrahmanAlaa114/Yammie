@@ -17,23 +17,24 @@ final class OnboardingCoordinator : BaseCoordinator{
     
     override func start() {
         
-        let onboardingViewController = OnboardingViewController(nibName: "OnboardingViewController", bundle: nil)
+        let viewController = OnboardingViewController()
         
-        
-        onboardingViewController.coordinator = self //remove when create view model
-//        let loginViewModel = LoginViewModel()
-//        loginViewModel.coordinator = self
-//        loginViewVontroller.viewModel = loginViewModel
-        navigationController.setViewControllers([onboardingViewController], animated: false)
+        viewController.coordinator = self //remove when create view model
+        navigationController.pushViewController(viewController, animated: true)
+//        navigationController.setViewControllers([onboardingViewController], animated: false)
         
     }
     
     func startHome(){
         
-        let homeCoordinator = HomeCoordinator(navigationController: navigationController)
-        childCoordinators.append(homeCoordinator)
-        homeCoordinator.start()
+        let coordinator = HomeCoordinator(navigationController: navigationController)
+        add(coordinator: coordinator)
+        coordinator.start()
         
+    }
+    
+    deinit{
+        print("deinit OnboardingCoordinator")
     }
     
 }

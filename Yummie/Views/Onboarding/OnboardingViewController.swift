@@ -16,7 +16,7 @@ class OnboardingViewController: UIViewController {
     
     var slides: [OnboardingSlide] = []
     
-    var coordinator:OnboardingCoordinator!
+    var coordinator:OnboardingCoordinator?
     
     var currentPage = 0 {
         didSet {
@@ -42,18 +42,25 @@ class OnboardingViewController: UIViewController {
         ]
         
         pageControl.numberOfPages = slides.count
+     
     }
     
     @IBAction func nextBtnClicked(_ sender: UIButton) {
         if currentPage == slides.count - 1 {
-            
-            coordinator.startHome()
+            UserDefaults.standard.hasOnboarded = true
+            coordinator?.startHome()
             
         } else {
             currentPage += 1
             let indexPath = IndexPath(item: currentPage, section: 0)
             collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+           
+        
         }
+    }
+    
+    deinit{
+        print("deinit OnboardingViewController")
     }
     
 }
@@ -70,12 +77,14 @@ extension OnboardingViewController: UICollectionViewDelegate, UICollectionViewDa
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
+        return CGSize(width: collectionView.frame.width, height: collectionView.frame.height - 50)
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let width = scrollView.frame.width
         currentPage = Int(scrollView.contentOffset.x / width)
+        
+       
     }
 }
 

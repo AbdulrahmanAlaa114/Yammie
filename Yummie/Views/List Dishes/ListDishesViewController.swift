@@ -6,24 +6,65 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class ListDishesViewController: UIViewController {
-
+    
+    @IBOutlet weak var tableView: UITableView!
+    
+    var disposeBag = DisposeBag()
+    var viewModel: ListDishesViewModel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        title = viewModel.title
+        subscribeToLoading()
+        registerCells()
+        subscribeToResponse()
+        subscribeToSelection() 
+        viewModel.getData()
+        
     }
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    func subscribeToLoading() {
+        viewModel.loadingBehavior.subscribe(onNext: { [weak self] (isLoading) in
+            guard let self = self else {return}
+            if isLoading {
+                self.showSpinner()
+            } else {
+                self.hideSpinner()
+            }
+        }).disposed(by: disposeBag)
     }
-    */
-
+    
+    private func registerCells() {
+        tableView.register(UINib(nibName: DishListTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: DishListTableViewCell.identifier)
+    }
+    
+    func subscribeToResponse(){
+        
+        viewModel.dishes.bind(to: tableView
+                                .rx
+                                .items(cellIdentifier: DishListTableViewCell.identifier, cellType: DishListTableViewCell.self)){ row, dish, cell in
+            cell.setup(dish: dish)
+            
+        }.disposed(by: disposeBag)
+        
+    }
+    
+    func subscribeToSelection() {
+        tableView.rx.modelSelected(Dish.self)
+            .bind {[weak self] dish in
+                guard let self = self else {return}
+                
+                self.viewModel.selected(dish: dish)
+            }
+            .disposed(by: disposeBag)
+    }
+    
+    deinit{
+        print("deinit ListDishesViewController")
+    }
 }

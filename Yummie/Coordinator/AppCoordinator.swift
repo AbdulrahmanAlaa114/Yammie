@@ -19,13 +19,16 @@ final class AppCoordinator: BaseCoordinator{
     override func start() {
         
         let navigationController = UINavigationController()
-        
-        let onboardingCoordinator = OnboardingCoordinator(navigationController: navigationController)
-        
-        add(coordinator: onboardingCoordinator)
-        
-        onboardingCoordinator.start()
-        
+//        UserDefaults.standard.hasOnboarded = false
+        if UserDefaults.standard.hasOnboarded {
+            let coordinator = HomeCoordinator(navigationController: navigationController)
+            add(coordinator: coordinator)
+            coordinator.start()
+        } else {
+            let coordinator = OnboardingCoordinator(navigationController: navigationController)
+            add(coordinator: coordinator)
+            coordinator.start()
+        }
         window.rootViewController = navigationController
         window.makeKeyAndVisible()
         
