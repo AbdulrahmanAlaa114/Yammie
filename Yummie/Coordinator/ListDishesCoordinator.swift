@@ -36,9 +36,9 @@ final class ListDishesCoordinator: BaseCoordinator{
         
     }
     
-    deinit{
-        print("deinit ListDishesCoordinator")
-    }
+//    deinit{
+//        print("deinit ListDishesCoordinator")
+//    }
     
     
 }

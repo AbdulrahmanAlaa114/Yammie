@@ -56,6 +56,17 @@ class ListDishesViewModelTest: XCTestCase {
     
     }
 
+    func testGoTo(){
+        
+        let dish = Dish(id: "", name: "", description: "", image: "", calories: 0)
+        sut.coordinator?.goToDishDetail(dish: dish)
+        
+    }
     
+    func testSelectedDish(){
+        let dish = Dish(id: "", name: "", description: "", image: "", calories: 0)
+
+        sut.selected(dish: dish)
+    }
 
 }

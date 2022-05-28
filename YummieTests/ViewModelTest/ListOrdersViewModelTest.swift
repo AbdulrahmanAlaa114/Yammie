@@ -51,5 +51,11 @@ class ListOrdersViewModelTest: XCTestCase {
     
     }
     
+    func testSelectedDish(){
+        let dish = Dish(id: "", name: "", description: "", image: "", calories: 0)
+
+        sut.selected(dish: dish)
+    }
+    
  
 }

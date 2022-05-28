@@ -36,9 +36,9 @@ final class ListOrdersCoordinator: BaseCoordinator{
         
     }
     
-    deinit{
-        print("deinit ListOrdersCoordinator")
-    }
+//    deinit{
+//        print("deinit ListOrdersCoordinator")
+//    }
     
     
 }

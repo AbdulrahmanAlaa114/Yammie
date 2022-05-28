@@ -52,5 +52,21 @@ class HomeViewModelTests: XCTestCase {
     
     }
     
+    func testSelectedCategory(){
+        let category = DishCategory(id: "", name: "", image: "")
+        sut.selected(category: category)
+    }
+    
+    func testSelectedDish(){
+        let dish = Dish(id: "", name: "", description: "", image: "", calories: 0)
+
+        sut.selected(dish: dish)
+    }
+    
+    func testListOrderTapped(){
+        sut.listOrderTapped()
+    }
+    
+    
 
 }

@@ -32,8 +32,8 @@ final class DishDetailCoordinator: BaseCoordinator{
     }
     
     
-    deinit{
-        print("deinit DishDetailCoordinator")
-    }
+//    deinit{
+//        print("deinit DishDetailCoordinator")
+//    }
     
 }

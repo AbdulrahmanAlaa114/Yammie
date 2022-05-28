@@ -33,8 +33,8 @@ final class OnboardingCoordinator : BaseCoordinator{
         
     }
     
-    deinit{
-        print("deinit OnboardingCoordinator")
-    }
+//    deinit{
+//        print("deinit OnboardingCoordinator")
+//    }
     
 }
