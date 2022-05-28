@@ -7,11 +7,11 @@
 
 import UIKit
 
-final class OnboardingCoordinator : BaseCoordinator{
+final class OnboardingCoordinator: BaseCoordinator {
     
     private let navigationController: UINavigationController
     
-    init(navigationController: UINavigationController){
+    init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
     
@@ -25,7 +25,7 @@ final class OnboardingCoordinator : BaseCoordinator{
         
     }
     
-    func startHome(){
+    func startHome() {
         
         let coordinator = HomeCoordinator(navigationController: navigationController)
         add(coordinator: coordinator)
@@ -33,8 +33,8 @@ final class OnboardingCoordinator : BaseCoordinator{
         
     }
     
-//    deinit{
-//        print("deinit OnboardingCoordinator")
-//    }
+    deinit {
+        print("deinit OnboardingCoordinator")
+    }
     
 }

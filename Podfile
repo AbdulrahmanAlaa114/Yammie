@@ -12,6 +12,7 @@ target 'Yummie' do
   pod 'RxCocoa'
   pod "IQKeyboardManagerSwift"
   pod "Kingfisher"
+  pod "SwiftLint"
 
 
 end

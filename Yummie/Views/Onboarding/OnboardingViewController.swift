@@ -10,19 +10,15 @@ import RxSwift
 import RxCocoa
 class OnboardingViewController: UIViewController {
 
-    
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var nextBtn: UIButton!
     @IBOutlet weak var pageControl: UIPageControl!
-    
-    
+        
     let disposeBag = DisposeBag()
     var viewModel: OnboardingViewModel!
    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         navigationController?.navigationBar.isHidden = true
         registerCells()
@@ -31,9 +27,10 @@ class OnboardingViewController: UIViewController {
         subcribeToIndexPath()
         subscribeToNextButton()
         pageControl.numberOfPages = viewModel.slidesBahavior.value.count
+        
     }
     
-    func subscribeToCurrentPage(){
+    func subscribeToCurrentPage() {
         
         viewModel.currentPage.bind { [weak self] page in
             guard let self = self else {return}
@@ -51,14 +48,14 @@ class OnboardingViewController: UIViewController {
         self.viewModel.slidesBahavior
             .bind(to: self.collectionView
                     .rx
-                    .items(cellIdentifier: OnboardingCollectionViewCell.identifier, cellType: OnboardingCollectionViewCell.self)){ row, onboardingSlide, cell in
+                    .items(cellIdentifier: OnboardingCollectionViewCell.identifier, cellType: OnboardingCollectionViewCell.self)) { _, onboardingSlide, cell in
                 cell.setup(onboardingSlide)
             }.disposed(by: disposeBag)
         
         collectionView.rx.setDelegate(self).disposed(by: disposeBag)
     }
     
-    func registerCells(){
+    func registerCells() {
         collectionView.register(UINib(nibName: OnboardingCollectionViewCell.identifier, bundle: nil), forCellWithReuseIdentifier: OnboardingCollectionViewCell.identifier)
     }
     
@@ -71,15 +68,14 @@ class OnboardingViewController: UIViewController {
             }).disposed(by: disposeBag)
     }
     
-    func subcribeToIndexPath(){
+    func subcribeToIndexPath() {
         viewModel.indexPath.bind { [weak self] indexPath in
             guard let self = self else { return }
             self.collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         }.disposed(by: disposeBag)
     }
     
-    
-    deinit{
+    deinit {
         print("deinit OnboardingViewController")
     }
     
@@ -87,7 +83,6 @@ class OnboardingViewController: UIViewController {
 
 extension OnboardingViewController: UICollectionViewDelegateFlowLayout {
    
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.width, height: collectionView.frame.height - 50)
     }
@@ -97,7 +92,5 @@ extension OnboardingViewController: UICollectionViewDelegateFlowLayout {
         viewModel.currentPage.accept(Int(scrollView.contentOffset.x / width))
         
     }
-    
+
 }
-
-

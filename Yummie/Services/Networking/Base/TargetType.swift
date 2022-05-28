@@ -28,7 +28,6 @@ enum Task {
 
 protocol TargetType {
     
-
     var url: String { get }
     
     /// The HTTP method used in the request.

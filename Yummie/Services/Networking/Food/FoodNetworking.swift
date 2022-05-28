@@ -11,35 +11,30 @@ import Alamofire
 enum FoodNetworking {
     
     case fetchAllCategories
-    case placeOrder(info: [String:Any])
-    case fetchCategoryDishes(info: [String:Any])
+    case placeOrder(info: [String: Any])
+    case fetchCategoryDishes(info: [String: Any])
     case fetchOrders
 }
-
 
 extension FoodNetworking: TargetType {
     
     var url: String {
         
         switch self {
-       
             
         case .fetchAllCategories:
             return URLs.fetchAllCategories
         case .placeOrder(info: let info):
-            return URLs.placeOrder + "\(info["dishId"] as! String)"
+            return URLs.placeOrder + "\((info["dishId"] as? String) ?? "")"
         case .fetchCategoryDishes(info: let info):
-            return URLs.fetchCategoryDishes + "\(info["categoryId"] as! String)"
+            return URLs.fetchCategoryDishes + "\((info["categoryId"] as? String) ?? "")"
         case .fetchOrders:
             return URLs.fetchOrders
         }
     }
     
-    
     var method: HTTPMethod {
         switch self {
-        
-        
             
         case .fetchAllCategories:
             return .get
@@ -54,11 +49,11 @@ extension FoodNetworking: TargetType {
     
     var task: Task {
         switch self {
-        
+            
         case .fetchAllCategories:
             return .requestPlain
         case .placeOrder(info: let info):
-        
+            
             return .requestParameters(parameters: info, encoding: JSONEncoding.default)
         case .fetchCategoryDishes:
             return .requestPlain
@@ -70,12 +65,9 @@ extension FoodNetworking: TargetType {
     
     var headers: [String: String]? {
         switch self {
-
+        
         default:
             return [:]
-            
-            
         }
     }
 }
-

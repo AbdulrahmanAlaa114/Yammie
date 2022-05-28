@@ -9,34 +9,31 @@ import Foundation
 import RxSwift
 import RxRelay
 
-class DishDetailViewModel: BaseViewModel{
+class DishDetailViewModel: BaseViewModel {
     
     let dish: Dish
     var coordinator: DishDetailCoordinator?
     var nameBehavior   = BehaviorRelay<String>(value: "")
-    
     var isPlaceOrderButtonEnapled: Observable<Bool> {
         return nameBehavior.asObservable().map { (name) -> Bool in
             let isNameEmpty = name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
             return !isNameEmpty
         }
     }
-    
     let api: FoodAPIProtocol
-   
-    
-    init(dish: Dish, api: FoodAPIProtocol = FoodAPI()){
+
+    init(dish: Dish, api: FoodAPIProtocol = FoodAPI()) {
         self.dish = dish
         self.api = api
     }
  
-    func placingOrder(){
-        if Reachability()?.connection != Reachability.Connection.none{
+    func placingOrder() {
+
+        if Reachability()?.connection != Reachability.Connection.none {
             
-        
             loadingBehavior.accept(true)
             let info = [
-                "dishId":"\(dish.id ?? "")",
+                "dishId": "\(dish.id ?? "")",
                 "name": nameBehavior.value
             ]
             
@@ -44,15 +41,8 @@ class DishDetailViewModel: BaseViewModel{
                 guard let self = self else {return}
                 switch result {
                 case .success(_):
-                    
-                    self.creatAlert(alertTitle: "Success", alertMessage: "Your order has been received. 👨🏼‍🍳", alertAction: [
-                        UIAlertAction(title: "Ok", style: .default, handler: { _ in
-                            print("done")
-                            self.showAlertBehavior.accept(false)
-                        })
-                    ])
-                    
-                    print("Your order has been received. 👨🏼‍🍳")
+                    self.creatAlert(alertTitle: "Success",
+                                    alertMessage: "Your order has been received. 👨🏼‍🍳")
                     self.loadingBehavior.accept(false)
                 case .failure(let error):
                     self.loadingBehavior.accept(false)
@@ -64,7 +54,7 @@ class DishDetailViewModel: BaseViewModel{
         
     }
     
-    deinit{
+    deinit {
         coordinator?.removeFromParant()
         print("deinit DishDetailViewModel")
     }

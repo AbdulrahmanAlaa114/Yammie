@@ -29,7 +29,6 @@ class HomeViewController: UIViewController {
         subscribeToSelection()
         viewModel.getData()
         
- 
     }
     
     func subscribeToAlert() {
@@ -52,7 +51,7 @@ class HomeViewController: UIViewController {
         }).disposed(by: disposeBag)
     }
     
-    func setupView(){
+    func setupView() {
         
         navigationController?.navigationBar.isHidden = false
         title = viewModel.title
@@ -62,7 +61,7 @@ class HomeViewController: UIViewController {
         
     }
     
-    @objc func goToListOrder(){
+    @objc func goToListOrder() {
         viewModel.listOrderTapped()
     }
     
@@ -71,21 +70,21 @@ class HomeViewController: UIViewController {
         self.viewModel.categoriesObservable
             .bind(to: self.categoryCollectionView
                     .rx
-                    .items(cellIdentifier: CategoryCollectionViewCell.identifier, cellType: CategoryCollectionViewCell.self)){ row, category, cell in
+                    .items(cellIdentifier: CategoryCollectionViewCell.identifier, cellType: CategoryCollectionViewCell.self)) { _, category, cell in
                 cell.setup(category: category)
             }.disposed(by: disposeBag)
         
         self.viewModel.popularsObservable
             .bind(to: self.popularCollectionView
                     .rx
-                    .items(cellIdentifier: DishPortraitCollectionViewCell.identifier, cellType: DishPortraitCollectionViewCell.self)){ row, dish, cell in
+                    .items(cellIdentifier: DishPortraitCollectionViewCell.identifier, cellType: DishPortraitCollectionViewCell.self)) { _, dish, cell in
                 cell.setup(dish: dish)
             }.disposed(by: disposeBag)
         
         self.viewModel.specialsObservable
             .bind(to: self.specialsCollectionView
                     .rx
-                    .items(cellIdentifier: DIshLandscapeCollectionViewCell.identifier, cellType: DIshLandscapeCollectionViewCell.self)){ row, dish, cell in
+                    .items(cellIdentifier: DIshLandscapeCollectionViewCell.identifier, cellType: DIshLandscapeCollectionViewCell.self)) { _, dish, cell in
                 cell.setup(dish: dish)
             }.disposed(by: disposeBag)
             
@@ -102,7 +101,6 @@ class HomeViewController: UIViewController {
         }
         .disposed(by: disposeBag)
         
-        
         popularCollectionView.rx.modelSelected(Dish.self)
             .bind {[weak self] dish in
                 guard let self = self else {return}
@@ -117,8 +115,6 @@ class HomeViewController: UIViewController {
                 self.viewModel.selected(dish: dish)
         }
         .disposed(by: disposeBag)
-        
-        
         
     }
         

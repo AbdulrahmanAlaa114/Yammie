@@ -43,11 +43,11 @@ class ListDishesViewController: UIViewController {
         tableView.register(UINib(nibName: DishListTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: DishListTableViewCell.identifier)
     }
     
-    func subscribeToResponse(){
+    func subscribeToResponse() {
         
         viewModel.dishes.bind(to: tableView
                                 .rx
-                                .items(cellIdentifier: DishListTableViewCell.identifier, cellType: DishListTableViewCell.self)){ row, dish, cell in
+                                .items(cellIdentifier: DishListTableViewCell.identifier, cellType: DishListTableViewCell.self)) { _, dish, cell in
             cell.setup(dish: dish)
             
         }.disposed(by: disposeBag)
@@ -64,7 +64,7 @@ class ListDishesViewController: UIViewController {
             .disposed(by: disposeBag)
     }
     
-    deinit{
+    deinit {
         print("deinit ListDishesViewController")
     }
 }

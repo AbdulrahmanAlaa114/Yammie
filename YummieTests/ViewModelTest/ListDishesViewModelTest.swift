@@ -12,7 +12,7 @@ class ListDishesViewModelTest: XCTestCase {
     
     var sut: ListDishesViewModel!
     var foodAPIMock: FoodAPIMock!
-    var category : DishCategory!
+    var category: DishCategory!
     
     override func setUpWithError() throws {
         
@@ -30,14 +30,14 @@ class ListDishesViewModelTest: XCTestCase {
         
     }
     
-    func testGetData(){
+    func testGetData() {
         
         sut.getData()
         XCTAssertTrue(foodAPIMock.isCallFetchCategoryDishes)
         
     }
     
-    func testGetDataSuccess(){
+    func testGetDataSuccess() {
         
         sut.getData()
         foodAPIMock.fetchCategoryDishesSuccess()
@@ -46,8 +46,7 @@ class ListDishesViewModelTest: XCTestCase {
         
     }
     
-    
-    func testGetDataFailure(){
+    func testGetDataFailure() {
         
         sut.getData()
         let error = AppError.serverError("hi")
@@ -56,14 +55,14 @@ class ListDishesViewModelTest: XCTestCase {
     
     }
 
-    func testGoTo(){
+    func testGoTo() {
         
         let dish = Dish(id: "", name: "", description: "", image: "", calories: 0)
         sut.coordinator?.goToDishDetail(dish: dish)
         
     }
     
-    func testSelectedDish(){
+    func testSelectedDish() {
         let dish = Dish(id: "", name: "", description: "", image: "", calories: 0)
 
         sut.selected(dish: dish)

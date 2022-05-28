@@ -7,12 +7,11 @@
 
 import UIKit
 
-final class ListOrdersCoordinator: BaseCoordinator{
-    
+final class ListOrdersCoordinator: BaseCoordinator {
     
     let navigationController: UINavigationController
         
-    init(navigationController: UINavigationController){
+    init(navigationController: UINavigationController) {
         
         self.navigationController = navigationController
         
@@ -27,7 +26,7 @@ final class ListOrdersCoordinator: BaseCoordinator{
         navigationController.pushViewController(viewContrroler, animated: true)
     }
     
-    func goToDishDetail(dish: Dish){
+    func goToDishDetail(dish: Dish) {
         
         let coordinator = DishDetailCoordinator(navigationController: navigationController, dish: dish)
         coordinator.parantCoordinator = self
@@ -39,6 +38,5 @@ final class ListOrdersCoordinator: BaseCoordinator{
 //    deinit{
 //        print("deinit ListOrdersCoordinator")
 //    }
-    
     
 }

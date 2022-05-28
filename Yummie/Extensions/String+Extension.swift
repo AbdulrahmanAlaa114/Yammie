@@ -12,13 +12,3 @@ extension String {
         return URL(string: self)
     }
 }
-
-
-
-public enum State {
-    case loading
-    case error
-    case empty
-    case populated
-    
-}

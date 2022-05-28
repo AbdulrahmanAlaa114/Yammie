@@ -8,25 +8,22 @@
 import XCTest
 @testable import Yummie
 
-
 class FoodAPITests: XCTestCase {
 
     var sut: FoodAPI?
-    
-    
-    
+
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         sut = FoodAPI()
     }
     
-    func testFetchAllCategoriesSuccess(){
+    func testFetchAllCategoriesSuccess() {
         
         let expect = XCTestExpectation(description: "callback1")
 
         sut?.fetchAllCategories(completion: { result in
             
-            if let response = try? result.get(){
+            if let response = try? result.get() {
                 expect.fulfill()
                 XCTAssertEqual(response.status, 200)
             }
@@ -37,13 +34,13 @@ class FoodAPITests: XCTestCase {
         
     }
     
-    func testFetchCategoryDishesSuccess(){
+    func testFetchCategoryDishesSuccess() {
         
         let expect = XCTestExpectation(description: "callback2")
 
-        sut?.fetchCategoryDishes(info: ["categoryId" : "cat1"], completion: { result in
+        sut?.fetchCategoryDishes(info: ["categoryId": "cat1"], completion: { result in
             
-            if let response = try? result.get(){
+            if let response = try? result.get() {
                 expect.fulfill()
                 XCTAssertEqual(response.status, 200)
             }
@@ -53,13 +50,13 @@ class FoodAPITests: XCTestCase {
         
     }
     
-    func testFetchOrders(){
+    func testFetchOrders() {
         
         let expect = XCTestExpectation(description: "callback3")
 
         sut?.fetchOrders(completion: { result in
             
-            if let response = try? result.get(){
+            if let response = try? result.get() {
                 expect.fulfill()
                 
                 XCTAssertEqual(response.status, 200)
@@ -69,17 +66,17 @@ class FoodAPITests: XCTestCase {
         wait(for: [expect], timeout: 10)
     }
     
-    func testPlaceOrder(){
+    func testPlaceOrder() {
         
         let expect = XCTestExpectation(description: "callback3")
 
         let info = [
-            "name":"abdo",
-            "dishId":"item2"
+            "name": "abdo",
+            "dishId": "item2"
         ]
         sut?.placeOrder(info: info, completion: { result in
             
-            if let response = try? result.get(){
+            if let response = try? result.get() {
                 expect.fulfill()
                 
                 XCTAssertEqual(response.status, 201)
@@ -89,11 +86,8 @@ class FoodAPITests: XCTestCase {
         wait(for: [expect], timeout: 10)
     }
     
-    
     override func tearDownWithError() throws {
         sut = nil
     }
-
-  
 
 }

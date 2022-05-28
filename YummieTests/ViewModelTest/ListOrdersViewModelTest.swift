@@ -25,14 +25,14 @@ class ListOrdersViewModelTest: XCTestCase {
         sut = nil
     }
 
-    func testGetData(){
+    func testGetData() {
         
         sut.getData()
         XCTAssertTrue(foodAPIMock.isCallfetchOrders)
         
     }
     
-    func testGetDataSuccess(){
+    func testGetDataSuccess() {
         
         sut.getData()
         foodAPIMock.fetchOrdersSuccess()
@@ -41,8 +41,7 @@ class ListOrdersViewModelTest: XCTestCase {
         
     }
     
-    
-    func testGetDataFailure(){
+    func testGetDataFailure() {
         
         sut.getData()
         let error = AppError.invalidUrl
@@ -51,11 +50,10 @@ class ListOrdersViewModelTest: XCTestCase {
     
     }
     
-    func testSelectedDish(){
+    func testSelectedDish() {
         let dish = Dish(id: "", name: "", description: "", image: "", calories: 0)
 
         sut.selected(dish: dish)
     }
-    
- 
+     
 }

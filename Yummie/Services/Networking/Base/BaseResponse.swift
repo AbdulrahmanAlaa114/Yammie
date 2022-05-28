@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 class BaseResponse<T: Codable>: Codable {
    
     let status: Int
@@ -17,6 +16,3 @@ class BaseResponse<T: Codable>: Codable {
     let error: String?
   
 }
-
-
-

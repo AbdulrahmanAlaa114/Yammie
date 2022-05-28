@@ -51,7 +51,7 @@ class DishDetailViewController: UIViewController {
         }).disposed(by: disposeBag)
     }
     
-    func bindTextFieldsToViewModel(){
+    func bindTextFieldsToViewModel() {
         nameField.rx.text.orEmpty.bind(to: viewModel.nameBehavior).disposed(by: disposeBag)
     }
     
@@ -75,9 +75,7 @@ class DishDetailViewController: UIViewController {
         caloriesLbl.text = viewModel.dish.formattedCalories
     }
     
-    
-    
-    deinit{
+    deinit {
         print("deinit DishDetailViewController")
     }
 

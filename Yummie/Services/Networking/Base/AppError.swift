@@ -14,7 +14,6 @@ enum AppError: LocalizedError {
     case invalidUrl
     case serverError(String)
 
-    
     var errorDescription: String? {
         switch self {
             

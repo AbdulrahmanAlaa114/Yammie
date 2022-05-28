@@ -43,12 +43,12 @@ class ListOrdersViewController: UIViewController {
         tableView.register(UINib(nibName: DishListTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: DishListTableViewCell.identifier)
     }
     
-    func subscribeToResponse(){
+    func subscribeToResponse() {
         //
         viewModel.orders.bind(to: tableView
                                 .rx
                                 .items(cellIdentifier: DishListTableViewCell.identifier,
-                                       cellType: DishListTableViewCell.self)){ row, order, cell in
+                                       cellType: DishListTableViewCell.self)) { _, order, cell in
             cell.setup(dish: order.dish!)
             
         }.disposed(by: disposeBag)
@@ -65,8 +65,7 @@ class ListOrdersViewController: UIViewController {
             .disposed(by: disposeBag)
     }
     
-    deinit{
+    deinit {
         print("deinit ListOrdersViewController")
     }
 }
-

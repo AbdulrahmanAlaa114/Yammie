@@ -22,7 +22,6 @@
 		042381D028404695002EC553 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042381CF28404695002EC553 /* UIViewController+Extension.swift */; };
 		042381D328406106002EC553 /* DesignSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042381D228406106002EC553 /* DesignSystem.swift */; };
 		042381D528406117002EC553 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042381D428406117002EC553 /* Colors.swift */; };
-		0431EBD628412BD200C2B761 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0431EBD428412BD200C2B761 /* Reachability.swift */; };
 		0431EBEE28415EFD00C2B761 /* StubGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0431EBED28415EFD00C2B761 /* StubGenerator.swift */; };
 		0431EBF128415FEF00C2B761 /* FoodAPIMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0431EBF028415FEF00C2B761 /* FoodAPIMock.swift */; };
 		044F6525283EF65700F2BE02 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044F6524283EF65700F2BE02 /* AppDelegate.swift */; };
@@ -80,6 +79,8 @@
 		04D4680A2842AB30006D6897 /* HomeCoordinatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D468092842AB30006D6897 /* HomeCoordinatorTest.swift */; };
 		04D4680C2842AF26006D6897 /* ListOrdersCoordinatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D4680B2842AF26006D6897 /* ListOrdersCoordinatorTest.swift */; };
 		04D468102842B15F006D6897 /* ListDishesCoordinatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D4680F2842B15F006D6897 /* ListDishesCoordinatorTest.swift */; };
+		04D468162844561A006D6897 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D468152844561A006D6897 /* Reachability.swift */; };
+		04D468182844561A006D6897 /* OnboardingCoordinatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D468172844561A006D6897 /* OnboardingCoordinatorTest.swift */; };
 		454A322A2659AC3E9173D621 /* Pods_Yummie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EC441F34716D37AFC9EB235 /* Pods_Yummie.framework */; };
 /* End PBXBuildFile section */
 
@@ -109,7 +110,6 @@
 		042381CF28404695002EC553 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		042381D228406106002EC553 /* DesignSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem.swift; sourceTree = "<group>"; };
 		042381D428406117002EC553 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
-		0431EBD428412BD200C2B761 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		0431EBDB2841580100C2B761 /* YummieTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YummieTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0431EBED28415EFD00C2B761 /* StubGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StubGenerator.swift; sourceTree = "<group>"; };
 		0431EBF028415FEF00C2B761 /* FoodAPIMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodAPIMock.swift; sourceTree = "<group>"; };
@@ -170,6 +170,8 @@
 		04D468092842AB30006D6897 /* HomeCoordinatorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinatorTest.swift; sourceTree = "<group>"; };
 		04D4680B2842AF26006D6897 /* ListOrdersCoordinatorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOrdersCoordinatorTest.swift; sourceTree = "<group>"; };
 		04D4680F2842B15F006D6897 /* ListDishesCoordinatorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDishesCoordinatorTest.swift; sourceTree = "<group>"; };
+		04D468152844561A006D6897 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		04D468172844561A006D6897 /* OnboardingCoordinatorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinatorTest.swift; sourceTree = "<group>"; };
 		2EC441F34716D37AFC9EB235 /* Pods_Yummie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Yummie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E6F29161B34006AAF1A35FE /* Pods-Yummie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yummie.debug.xcconfig"; path = "Target Support Files/Pods-Yummie/Pods-Yummie.debug.xcconfig"; sourceTree = "<group>"; };
 		A1F9994191D887B362FF9359 /* Pods-Yummie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yummie.release.xcconfig"; path = "Target Support Files/Pods-Yummie/Pods-Yummie.release.xcconfig"; sourceTree = "<group>"; };
@@ -327,7 +329,7 @@
 		044F6538283EF7D700F2BE02 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				0431EBD428412BD200C2B761 /* Reachability.swift */,
+				04D468152844561A006D6897 /* Reachability.swift */,
 				044F6539283EF7FA00F2BE02 /* String+Extension.swift */,
 				044F653A283EF7FB00F2BE02 /* UIView+Extension.swift */,
 				044F653B283EF7FB00F2BE02 /* UserDefaults+Extension.swift */,
@@ -538,6 +540,7 @@
 				04D468092842AB30006D6897 /* HomeCoordinatorTest.swift */,
 				04D4680B2842AF26006D6897 /* ListOrdersCoordinatorTest.swift */,
 				04D4680F2842B15F006D6897 /* ListDishesCoordinatorTest.swift */,
+				04D468172844561A006D6897 /* OnboardingCoordinatorTest.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -585,6 +588,7 @@
 			buildConfigurationList = 044F6535283EF65C00F2BE02 /* Build configuration list for PBXNativeTarget "Yummie" */;
 			buildPhases = (
 				C0F908C12CC02E132571B4FE /* [CP] Check Pods Manifest.lock */,
+				04D468112844561A006D6897 /* ShellScript */,
 				044F651D283EF65700F2BE02 /* Sources */,
 				044F651E283EF65700F2BE02 /* Frameworks */,
 				044F651F283EF65700F2BE02 /* Resources */,
@@ -671,6 +675,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		04D468112844561A006D6897 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
+		};
 		C0F908C12CC02E132571B4FE /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -719,6 +740,7 @@
 			files = (
 				0450F52428422F9C00239993 /* HomeViewModelTests.swift in Sources */,
 				0431EBF128415FEF00C2B761 /* FoodAPIMock.swift in Sources */,
+				04D468182844561A006D6897 /* OnboardingCoordinatorTest.swift in Sources */,
 				04D4680A2842AB30006D6897 /* HomeCoordinatorTest.swift in Sources */,
 				0431EBEE28415EFD00C2B761 /* StubGenerator.swift in Sources */,
 				0450F5302842419E00239993 /* Bundel+UnitTest.swift in Sources */,
@@ -773,7 +795,7 @@
 				044F653D283EF7FB00F2BE02 /* UIView+Extension.swift in Sources */,
 				044F658D283EF8BD00F2BE02 /* DishCategory.swift in Sources */,
 				049D073A284267E9000FC8A7 /* BaseViewModel.swift in Sources */,
-				0431EBD628412BD200C2B761 /* Reachability.swift in Sources */,
+				04D468162844561A006D6897 /* Reachability.swift in Sources */,
 				0406CAA5283FE7DB00AF6357 /* BaseAPI.swift in Sources */,
 				044F653E283EF7FB00F2BE02 /* UserDefaults+Extension.swift in Sources */,
 				0455A3B7283FBFB900FB0EF7 /* ListDishesViewModel.swift in Sources */,

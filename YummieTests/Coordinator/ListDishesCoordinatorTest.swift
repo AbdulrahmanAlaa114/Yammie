@@ -14,7 +14,6 @@ class ListDishesCoordinatorTest: XCTestCase {
    
     override func setUpWithError() throws {
         
-        
         sut = ListDishesCoordinator(navigationController: UINavigationController(), category: DishCategory(id: "", name: "", image: ""))
     }
 
@@ -22,12 +21,10 @@ class ListDishesCoordinatorTest: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-
-    func testGoToDishDetail(){
+    func testGoToDishDetail() {
         let dish = Dish(id: "", name: "", description: "", image: "", calories: 0)
         sut.goToDishDetail(dish: dish)
-        XCTAssertEqual(sut.childCoordinators.count , 1)
+        XCTAssertEqual(sut.childCoordinators.count, 1)
     }
-
-
+    
 }

@@ -7,12 +7,12 @@
 
 import UIKit
 
-final class ListDishesCoordinator: BaseCoordinator{
+final class ListDishesCoordinator: BaseCoordinator {
     
     let navigationController: UINavigationController
     let category: DishCategory
     
-    init(navigationController: UINavigationController, category: DishCategory){
+    init(navigationController: UINavigationController, category: DishCategory) {
         self.navigationController = navigationController
         self.category = category
     }
@@ -27,7 +27,7 @@ final class ListDishesCoordinator: BaseCoordinator{
         
     }
     
-    func goToDishDetail(dish: Dish){
+    func goToDishDetail(dish: Dish) {
         
         let coordinator = DishDetailCoordinator(navigationController: navigationController, dish: dish)
         add(coordinator: coordinator)
@@ -39,6 +39,5 @@ final class ListDishesCoordinator: BaseCoordinator{
 //    deinit{
 //        print("deinit ListDishesCoordinator")
 //    }
-    
     
 }

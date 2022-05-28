@@ -10,7 +10,7 @@ import XCTest
 
 class HomeCoordinatorTest: XCTestCase {
     
-    var sut :HomeCoordinator!
+    var sut: HomeCoordinator!
     
     override func setUpWithError() throws {
         sut = HomeCoordinator(navigationController: UINavigationController())
@@ -20,23 +20,22 @@ class HomeCoordinatorTest: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testGoToListDishes(){
+    func testGoToListDishes() {
         let category = DishCategory(id: "", name: "", image: "")
         sut.goToListDishes(category: category)
-        XCTAssertEqual(sut.childCoordinators.count , 1)
+        XCTAssertEqual(sut.childCoordinators.count, 1)
     }
     
-    func testGoToDishDetail(){
+    func testGoToDishDetail() {
         let dish = Dish(id: "", name: "", description: "", image: "", calories: 0)
         sut.goToDishDetail(dish: dish)
-        XCTAssertEqual(sut.childCoordinators.count , 1)
+        XCTAssertEqual(sut.childCoordinators.count, 1)
     }
     
-    func testGoToListOrders(){
+    func testGoToListOrders() {
         sut.goToListOrders()
-        XCTAssertEqual(sut.childCoordinators.count , 1)
+        XCTAssertEqual(sut.childCoordinators.count, 1)
         
     }
-   
-
+    
 }

@@ -9,24 +9,21 @@ import Foundation
 import RxSwift
 import RxRelay
 
-class ListOrdersViewModel: BaseViewModel{
-    
-    var title = "Orders"
-    
-    var coordinator: ListOrdersCoordinator?
- 
+class ListOrdersViewModel: BaseViewModel {
     
     private var ordersPublish = PublishSubject<[Order]>()
     var orders: Observable<[Order]> { return ordersPublish }
-    
+    var title = "Orders"
+    var coordinator: ListOrdersCoordinator?
     let api: FoodAPIProtocol
    
-    init(api: FoodAPIProtocol = FoodAPI()){
+    init(api: FoodAPIProtocol = FoodAPI()) {
         self.api = api
     }
     
-    func getData(){
-        if Reachability()?.connection != Reachability.Connection.none{
+    func getData() {
+        
+        if Reachability()?.connection != Reachability.Connection.none {
             
             loadingBehavior.accept(true)
             api.fetchOrders { [weak self] (result) in
@@ -46,11 +43,11 @@ class ListOrdersViewModel: BaseViewModel{
         
     }
     
-    func selected(dish: Dish){
+    func selected(dish: Dish) {
         coordinator?.goToDishDetail(dish: dish)
     }
     
-    deinit{
+    deinit {
         coordinator?.removeFromParant()
         print("deinit ListDishesViewModel")
     }

@@ -8,9 +8,7 @@
 import Foundation
 @testable import Yummie
 
-
-class FoodAPIMock: FoodAPIProtocol{
-    
+class FoodAPIMock: FoodAPIProtocol {
     
     var isCallfetchAllCategories = false
     var completeClosureFetchAllCategories: ((Result<BaseResponse<AllDishes>?, Error>) -> Void)!
@@ -35,7 +33,7 @@ class FoodAPIMock: FoodAPIProtocol{
 
     }
     
-    func fetchAllCategoriesSuccess(){
+    func fetchAllCategoriesSuccess() {
         
         let all = StubGenerator.stub(fileName: "AllDishes", responseClass: BaseResponse<AllDishes>.self)
         self.allDishes = all
@@ -43,20 +41,18 @@ class FoodAPIMock: FoodAPIProtocol{
         
     }
     
-    func fetchAllCategoriesFailure(error: Error){
+    func fetchAllCategoriesFailure(error: Error) {
         
         completeClosureFetchAllCategories(.failure(error))
         
     }
     
-    
-    
-    func fetchCategoryDishes(info: [String : Any], completion: @escaping (Result<BaseResponse<[Dish]>?, Error>) -> Void) {
+    func fetchCategoryDishes(info: [String: Any], completion: @escaping (Result<BaseResponse<[Dish]>?, Error>) -> Void) {
         isCallFetchCategoryDishes = true
         self.completeClosureFetchCategoryDishes = completion
     }
     
-    func fetchCategoryDishesSuccess(){
+    func fetchCategoryDishesSuccess() {
         
         let all = StubGenerator.stub(fileName: "Dishes", responseClass: BaseResponse<[Dish]>.self)
         self.dishes = all
@@ -64,20 +60,18 @@ class FoodAPIMock: FoodAPIProtocol{
         
     }
     
-    func fetchCategoryDishesFailure(error: Error){
+    func fetchCategoryDishesFailure(error: Error) {
         
         completeClosureFetchCategoryDishes(.failure(error))
         
     }
-    
-    
     
     func fetchOrders(completion: @escaping (Result<BaseResponse<[Order]>?, Error>) -> Void) {
         isCallfetchOrders = true
         self.completeClosureFetchOrders = completion
     }
     
-    func fetchOrdersSuccess(){
+    func fetchOrdersSuccess() {
         
         let all = StubGenerator.stub(fileName: "Orders", responseClass: BaseResponse<[Order]>.self)
         self.orders = all
@@ -85,21 +79,18 @@ class FoodAPIMock: FoodAPIProtocol{
         
     }
     
-    func fetchOrdersFailure(error: Error){
+    func fetchOrdersFailure(error: Error) {
         
         completeClosureFetchOrders(.failure(error))
         
     }
     
-    
-    
-    
-    func placeOrder(info: [String : Any], completion: @escaping (Result<BaseResponse<Order>?, Error>) -> Void) {
+    func placeOrder(info: [String: Any], completion: @escaping (Result<BaseResponse<Order>?, Error>) -> Void) {
         isCallPlaceOrder = true
         self.completeClosurePlaceOrder = completion
     }
     
-    func fetchPlaceOrderSuccess(){
+    func fetchPlaceOrderSuccess() {
         
         let all = StubGenerator.stub(fileName: "PlaceOrder", responseClass: BaseResponse<Order>.self)
         self.placeOrder = all
@@ -107,13 +98,10 @@ class FoodAPIMock: FoodAPIProtocol{
         
     }
     
-    func fetchPlaceOrderFailure(error: Error){
+    func fetchPlaceOrderFailure(error: Error) {
         
         completeClosurePlaceOrder(.failure(error))
         
     }
-    
-    
-    
     
 }

@@ -8,8 +8,9 @@
 import Foundation
 import UIKit
 
-extension DesignSystem{
-    enum Colors: String{
+extension DesignSystem {
+    
+    enum Colors: String {
         
         case primary = "Primary"
         case backgroundPrimary = "Background Primary"
@@ -21,11 +22,10 @@ extension DesignSystem{
         
         var color: UIColor {
             switch self {
-                default:
-                    return UIColor(named: self.rawValue)!
+            default:
+                return UIColor(named: self.rawValue)!
             }
         }
-        
-        
     }
+    
 }

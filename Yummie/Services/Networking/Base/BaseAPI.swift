@@ -43,9 +43,7 @@ class BaseAPI<T: TargetType> {
                 }
             
                 completion(.success(responseObj))
-                
-                
-                
+  
 //            }else{
 //
 //
@@ -54,8 +52,7 @@ class BaseAPI<T: TargetType> {
         }
     }
     
-    
-    private func buildParams(task: Task) -> ([String:Any], ParameterEncoding) {
+    private func buildParams(task: Task) -> ([String: Any], ParameterEncoding) {
         switch task {
         case .requestPlain:
             return ([:], URLEncoding.default)
@@ -63,6 +60,5 @@ class BaseAPI<T: TargetType> {
             return (parameters, encoding)
         }
     }
-    
-    
+
 }

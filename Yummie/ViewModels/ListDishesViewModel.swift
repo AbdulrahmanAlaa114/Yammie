@@ -8,31 +8,27 @@
 import Foundation
 import RxSwift
 import RxRelay
-class ListDishesViewModel: BaseViewModel{
-    
-    var category: DishCategory!
-    var title = ""
-    var coordinator: ListDishesCoordinator?
-    
+class ListDishesViewModel: BaseViewModel {
     
     private var dishesPublish = PublishSubject<[Dish]>()
     var dishes: Observable<[Dish]> { return dishesPublish }
-    
+    var category: DishCategory!
+    var title = ""
+    var coordinator: ListDishesCoordinator?
     let api: FoodAPIProtocol
    
-    
-    init(category: DishCategory, api: FoodAPIProtocol = FoodAPI()){
+    init(category: DishCategory, api: FoodAPIProtocol = FoodAPI()) {
         self.category = category
         self.title = category.name ?? ""
         self.api = api
     }
     
-    func getData(){
-        if Reachability()?.connection != Reachability.Connection.none{
-            
+    func getData() {
+        
+        if Reachability()?.connection != Reachability.Connection.none {
             
             loadingBehavior.accept(true)
-            api.fetchCategoryDishes(info: ["categoryId" : "\(category.id ?? "")"]) { [weak self] (result) in
+            api.fetchCategoryDishes(info: ["categoryId": "\(category.id ?? "")"]) { [weak self] (result) in
                 guard let self = self else {return}
                 switch result {
                 case .success(let response):
@@ -47,14 +43,13 @@ class ListDishesViewModel: BaseViewModel{
         
     }
     
-    func selected(dish: Dish){
+    func selected(dish: Dish) {
         coordinator?.goToDishDetail(dish: dish)
     }
     
-    
-    
-    deinit{
+    deinit {
         coordinator?.removeFromParant()
         print("deinit ListDishesViewModel")
     }
+    
 }

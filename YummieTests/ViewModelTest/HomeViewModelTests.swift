@@ -10,8 +10,7 @@ import XCTest
 
 class HomeViewModelTests: XCTestCase {
 
-    
-    var sut:HomeViewModel!
+    var sut: HomeViewModel!
     var foodAPIMock: FoodAPIMock!
     
     override func setUpWithError() throws {
@@ -25,14 +24,14 @@ class HomeViewModelTests: XCTestCase {
         sut = nil
     }
 
-    func testGetData(){
+    func testGetData() {
         
         sut.getData()
         XCTAssertTrue(foodAPIMock.isCallfetchAllCategories)
         
     }
     
-    func testGetDataSuccess(){
+    func testGetDataSuccess() {
         
         sut.getData()
         foodAPIMock.fetchAllCategoriesSuccess()
@@ -42,8 +41,7 @@ class HomeViewModelTests: XCTestCase {
         XCTAssertEqual(foodAPIMock.allDishes.data?.specials?.count, 2)
     }
     
-    
-    func testGetDataFailure(){
+    func testGetDataFailure() {
         
         sut.getData()
         let error = AppError.unknownError
@@ -52,21 +50,19 @@ class HomeViewModelTests: XCTestCase {
     
     }
     
-    func testSelectedCategory(){
+    func testSelectedCategory() {
         let category = DishCategory(id: "", name: "", image: "")
         sut.selected(category: category)
     }
     
-    func testSelectedDish(){
+    func testSelectedDish() {
         let dish = Dish(id: "", name: "", description: "", image: "", calories: 0)
 
         sut.selected(dish: dish)
     }
     
-    func testListOrderTapped(){
+    func testListOrderTapped() {
         sut.listOrderTapped()
     }
     
-    
-
 }

@@ -1,0 +1,9 @@
+disabled_rules:
+    - trailing_whitespace
+    - empty_enum_arguments
+    - line_length
+    - private_over_fileprivate
+    
+excluded:
+    - Pods
+    - Yummie/*/Reachability.swift

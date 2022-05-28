@@ -30,15 +30,14 @@ class DishDetailViewModelTest: XCTestCase {
         
     }
     
-    
-    func testPlacingOrder(){
+    func testPlacingOrder() {
         
         sut.placingOrder()
         XCTAssertTrue(foodAPIMock.isCallPlaceOrder)
         
     }
     
-    func testPlacingOrderSuccess(){
+    func testPlacingOrderSuccess() {
         
         sut.placingOrder()
         foodAPIMock.fetchPlaceOrderSuccess()
@@ -47,8 +46,7 @@ class DishDetailViewModelTest: XCTestCase {
         
     }
     
-    
-    func testPlacingOrderFailure(){
+    func testPlacingOrderFailure() {
         
         sut.placingOrder()
         let error = AppError.errorDecoding
@@ -56,6 +54,5 @@ class DishDetailViewModelTest: XCTestCase {
         XCTAssertEqual(error.localizedDescription, sut.alertMessage)
     
     }
-    
     
 }

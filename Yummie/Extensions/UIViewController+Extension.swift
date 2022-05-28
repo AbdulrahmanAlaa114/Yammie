@@ -7,11 +7,11 @@
 
 import UIKit
 
-fileprivate var aView : UIView?
+fileprivate var aView: UIView?
 
-extension UIViewController{
+extension UIViewController {
     
-    func showSpinner(){
+    func showSpinner() {
         aView = UIView(frame: self.view.bounds)
         aView?.backgroundColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.25)
         
@@ -22,23 +22,23 @@ extension UIViewController{
         self.view.addSubview(aView!)
     }
     
-    func hideSpinner(){
+    func hideSpinner() {
         aView?.removeFromSuperview()
         aView = nil
     }
     
-    func showAlert(title:String = "" ,message:String = "", actions:[UIAlertAction] = []){
+    func showAlert(title: String = "", message: String = "", actions: [UIAlertAction] = []) {
         
-        let Alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         for action in actions {
-            Alert.addAction(action)
+            alert.addAction(action)
         }
         
-        if self.presentedViewController as? UIAlertController != nil{
+        if self.presentedViewController as? UIAlertController != nil {
             self.dismiss(animated: true, completion: nil)
         }
         
-        present(Alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
         
     }
 }

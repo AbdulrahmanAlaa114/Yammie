@@ -7,13 +7,12 @@
 
 import UIKit
 
-final class DishDetailCoordinator: BaseCoordinator{
+final class DishDetailCoordinator: BaseCoordinator {
     
     let navigationController: UINavigationController
     let dish: Dish
     
-    
-    init(navigationController: UINavigationController, dish: Dish){
+    init(navigationController: UINavigationController, dish: Dish) {
         
         self.navigationController = navigationController
         self.dish = dish
@@ -26,11 +25,9 @@ final class DishDetailCoordinator: BaseCoordinator{
         let viewModel = DishDetailViewModel(dish: dish)
         viewModel.coordinator = self
         viewController.viewModel = viewModel
-        
         navigationController.pushViewController(viewController, animated: true)
         
     }
-    
     
 //    deinit{
 //        print("deinit DishDetailCoordinator")
