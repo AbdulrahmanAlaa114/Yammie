@@ -1,0 +1,86 @@
+{
+   "status":200,
+   "message":"Success",
+   "data":[
+      {
+         "id":"item1",
+         "name":"Pommes frites",
+         "description":"There are not many dishes in the world that have risen to the popularity of pommes frites. Originally invented in Belgium, this simple dish is made out of potatoes that are cut into lengthwise strips and deep-fried in hot oil. Although there is some rivalry between France and Belgium concerning the exact origin of pommes frites, the fact is that there is no nation in the world which celebrates and enjoys this dish more than the Belgians.",
+         "image":"https://cdn.tasteatlas.com//images/dishes/37a5c7e2ca0f45aca4111c3b06796b1d.jpg?width=660&height=420",
+         "calories":120,
+         "category":"cat1"
+      },
+      {
+         "id":"item2",
+         "name":"Gyoza",
+         "description":"The famous Japanese gyoza are crescent-shaped dumplings that have originated from the traditional Chinese jiaozi dumplings. The recipe was slightly altered to accommodate the Japanese taste, and gyoza soon became one of the favorite Japanese meals.",
+         "image":"https://cdn.tasteatlas.com//Images/Dishes/3c16ad904018488f8c363413d356cacc.jpg?width=660&height=420",
+         "calories":132,
+         "category":"cat1"
+      },
+      {
+         "id":"item3",
+         "name":"Nachos",
+         "description":"The first, original plate of nachos consisting of tortilla chips, melted chips, and jalapeños was made for a group of military officers' wives in 1943 in Piedras Negras, Mexico. The ladies of the US Army Air Force base went over to a restaurant in the city, called the Victory Club.",
+         "image":"https://cdn.tasteatlas.com//images/dishes/a29fe2d3d9c54547a9e49c49f5cf22cd.jpg?width=660&height=420",
+         "calories":423,
+         "category":"cat1"
+      },
+      {
+         "id":"item4",
+         "name":"Quesadilla",
+         "description":"Quesadilla is a simple Mexican snack consisting of a flour or corn tortilla filled with cheese that melts well. It is commonly folded in half and consumed. A quesadilla can also have some other ingredients on the inside such as meats, beans, or potatoes, but cheese is always mandatory (with the exception of Mexico City, where cheese in a quesadilla is often an afterthought).",
+         "image":"https://cdn.tasteatlas.com//images/dishes/cde29cfce09c43b0acc43e19a77b845b.jpg?width=660&height=420",
+         "calories":827,
+         "category":"cat1"
+      },
+      {
+         "id":"item5",
+         "name":"Churros",
+         "description":"Elongated, crispy, crunchy and intensely fragrant, churros consist of deep-fried yeast dough encrusted with sugar. Although some may argue against consuming these sweet treats, warning others about the dangerous effects of sugar and fat on human bodies, the popularity of churros throughout the world doesn't seem to wane.",
+         "image":"https://cdn.tasteatlas.com//images/dishes/c14da069b266431293f85d910b99cfbd.jpg?width=660&height=420",
+         "calories":290,
+         "category":"cat1"
+      },
+      {
+         "id":"item6",
+         "name":"Spring Rolls",
+         "description":"Spring rolls are traditional Chinese snacks consisting of thin sheets of dough that are filled with various ingredients, then deep-fried in hot oil. Some of the more common ingredients for the filling include shredded pork, shrimp, mushrooms, and cabbage.",
+         "image":"https://cdn.tasteatlas.com//Images/Dishes/b151eebf5805474aa899f41b8c331b56.jpg?width=660&height=420",
+         "calories":823,
+         "category":"cat1"
+      },
+      {
+         "id":"item7",
+         "name":"Falafel",
+         "description":"Even though these protein-packed chickpea fritters are listed as one of Israel's national dishes, it is often suggested that falafel might have originated in Egypt, Lebanon, or Palestine. By the 1950s, to earn a living, Yemenite immigrants in Israel started making falafel in the streets, selling it wrapped in paper, which has eventually transformed this ancient dish into an early form of Israeli fast food.",
+         "image":"https://cdn.tasteatlas.com//images/dishes/6a7d870a48e34847b06f1711907ccf8a.jpg?width=660&height=420",
+         "calories":1902,
+         "category":"cat1"
+      },
+      {
+         "id":"item8",
+         "name":"Jeon",
+         "description":"Jeon, also known as Korean pancakes, represents a number of pancake-like dishes in Korean cuisine that are often served as appetizers, side dishes, or consumed as snacks. Although jeon are typically prepared in savory versions, there are also some sweet varieties of these flavorful pancakes.",
+         "image":"https://cdn.tasteatlas.com//images/dishes/85969320cd7a4b66b98eaa607f2a7fa7.jpg?width=660&height=420",
+         "calories":232,
+         "category":"cat1"
+      },
+      {
+         "id":"item9",
+         "name":"Shaobing",
+         "description":"Known as a common snack food in Northern China, shaobing is a type of layered flatbread, typically topped with sesame seeds. It is made with multiple layers of dough brushed with sesame paste and resembles a flattened bread roll. Shaobing originated in the Shandong province, but today it can be found at numerous street stalls throughout the country.",
+         "image":"https://cdn.tasteatlas.com//images/dishes/47230a52a4e842d7acd7dc8cd1cd1eda.jpg?width=660&height=420",
+         "calories":822,
+         "category":"cat1"
+      },
+      {
+         "id":"item10",
+         "name":"Manjū",
+         "description":"Manjū is a steamed Japanese confectionery product shaped into various forms and incorporating different ingredients and flavors. Usually, there are two main parts of manju, the outer shell, created out of kneaded wheat or rice flour, and the creamy paste hidden inside the chewy outer layer.",
+         "image":"https://cdn.tasteatlas.com//Images/Dishes/fea3e4a030d14a499d5cd83d4016752d.jpg?width=660&height=420",
+         "calories":218,
+         "category":"cat1"
+      }
+   ]
+}

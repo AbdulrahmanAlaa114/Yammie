@@ -23,9 +23,7 @@ class FoodAPITests: XCTestCase {
     func testFetchAllCategoriesSuccess(){
         
         let expect = XCTestExpectation(description: "callback1")
-//        var responseError: Error?
-//        var responseSuccess: BaseResponse<AllDishes>?
-        
+
         sut?.fetchAllCategories(completion: { result in
             
             if let r = try? result.get()?.data{
@@ -35,6 +33,22 @@ class FoodAPITests: XCTestCase {
                 XCTAssertEqual(r.specials?.count, 2)
             }
             
+        })
+        
+        wait(for: [expect], timeout: 20)
+        
+    }
+    
+    func testFetchCategoryDishesSuccess(){
+        
+        let expect = XCTestExpectation(description: "callback1")
+
+        sut?.fetchCategoryDishes(info: ["categoryId" : "cat1"], completion: { result in
+            
+            if let r = try? result.get()?.data{
+                expect.fulfill()
+                XCTAssertEqual(r.count, 11)
+            }
         })
         
         wait(for: [expect], timeout: 10)

@@ -13,33 +13,63 @@ class FoodAPIMock: FoodAPIProtocol{
     
     
     var isCallfetchAllCategories = false
-   
-    var completeClosure: ((Result<BaseResponse<AllDishes>?, Error>) -> Void)!
+    var completeClosureFetchAllCategories: ((Result<BaseResponse<AllDishes>?, Error>) -> Void)!
     var allDishes: BaseResponse<AllDishes>!
+    
+    var isCallFetchCategoryDishes = false
+    var completeClosureFetchCategoryDishes: ((Result<BaseResponse<[Dish]>?, Error>) -> Void)!
+    var dishes: BaseResponse<[Dish]>!
+    
+//    var isCallfetchAllCategories = false
+//    var completeClosureFetchAllCategories: ((Result<BaseResponse<AllDishes>?, Error>) -> Void)!
+//    var allDishes: BaseResponse<AllDishes>!
+//
+//    var isCallfetchAllCategories = false
+//    var completeClosureFetchAllCategories: ((Result<BaseResponse<AllDishes>?, Error>) -> Void)!
+//    var allDishes: BaseResponse<AllDishes>!
+    
     func fetchAllCategories(completion: @escaping (Result<BaseResponse<AllDishes>?, Error>) -> Void) {
         
         isCallfetchAllCategories = true
-        self.completeClosure = completion
+        self.completeClosureFetchAllCategories = completion
 
     }
     
     func fetchAllCategoriesSuccess(){
         
-        let all = StubGenerator().stubAllDishes()
+        let all = StubGenerator.stub(fileName: "AllDishes", responseClass: BaseResponse<AllDishes>.self)
         self.allDishes = all
-        completeClosure(.success(all))
+        completeClosureFetchAllCategories(.success(all))
         
     }
     
     func fetchAllCategoriesFailure(error: Error){
         
-        completeClosure(.failure(error))
+        completeClosureFetchAllCategories(.failure(error))
         
     }
     
     func fetchCategoryDishes(info: [String : Any], completion: @escaping (Result<BaseResponse<[Dish]>?, Error>) -> Void) {
+        isCallFetchCategoryDishes = true
+        self.completeClosureFetchCategoryDishes = completion
+    }
+    
+    
+    func fetchCategoryDishesSuccess(){
+        
+        let all = StubGenerator.stub(fileName: "Dishes", responseClass: BaseResponse<[Dish]>.self)
+        self.dishes = all
+        completeClosureFetchCategoryDishes(.success(all))
         
     }
+    
+    func fetchCategoryDishesFailure(error: Error){
+        
+        completeClosureFetchCategoryDishes(.failure(error))
+        
+    }
+    
+    
     
     func fetchOrders(completion: @escaping (Result<BaseResponse<[Order]>?, Error>) -> Void) {
         

@@ -9,12 +9,12 @@ import Foundation
 import RxSwift
 import RxRelay
 
-class ListOrdersViewModel {
+class ListOrdersViewModel: BaseViewModel{
     
     var title = "Orders"
     
     var coordinator: ListOrdersCoordinator?
-    var loadingBehavior = BehaviorRelay<Bool>(value: false)
+ 
     
     private var ordersPublish = PublishSubject<[Order]>()
     var orders: Observable<[Order]> { return ordersPublish }
@@ -28,9 +28,6 @@ class ListOrdersViewModel {
     func getData(){
         if Reachability()?.connection != Reachability.Connection.none{
             
-            
-            
-    
             loadingBehavior.accept(true)
             api.fetchOrders { [weak self] (result) in
                 guard let self = self else {return}
@@ -41,7 +38,7 @@ class ListOrdersViewModel {
                     self.loadingBehavior.accept(false)
                 case .failure(let error):
                     self.loadingBehavior.accept(false)
-                    print(error.localizedDescription)
+                    self.creatAlert(alertTitle: "Error", alertMessage: error.localizedDescription)
                     
                 }
             }

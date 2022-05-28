@@ -71,6 +71,9 @@
 		0455A3C2283FDC7000FB0EF7 /* ListOrdersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0455A3C0283FDC7000FB0EF7 /* ListOrdersViewController.xib */; };
 		0455A3C4283FDD2C00FB0EF7 /* ListOrdersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0455A3C3283FDD2C00FB0EF7 /* ListOrdersViewModel.swift */; };
 		0455A3C6283FE07B00FB0EF7 /* ListOrdersCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0455A3C5283FE07B00FB0EF7 /* ListOrdersCoordinator.swift */; };
+		049D073A284267E9000FC8A7 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049D0739284267E9000FC8A7 /* BaseViewModel.swift */; };
+		049D073C28427FF6000FC8A7 /* Dishes.json in Resources */ = {isa = PBXBuildFile; fileRef = 049D073B28427FF6000FC8A7 /* Dishes.json */; };
+		049D073E28428378000FC8A7 /* ListDishesViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049D073D28428378000FC8A7 /* ListDishesViewModelTest.swift */; };
 		454A322A2659AC3E9173D621 /* Pods_Yummie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EC441F34716D37AFC9EB235 /* Pods_Yummie.framework */; };
 /* End PBXBuildFile section */
 
@@ -152,6 +155,9 @@
 		0455A3C0283FDC7000FB0EF7 /* ListOrdersViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListOrdersViewController.xib; sourceTree = "<group>"; };
 		0455A3C3283FDD2C00FB0EF7 /* ListOrdersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOrdersViewModel.swift; sourceTree = "<group>"; };
 		0455A3C5283FE07B00FB0EF7 /* ListOrdersCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOrdersCoordinator.swift; sourceTree = "<group>"; };
+		049D0739284267E9000FC8A7 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
+		049D073B28427FF6000FC8A7 /* Dishes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Dishes.json; sourceTree = "<group>"; };
+		049D073D28428378000FC8A7 /* ListDishesViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDishesViewModelTest.swift; sourceTree = "<group>"; };
 		2EC441F34716D37AFC9EB235 /* Pods_Yummie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Yummie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E6F29161B34006AAF1A35FE /* Pods-Yummie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yummie.debug.xcconfig"; path = "Target Support Files/Pods-Yummie/Pods-Yummie.debug.xcconfig"; sourceTree = "<group>"; };
 		A1F9994191D887B362FF9359 /* Pods-Yummie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yummie.release.xcconfig"; path = "Target Support Files/Pods-Yummie/Pods-Yummie.release.xcconfig"; sourceTree = "<group>"; };
@@ -264,11 +270,13 @@
 			isa = PBXGroup;
 			children = (
 				0450F52D2842411200239993 /* AllDishes.json */,
+				049D073B28427FF6000FC8A7 /* Dishes.json */,
 				0431EBED28415EFD00C2B761 /* StubGenerator.swift */,
 				0450F52F2842419E00239993 /* Bundel+UnitTest.swift */,
 				0450F52B28423E4000239993 /* FoodAPITests.swift */,
 				0431EBF028415FEF00C2B761 /* FoodAPIMock.swift */,
 				0450F52328422F9C00239993 /* HomeViewModelTests.swift */,
+				049D073D28428378000FC8A7 /* ListDishesViewModelTest.swift */,
 			);
 			path = YummieTests;
 			sourceTree = "<group>";
@@ -343,6 +351,7 @@
 				0455A3C3283FDD2C00FB0EF7 /* ListOrdersViewModel.swift */,
 				0455A3B6283FBFB900FB0EF7 /* ListDishesViewModel.swift */,
 				0455A3B8283FBFED00FB0EF7 /* DishDetailViewModel.swift */,
+				049D0739284267E9000FC8A7 /* BaseViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -592,6 +601,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0450F52E2842411200239993 /* AllDishes.json in Resources */,
+				049D073C28427FF6000FC8A7 /* Dishes.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -667,6 +677,7 @@
 				0431EBF128415FEF00C2B761 /* FoodAPIMock.swift in Sources */,
 				0431EBEE28415EFD00C2B761 /* StubGenerator.swift in Sources */,
 				0450F5302842419E00239993 /* Bundel+UnitTest.swift in Sources */,
+				049D073E28428378000FC8A7 /* ListDishesViewModelTest.swift in Sources */,
 				0450F52C28423E4000239993 /* FoodAPITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -713,6 +724,7 @@
 				0406CAA3283FE7DB00AF6357 /* TargetType.swift in Sources */,
 				044F653D283EF7FB00F2BE02 /* UIView+Extension.swift in Sources */,
 				044F658D283EF8BD00F2BE02 /* DishCategory.swift in Sources */,
+				049D073A284267E9000FC8A7 /* BaseViewModel.swift in Sources */,
 				0431EBD628412BD200C2B761 /* Reachability.swift in Sources */,
 				0406CAA5283FE7DB00AF6357 /* BaseAPI.swift in Sources */,
 				044F653E283EF7FB00F2BE02 /* UserDefaults+Extension.swift in Sources */,

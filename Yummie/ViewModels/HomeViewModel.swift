@@ -9,18 +9,10 @@ import Foundation
 import RxSwift
 import RxRelay
 
-class HomeViewModel{
-    
-    
-    var alertTitle = ""
-    var alertMessage = ""
-    var alertAction: [UIAlertAction] = []
-    
-    var showAlertBehavior = BehaviorRelay<Bool>(value: false)
+class HomeViewModel: BaseViewModel{
     
     var title = "Yammie"
     
-    var loadingBehavior = BehaviorRelay<Bool>(value: false)
     
     private var categories = PublishSubject<[DishCategory]>()
     private var populars = PublishSubject<[Dish]>()
@@ -38,12 +30,6 @@ class HomeViewModel{
         self.api = api
     }
     
-    func creatAlert(alertTitle: String, alertMessage: String, alertAction:[UIAlertAction]){
-        self.alertTitle = alertTitle
-        self.alertMessage = alertMessage
-        self.alertAction = alertAction
-        self.showAlertBehavior.accept(true)
-    }
     
     func getData(){
         
@@ -63,9 +49,7 @@ class HomeViewModel{
                     self.loadingBehavior.accept(false)
                 case .failure(let error):
                     self.loadingBehavior.accept(false)
-                    self.creatAlert(alertTitle: "Error", alertMessage: error.localizedDescription, alertAction: [UIAlertAction(title: "Ok", style: .default, handler: { UIAlertAction in
-                        self.showAlertBehavior.accept(false)
-                    })])
+                    self.creatAlert(alertTitle: "Error", alertMessage: error.localizedDescription)
                     
                 }
             }

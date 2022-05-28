@@ -8,12 +8,12 @@
 import Foundation
 import RxSwift
 import RxRelay
-class ListDishesViewModel{
+class ListDishesViewModel: BaseViewModel{
     
     var category: DishCategory!
     var title = ""
     var coordinator: ListDishesCoordinator?
-    var loadingBehavior = BehaviorRelay<Bool>(value: false)
+    
     
     private var dishesPublish = PublishSubject<[Dish]>()
     var dishes: Observable<[Dish]> { return dishesPublish }
@@ -40,7 +40,7 @@ class ListDishesViewModel{
                     self.loadingBehavior.accept(false)
                 case .failure(let error):
                     self.loadingBehavior.accept(false)
-                    print(error.localizedDescription)
+                    self.creatAlert(alertTitle: "Error", alertMessage: error.localizedDescription)
                 }
             }
         }

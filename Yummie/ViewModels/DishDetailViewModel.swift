@@ -9,19 +9,12 @@ import Foundation
 import RxSwift
 import RxRelay
 
-class DishDetailViewModel{
-    
-    
-    var alertTitle = ""
-    var alertMessage = ""
-    var alertAction: [UIAlertAction] = []
-    
-    var showAlertBehavior = BehaviorRelay<Bool>(value: false)
+class DishDetailViewModel: BaseViewModel{
     
     let dish: Dish
     var coordinator: DishDetailCoordinator?
     var nameBehavior   = BehaviorRelay<String>(value: "")
-    var loadingBehavior = BehaviorRelay<Bool>(value: false)
+    
     var isPlaceOrderButtonEnapled: Observable<Bool> {
         return nameBehavior.asObservable().map { (name) -> Bool in
             let isNameEmpty = name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
@@ -36,14 +29,7 @@ class DishDetailViewModel{
         self.dish = dish
         self.api = api
     }
-    
-    func creatAlert(alertTitle: String, alertMessage: String, alertAction:[UIAlertAction]){
-        self.alertTitle = alertTitle
-        self.alertMessage = alertMessage
-        self.alertAction = alertAction
-        self.showAlertBehavior.accept(true)
-    }
-    
+ 
     func placingOrder(){
         if Reachability()?.connection != Reachability.Connection.none{
             
@@ -71,7 +57,7 @@ class DishDetailViewModel{
                     self.loadingBehavior.accept(false)
                 case .failure(let error):
                     self.loadingBehavior.accept(false)
-                    print(error.localizedDescription)
+                    self.creatAlert(alertTitle: "Error", alertMessage: error.localizedDescription)
                     
                 }
             }
