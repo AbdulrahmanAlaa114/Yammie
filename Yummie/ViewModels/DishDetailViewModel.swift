@@ -29,8 +29,12 @@ class DishDetailViewModel{
         }
     }
     
-    init(dish: Dish){
+    let api: FoodAPIProtocol
+   
+    
+    init(dish: Dish, api: FoodAPIProtocol = FoodAPI()){
         self.dish = dish
+        self.api = api
     }
     
     func creatAlert(alertTitle: String, alertMessage: String, alertAction:[UIAlertAction]){
@@ -41,37 +45,38 @@ class DishDetailViewModel{
     }
     
     func placingOrder(){
-        
-        print(nameBehavior.value)
-        
-        let api: FoodAPIProtocol = FoodAPI()
-        loadingBehavior.accept(true)
-        let info = [
-            "dishId":"\(dish.id ?? "")",
-            "name": nameBehavior.value
-        ]
-        
-        api.placeOrder(info: info) { [weak self] (result) in
-            guard let self = self else {return}
-            switch result {
-            case .success(_):
-                
-                self.creatAlert(alertTitle: "Success", alertMessage: "Your order has been received. 👨🏼‍🍳", alertAction: [
-                    UIAlertAction(title: "Ok", style: .default, handler: { _ in
-                        print("done")
-                        self.showAlertBehavior.accept(false)
-                    })
-                ])
-                
-                print("Your order has been received. 👨🏼‍🍳")
-                self.loadingBehavior.accept(false)
-            case .failure(let error):
-                self.loadingBehavior.accept(false)
-                print(error.localizedDescription)
-                
+        if Reachability()?.connection != Reachability.Connection.none{
+            
+            
+            let api: FoodAPIProtocol = FoodAPI()
+            loadingBehavior.accept(true)
+            let info = [
+                "dishId":"\(dish.id ?? "")",
+                "name": nameBehavior.value
+            ]
+            
+            api.placeOrder(info: info) { [weak self] (result) in
+                guard let self = self else {return}
+                switch result {
+                case .success(_):
+                    
+                    self.creatAlert(alertTitle: "Success", alertMessage: "Your order has been received. 👨🏼‍🍳", alertAction: [
+                        UIAlertAction(title: "Ok", style: .default, handler: { _ in
+                            print("done")
+                            self.showAlertBehavior.accept(false)
+                        })
+                    ])
+                    
+                    print("Your order has been received. 👨🏼‍🍳")
+                    self.loadingBehavior.accept(false)
+                case .failure(let error):
+                    self.loadingBehavior.accept(false)
+                    print(error.localizedDescription)
+                    
+                }
             }
         }
-         
+        
     }
     
     deinit{

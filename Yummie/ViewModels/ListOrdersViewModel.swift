@@ -18,26 +18,35 @@ class ListOrdersViewModel {
     
     private var ordersPublish = PublishSubject<[Order]>()
     var orders: Observable<[Order]> { return ordersPublish }
+    
+    let api: FoodAPIProtocol
    
+    init(api: FoodAPIProtocol = FoodAPI()){
+        self.api = api
+    }
     
     func getData(){
-        
-        let api: FoodAPIProtocol = FoodAPI()
-        loadingBehavior.accept(true)
-        api.fetchOrders { [weak self] (result) in
-            guard let self = self else {return}
-            switch result {
-            case .success(let response):
-
-                self.ordersPublish.onNext(response?.data ?? [])
-                self.loadingBehavior.accept(false)
-            case .failure(let error):
-                self.loadingBehavior.accept(false)
-                print(error.localizedDescription)
-
+        if Reachability()?.connection != Reachability.Connection.none{
+            
+            
+            
+    
+            loadingBehavior.accept(true)
+            api.fetchOrders { [weak self] (result) in
+                guard let self = self else {return}
+                switch result {
+                case .success(let response):
+                    
+                    self.ordersPublish.onNext(response?.data ?? [])
+                    self.loadingBehavior.accept(false)
+                case .failure(let error):
+                    self.loadingBehavior.accept(false)
+                    print(error.localizedDescription)
+                    
+                }
             }
         }
-                
+        
     }
     
     func selected(dish: Dish){

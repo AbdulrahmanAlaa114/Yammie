@@ -13,7 +13,6 @@ final class DishDetailCoordinator: BaseCoordinator{
     let dish: Dish
     
     
-    
     init(navigationController: UINavigationController, dish: Dish){
         
         self.navigationController = navigationController
@@ -32,9 +31,6 @@ final class DishDetailCoordinator: BaseCoordinator{
         
     }
     
-//    func remove(){
-//        parantCoordinator?.remove(coordinator: self)
-//    }
     
     deinit{
         print("deinit DishDetailCoordinator")

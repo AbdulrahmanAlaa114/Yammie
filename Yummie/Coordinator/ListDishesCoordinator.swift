@@ -13,20 +13,17 @@ final class ListDishesCoordinator: BaseCoordinator{
     let category: DishCategory
     
     init(navigationController: UINavigationController, category: DishCategory){
-        
         self.navigationController = navigationController
         self.category = category
-        
     }
     
     override func start() {
         
-        let listDishesViewContrroler = ListDishesViewController()
+        let viewContrroler = ListDishesViewController()
         let viewModel = ListDishesViewModel(category: category)
         viewModel.coordinator = self
-        listDishesViewContrroler.viewModel = viewModel
-        navigationController.pushViewController(listDishesViewContrroler, animated: true)
-//        navigationController.setViewControllers([listDishesViewContrroler], animated: true)
+        viewContrroler.viewModel = viewModel
+        navigationController.pushViewController(viewContrroler, animated: true)
         
     }
     

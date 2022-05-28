@@ -19,10 +19,13 @@
 		0406CAB72840179B00AF6357 /* OnboardingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0406CAB32840179B00AF6357 /* OnboardingViewController.xib */; };
 		0406CAB82840179B00AF6357 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0406CAB42840179B00AF6357 /* OnboardingViewController.swift */; };
 		0406CAB92840179B00AF6357 /* OnboardingCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0406CAB52840179B00AF6357 /* OnboardingCollectionViewCell.xib */; };
-		042381CE284045FE002EC553 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042381CD284045FE002EC553 /* Reachability.swift */; };
 		042381D028404695002EC553 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042381CF28404695002EC553 /* UIViewController+Extension.swift */; };
 		042381D328406106002EC553 /* DesignSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042381D228406106002EC553 /* DesignSystem.swift */; };
 		042381D528406117002EC553 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042381D428406117002EC553 /* Colors.swift */; };
+		0431EBD528412BD200C2B761 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0431EBD328412BD200C2B761 /* ViewController.swift */; };
+		0431EBD628412BD200C2B761 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0431EBD428412BD200C2B761 /* Reachability.swift */; };
+		0431EBEE28415EFD00C2B761 /* StubGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0431EBED28415EFD00C2B761 /* StubGenerator.swift */; };
+		0431EBF128415FEF00C2B761 /* FoodAPIMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0431EBF028415FEF00C2B761 /* FoodAPIMock.swift */; };
 		044F6525283EF65700F2BE02 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044F6524283EF65700F2BE02 /* AppDelegate.swift */; };
 		044F6527283EF65700F2BE02 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044F6526283EF65700F2BE02 /* SceneDelegate.swift */; };
 		044F652E283EF65C00F2BE02 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 044F652D283EF65C00F2BE02 /* Assets.xcassets */; };
@@ -52,6 +55,10 @@
 		044F658E283EF8BD00F2BE02 /* OnboaringSlide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044F6589283EF8BD00F2BE02 /* OnboaringSlide.swift */; };
 		044F658F283EF8BE00F2BE02 /* AllDishes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044F658A283EF8BD00F2BE02 /* AllDishes.swift */; };
 		044F6590283EF8BE00F2BE02 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044F658B283EF8BD00F2BE02 /* Order.swift */; };
+		0450F52428422F9C00239993 /* HomeViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0450F52328422F9C00239993 /* HomeViewModelTests.swift */; };
+		0450F52C28423E4000239993 /* FoodAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0450F52B28423E4000239993 /* FoodAPITests.swift */; };
+		0450F52E2842411200239993 /* AllDishes.json in Resources */ = {isa = PBXBuildFile; fileRef = 0450F52D2842411200239993 /* AllDishes.json */; };
+		0450F5302842419E00239993 /* Bundel+UnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0450F52F2842419E00239993 /* Bundel+UnitTest.swift */; };
 		0455A3AF283FBD0F00FB0EF7 /* ListDishesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0455A3AD283FBD0F00FB0EF7 /* ListDishesViewController.swift */; };
 		0455A3B0283FBD0F00FB0EF7 /* ListDishesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0455A3AE283FBD0F00FB0EF7 /* ListDishesViewController.xib */; };
 		0455A3B4283FBE1F00FB0EF7 /* DishDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0455A3B2283FBE1F00FB0EF7 /* DishDetailViewController.swift */; };
@@ -67,6 +74,16 @@
 		454A322A2659AC3E9173D621 /* Pods_Yummie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EC441F34716D37AFC9EB235 /* Pods_Yummie.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		0431EBDF2841580100C2B761 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 044F6519283EF65700F2BE02 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 044F6520283EF65700F2BE02;
+			remoteInfo = Yummie;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		0406CA94283FE7DB00AF6357 /* FoodAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodAPI.swift; sourceTree = "<group>"; };
 		0406CA95283FE7DB00AF6357 /* FoodNetworking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodNetworking.swift; sourceTree = "<group>"; };
@@ -80,10 +97,14 @@
 		0406CAB32840179B00AF6357 /* OnboardingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OnboardingViewController.xib; sourceTree = "<group>"; };
 		0406CAB42840179B00AF6357 /* OnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		0406CAB52840179B00AF6357 /* OnboardingCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OnboardingCollectionViewCell.xib; sourceTree = "<group>"; };
-		042381CD284045FE002EC553 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		042381CF28404695002EC553 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		042381D228406106002EC553 /* DesignSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem.swift; sourceTree = "<group>"; };
 		042381D428406117002EC553 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		0431EBD328412BD200C2B761 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		0431EBD428412BD200C2B761 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		0431EBDB2841580100C2B761 /* YummieTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YummieTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0431EBED28415EFD00C2B761 /* StubGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StubGenerator.swift; sourceTree = "<group>"; };
+		0431EBF028415FEF00C2B761 /* FoodAPIMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodAPIMock.swift; sourceTree = "<group>"; };
 		044F6521283EF65700F2BE02 /* Yummie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Yummie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		044F6524283EF65700F2BE02 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		044F6526283EF65700F2BE02 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -115,6 +136,10 @@
 		044F6589283EF8BD00F2BE02 /* OnboaringSlide.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboaringSlide.swift; sourceTree = "<group>"; };
 		044F658A283EF8BD00F2BE02 /* AllDishes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllDishes.swift; sourceTree = "<group>"; };
 		044F658B283EF8BD00F2BE02 /* Order.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
+		0450F52328422F9C00239993 /* HomeViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModelTests.swift; sourceTree = "<group>"; };
+		0450F52B28423E4000239993 /* FoodAPITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodAPITests.swift; sourceTree = "<group>"; };
+		0450F52D2842411200239993 /* AllDishes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AllDishes.json; sourceTree = "<group>"; };
+		0450F52F2842419E00239993 /* Bundel+UnitTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundel+UnitTest.swift"; sourceTree = "<group>"; };
 		0455A3AD283FBD0F00FB0EF7 /* ListDishesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDishesViewController.swift; sourceTree = "<group>"; };
 		0455A3AE283FBD0F00FB0EF7 /* ListDishesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListDishesViewController.xib; sourceTree = "<group>"; };
 		0455A3B2283FBE1F00FB0EF7 /* DishDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishDetailViewController.swift; sourceTree = "<group>"; };
@@ -133,6 +158,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		0431EBD82841580100C2B761 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		044F651E283EF65700F2BE02 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -177,9 +209,16 @@
 		0406CAB12840179B00AF6357 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
-				0406CAB22840179B00AF6357 /* OnboardingCollectionViewCell.swift */,
 				0406CAB32840179B00AF6357 /* OnboardingViewController.xib */,
 				0406CAB42840179B00AF6357 /* OnboardingViewController.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		040CCA8628425C28005B1F00 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				0406CAB22840179B00AF6357 /* OnboardingCollectionViewCell.swift */,
 				0406CAB52840179B00AF6357 /* OnboardingCollectionViewCell.xib */,
 			);
 			path = Onboarding;
@@ -221,10 +260,24 @@
 			path = "Design System";
 			sourceTree = "<group>";
 		};
+		0431EBDC2841580100C2B761 /* YummieTests */ = {
+			isa = PBXGroup;
+			children = (
+				0450F52D2842411200239993 /* AllDishes.json */,
+				0431EBED28415EFD00C2B761 /* StubGenerator.swift */,
+				0450F52F2842419E00239993 /* Bundel+UnitTest.swift */,
+				0450F52B28423E4000239993 /* FoodAPITests.swift */,
+				0431EBF028415FEF00C2B761 /* FoodAPIMock.swift */,
+				0450F52328422F9C00239993 /* HomeViewModelTests.swift */,
+			);
+			path = YummieTests;
+			sourceTree = "<group>";
+		};
 		044F6518283EF65700F2BE02 = {
 			isa = PBXGroup;
 			children = (
 				044F6523283EF65700F2BE02 /* Yummie */,
+				0431EBDC2841580100C2B761 /* YummieTests */,
 				044F6522283EF65700F2BE02 /* Products */,
 				88CED4896238FABEF95D080D /* Pods */,
 				E150A3C64CB04162B69937A0 /* Frameworks */,
@@ -235,6 +288,7 @@
 			isa = PBXGroup;
 			children = (
 				044F6521283EF65700F2BE02 /* Yummie.app */,
+				0431EBDB2841580100C2B761 /* YummieTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -257,7 +311,8 @@
 		044F6538283EF7D700F2BE02 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				042381CD284045FE002EC553 /* Reachability.swift */,
+				0431EBD328412BD200C2B761 /* ViewController.swift */,
+				0431EBD428412BD200C2B761 /* Reachability.swift */,
 				044F6539283EF7FA00F2BE02 /* String+Extension.swift */,
 				044F653A283EF7FB00F2BE02 /* UIView+Extension.swift */,
 				044F653B283EF7FB00F2BE02 /* UserDefaults+Extension.swift */,
@@ -366,6 +421,7 @@
 		044F6565283EF8A700F2BE02 /* CollectionViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				040CCA8628425C28005B1F00 /* Onboarding */,
 				044F6566283EF8A700F2BE02 /* DishPortraitCollectionViewCell */,
 				044F6569283EF8A700F2BE02 /* CategoryCollectionViewCell */,
 				044F656C283EF8A700F2BE02 /* DishLandscapeCollectionViewCell */,
@@ -455,6 +511,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		0431EBDA2841580100C2B761 /* YummieTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0431EBE32841580100C2B761 /* Build configuration list for PBXNativeTarget "YummieTests" */;
+			buildPhases = (
+				0431EBD72841580100C2B761 /* Sources */,
+				0431EBD82841580100C2B761 /* Frameworks */,
+				0431EBD92841580100C2B761 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0431EBE02841580100C2B761 /* PBXTargetDependency */,
+			);
+			name = YummieTests;
+			productName = YummieTests;
+			productReference = 0431EBDB2841580100C2B761 /* YummieTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		044F6520283EF65700F2BE02 /* Yummie */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 044F6535283EF65C00F2BE02 /* Build configuration list for PBXNativeTarget "Yummie" */;
@@ -484,6 +558,10 @@
 				LastSwiftUpdateCheck = 1320;
 				LastUpgradeCheck = 1320;
 				TargetAttributes = {
+					0431EBDA2841580100C2B761 = {
+						CreatedOnToolsVersion = 13.2.1;
+						TestTargetID = 044F6520283EF65700F2BE02;
+					};
 					044F6520283EF65700F2BE02 = {
 						CreatedOnToolsVersion = 13.2.1;
 					};
@@ -503,11 +581,20 @@
 			projectRoot = "";
 			targets = (
 				044F6520283EF65700F2BE02 /* Yummie */,
+				0431EBDA2841580100C2B761 /* YummieTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		0431EBD92841580100C2B761 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0450F52E2842411200239993 /* AllDishes.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		044F651F283EF65700F2BE02 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -572,6 +659,18 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		0431EBD72841580100C2B761 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0450F52428422F9C00239993 /* HomeViewModelTests.swift in Sources */,
+				0431EBF128415FEF00C2B761 /* FoodAPIMock.swift in Sources */,
+				0431EBEE28415EFD00C2B761 /* StubGenerator.swift in Sources */,
+				0450F5302842419E00239993 /* Bundel+UnitTest.swift in Sources */,
+				0450F52C28423E4000239993 /* FoodAPITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		044F651D283EF65700F2BE02 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -591,7 +690,6 @@
 				044F6578283EF8A700F2BE02 /* HomeViewController.swift in Sources */,
 				0406CAAB2840179B00AF6357 /* AppError.swift in Sources */,
 				044F6551283EF85C00F2BE02 /* Coordinator.swift in Sources */,
-				042381CE284045FE002EC553 /* Reachability.swift in Sources */,
 				044F654E283EF85C00F2BE02 /* AppCoordinator.swift in Sources */,
 				042381D028404695002EC553 /* UIViewController+Extension.swift in Sources */,
 				0455A3AF283FBD0F00FB0EF7 /* ListDishesViewController.swift in Sources */,
@@ -607,6 +705,7 @@
 				044F6582283EF8A700F2BE02 /* CardView.swift in Sources */,
 				044F657B283EF8A700F2BE02 /* DishPortraitCollectionViewCell.swift in Sources */,
 				0406CAA4283FE7DB00AF6357 /* BaseResponse.swift in Sources */,
+				0431EBD528412BD200C2B761 /* ViewController.swift in Sources */,
 				0455A3C4283FDD2C00FB0EF7 /* ListOrdersViewModel.swift in Sources */,
 				044F6550283EF85C00F2BE02 /* BaseCoordinator.swift in Sources */,
 				044F657F283EF8A700F2BE02 /* DIshLandscapeCollectionViewCell.swift in Sources */,
@@ -614,6 +713,7 @@
 				0406CAA3283FE7DB00AF6357 /* TargetType.swift in Sources */,
 				044F653D283EF7FB00F2BE02 /* UIView+Extension.swift in Sources */,
 				044F658D283EF8BD00F2BE02 /* DishCategory.swift in Sources */,
+				0431EBD628412BD200C2B761 /* Reachability.swift in Sources */,
 				0406CAA5283FE7DB00AF6357 /* BaseAPI.swift in Sources */,
 				044F653E283EF7FB00F2BE02 /* UserDefaults+Extension.swift in Sources */,
 				0455A3B7283FBFB900FB0EF7 /* ListDishesViewModel.swift in Sources */,
@@ -626,7 +726,53 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		0431EBE02841580100C2B761 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 044F6520283EF65700F2BE02 /* Yummie */;
+			targetProxy = 0431EBDF2841580100C2B761 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		0431EBE12841580100C2B761 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HXWGTL339P;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.AbdulrahmanAlaa.YummieTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Yummie.app/Yummie";
+			};
+			name = Debug;
+		};
+		0431EBE22841580100C2B761 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HXWGTL339P;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.AbdulrahmanAlaa.YummieTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Yummie.app/Yummie";
+			};
+			name = Release;
+		};
 		044F6533283EF65C00F2BE02 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -802,6 +948,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		0431EBE32841580100C2B761 /* Build configuration list for PBXNativeTarget "YummieTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0431EBE12841580100C2B761 /* Debug */,
+				0431EBE22841580100C2B761 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		044F651C283EF65700F2BE02 /* Build configuration list for PBXProject "Yummie" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

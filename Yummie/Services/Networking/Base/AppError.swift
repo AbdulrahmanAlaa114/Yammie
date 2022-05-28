@@ -13,6 +13,7 @@ enum AppError: LocalizedError {
     case unknownError
     case invalidUrl
     case serverError(String)
+
     
     var errorDescription: String? {
         switch self {

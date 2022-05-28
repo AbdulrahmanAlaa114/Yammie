@@ -1,0 +1,81 @@
+{
+   "status":200,
+   "message":"Success",
+   "data":{
+      "categories":[
+         {
+            "id":"cat1",
+            "title":"Snacks",
+            "image":"https://res.cloudinary.com/dn4pokov0/image/upload/v1611311563/d3f69e36ea17c0e0bb129ba1403e24dc.png"
+         },
+         {
+            "id":"cat2",
+            "title":"Pizzas",
+            "image":"https://cdn.iconscout.com/icon/free/png-256/pizza-618-1114742.png"
+         },
+         {
+            "id":"cat3",
+            "title":"Nigerian Dishes",
+            "image":"https://res.cloudinary.com/dn4pokov0/image/upload/v1623330069/afrocaribbean-food-color-icon-fish-260nw-1972641911.jpg_copy.png"
+         },
+         {
+            "id":"cat5",
+            "title":"Vegetarian Dishes",
+            "image":"https://icons.iconarchive.com/icons/google/noto-emoji-food-drink/512/32395-green-salad-icon.png"
+         }
+      ],
+      "populars":[
+         {
+            "id":"item12",
+            "name":"Pizza Napoletana",
+            "description":"The dough is comprised of wheat flour, yeast, salt, and water and is left to rise for up to 24 hours. It's shaped by hand into a flat, round disk, about 3 millimeters thick. After that, it's topped with ingredients and baked for 90 seconds in a blisteringly hot (around 900°F) wood-burning oven. The result is a soft, elastic heart with a tall, fluffy crust called the cornicione in Italian. You can find this variety at your local Eataly's La Pizza & La Pasta restaurant.",
+            "image":"https://www.eataly.com/wp/wp-content/uploads/2018/08/ech-quattro-mani-matt-roan-pizza-horizontal-web.jpg",
+            "calories":120
+         },
+         {
+            "id":"pop2",
+            "name":"Cassava Flakes",
+            "description":"Garri, otherwise known as Cassava Flakes, is one of the main sources of carbohydrates and a popular staple food in Nigeria. It is a local delicacy eaten across Nigeria, usually mixed with sugar, milk, etc and eaten however you desire.",
+            "image":"https://p3y6v9e6.stackpathcdn.com/wp-content/uploads/zikoko/2020/03/D1sPmD5XQAA7Hjh.jpg",
+            "calories":102
+         },
+         {
+            "id":"pop3",
+            "name":"Grilled Cheese",
+            "description":"A toasted sandwich, grilled cheese sandwich, cheese toastie, or grilled cheese is a hot sandwich made with one or more varieties of cheese on bread.",
+            "image":"https://hips.hearstapps.com/hmg-prod/images/grilled-cheese-horizontal-jpg-1522266016.jpg",
+            "calories":1022
+         },
+         {
+            "id":"pop4",
+            "name":"Pasta Carbonara",
+            "description":"The carbonara we know today is prepared by simply tossing spaghetti with guanciale (cured pork jowl), egg yolks, and Pecorino Romano cheese. Despite its simplicity, this dish remains one of Rome's favorites, equally popular throughout the country.",
+            "image":"https://cdn.tasteatlas.com/images/dishes/990d2b4155d248ff8838ca8350be1d78.jpg?w=905&h=510",
+            "calories":302
+         },
+         {
+            "id":"pop5",
+            "name":"Kasha",
+            "description":"The fundamental dish of Russian cuisine is known as kasha, a porridge that has represented an essential Russian meal for centuries. Russian kasha refers to various dishes which are created with cereals, most commonly rice, wheat, or millet, and pseudocereals like buckwheat and quinoa.",
+            "image":"https://cdn.tasteatlas.com//Images/Dishes/ee60c7c639314b76918e97a37e547531.jpg?width=660&height=420",
+            "calories":599
+         }
+      ],
+      "specials":[
+         {
+            "id":"item30",
+            "name":"Jollof Rice",
+            "description":"Jollof rice is Nigeria's national dish. In order to prepare it, rice is cooked in a rich tomato sauce so that it soaks in all the flavors. The most common ingredients found in jollof rice include rice, tomatoes, tomato paste, onions, salt, and pepper.",
+            "image":"https://cdn.tasteatlas.com/images/dishes/41ca6dfc48714647a813a6c1333a9e94.jpg?mw=1300",
+            "calories":1200
+         },
+         {
+            "id":"pop5",
+            "name":"Roti",
+            "description":"Roti is a flat and unleavened bread made with wholemeal flour. It is traditionally cooked on an iron griddle called tava, an important vessel in the Indian cuisine. In Indian cuisine, roti is as essential as rice. There are several theories regarding its origin.",
+            "image":"https://cdn.tasteatlas.com/Images/Dishes/1bd5e63b79b344ef9b56cc6480470dba.jpg?mw=1300",
+            "calories":300
+         }
+      ]
+   }
+}

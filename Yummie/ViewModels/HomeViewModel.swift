@@ -11,6 +11,13 @@ import RxRelay
 
 class HomeViewModel{
     
+    
+    var alertTitle = ""
+    var alertMessage = ""
+    var alertAction: [UIAlertAction] = []
+    
+    var showAlertBehavior = BehaviorRelay<Bool>(value: false)
+    
     var title = "Yammie"
     
     var loadingBehavior = BehaviorRelay<Bool>(value: false)
@@ -24,25 +31,43 @@ class HomeViewModel{
     var specialsObservable: Observable<[Dish]> { return specials }
     
     var coordinator: HomeCoordinator?
-     
+    
+    let api: FoodAPIProtocol
+   
+    init(api: FoodAPIProtocol = FoodAPI()){
+        self.api = api
+    }
+    
+    func creatAlert(alertTitle: String, alertMessage: String, alertAction:[UIAlertAction]){
+        self.alertTitle = alertTitle
+        self.alertMessage = alertMessage
+        self.alertAction = alertAction
+        self.showAlertBehavior.accept(true)
+    }
     
     func getData(){
-                
-        loadingBehavior.accept(true)
-        let api: FoodAPIProtocol = FoodAPI()
         
-        api.fetchAllCategories { [weak self] result in
-            guard let self = self else{ return }
-            switch result {
-            case .success(let response):
-                
-                self.categories.onNext(response?.data?.categories ?? [])
-                self.populars.onNext(response?.data?.populars ?? [])
-                self.specials.onNext(response?.data?.specials ?? [])
-                self.loadingBehavior.accept(false)
-            case .failure(let error):
-                self.loadingBehavior.accept(false)
-                print(error.localizedDescription)
+        if Reachability()?.connection != Reachability.Connection.none{
+            
+            loadingBehavior.accept(true)
+            
+            
+            api.fetchAllCategories { [weak self] result in
+                guard let self = self else{ return }
+                switch result {
+                case .success(let response):
+                    
+                    self.categories.onNext(response?.data?.categories ?? [])
+                    self.populars.onNext(response?.data?.populars ?? [])
+                    self.specials.onNext(response?.data?.specials ?? [])
+                    self.loadingBehavior.accept(false)
+                case .failure(let error):
+                    self.loadingBehavior.accept(false)
+                    self.creatAlert(alertTitle: "Error", alertMessage: error.localizedDescription, alertAction: [UIAlertAction(title: "Ok", style: .default, handler: { UIAlertAction in
+                        self.showAlertBehavior.accept(false)
+                    })])
+                    
+                }
             }
         }
         

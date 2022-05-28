@@ -22,6 +22,7 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         
         setupView()
+        subscribeToAlert() 
         subscribeToLoading()
         registerCells()
         subscribeToResponse()
@@ -29,6 +30,15 @@ class HomeViewController: UIViewController {
         viewModel.getData()
         
  
+    }
+    
+    func subscribeToAlert() {
+        viewModel.showAlertBehavior.subscribe(onNext: { [weak self] (isShow) in
+            guard let self = self else {return}
+            if isShow {
+                self.showAlert(title: self.viewModel.alertTitle, message: self.viewModel.alertMessage, actions: self.viewModel.alertAction)
+            }
+        }).disposed(by: disposeBag)
     }
     
     func subscribeToLoading() {

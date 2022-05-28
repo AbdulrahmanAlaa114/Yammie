@@ -47,9 +47,7 @@ class DishDetailViewController: UIViewController {
             guard let self = self else {return}
             if isShow {
                 self.showAlert(title: self.viewModel.alertTitle, message: self.viewModel.alertMessage, actions: self.viewModel.alertAction)
-            } else {
-                self.hideSpinner()
-            }
+            } 
         }).disposed(by: disposeBag)
     }
     

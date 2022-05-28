@@ -19,7 +19,7 @@ final class AppCoordinator: BaseCoordinator{
     override func start() {
         
         let navigationController = UINavigationController()
-//        UserDefaults.standard.hasOnboarded = false
+
         if UserDefaults.standard.hasOnboarded {
             let coordinator = HomeCoordinator(navigationController: navigationController)
             add(coordinator: coordinator)

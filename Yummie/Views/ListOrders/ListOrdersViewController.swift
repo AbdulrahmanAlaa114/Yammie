@@ -25,6 +25,7 @@ class ListOrdersViewController: UIViewController {
         subscribeToResponse()
         subscribeToSelection()
         viewModel.getData()
+            
     }
     
     func subscribeToLoading() {

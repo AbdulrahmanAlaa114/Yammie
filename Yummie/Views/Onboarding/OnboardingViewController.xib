@@ -22,17 +22,6 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="73h-5x-1Lm">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="730"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="szR-Qz-u4I">
-                        <size key="itemSize" width="0.0" height="0.0"/>
-                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                    </collectionViewFlowLayout>
-                    <cells/>
-                </collectionView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qvf-OT-Afo">
                     <rect key="frame" x="132" y="772" width="150" height="50"/>
                     <color key="backgroundColor" name="Button Primary"/>
@@ -48,25 +37,33 @@
                             <real key="value" value="10"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
-                    <connections>
-                        <action selector="nextBtnClicked:" destination="-1" eventType="touchUpInside" id="xd8-01-Aj1"/>
-                    </connections>
                 </button>
                 <pageControl opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="MCC-6o-F6n">
                     <rect key="frame" x="149.5" y="730" width="115.5" height="26"/>
                     <color key="pageIndicatorTintColor" systemColor="systemGray5Color"/>
                     <color key="currentPageIndicatorTintColor" red="0.87320786709999998" green="0.23044547439999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                 </pageControl>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="73h-5x-1Lm">
+                    <rect key="frame" x="0.0" y="44" width="414" height="686"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="szR-Qz-u4I">
+                        <size key="itemSize" width="0.0" height="0.0"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                    <cells/>
+                </collectionView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" name="Background Secondary"/>
             <constraints>
                 <constraint firstItem="MCC-6o-F6n" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="7AL-oW-3kB"/>
                 <constraint firstItem="qvf-OT-Afo" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="7Uu-Ob-a5v"/>
-                <constraint firstItem="73h-5x-1Lm" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="DXc-rH-2x2"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="qvf-OT-Afo" secondAttribute="bottom" constant="40" id="JEj-IV-BmS"/>
                 <constraint firstItem="73h-5x-1Lm" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="Ubu-Qq-I8f"/>
                 <constraint firstItem="qvf-OT-Afo" firstAttribute="top" secondItem="MCC-6o-F6n" secondAttribute="bottom" constant="16" id="XlK-qH-nHL"/>
+                <constraint firstItem="73h-5x-1Lm" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="qqp-fX-HSO"/>
                 <constraint firstItem="MCC-6o-F6n" firstAttribute="top" secondItem="73h-5x-1Lm" secondAttribute="bottom" id="r2V-Bo-JQ4"/>
                 <constraint firstItem="73h-5x-1Lm" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="vVZ-bR-vAj"/>
             </constraints>
@@ -75,10 +72,10 @@
     </objects>
     <resources>
         <namedColor name="Background Secondary">
-            <color red="0.99978146853146854" green="1" blue="1" alpha="0.97999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="1" blue="1" alpha="0.98000001907348633" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Button Primary">
-            <color red="0.0" green="0.0" blue="0.0" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.0" blue="0.0" alpha="0.69999998807907104" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Button Text Primary">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

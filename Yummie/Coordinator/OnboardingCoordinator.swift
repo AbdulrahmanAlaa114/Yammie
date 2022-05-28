@@ -18,10 +18,10 @@ final class OnboardingCoordinator : BaseCoordinator{
     override func start() {
         
         let viewController = OnboardingViewController()
-        
-        viewController.coordinator = self //remove when create view model
+        let viewModel = OnboardingViewModel()
+        viewModel.coordinator = self
+        viewController.viewModel = viewModel
         navigationController.pushViewController(viewController, animated: true)
-//        navigationController.setViewControllers([onboardingViewController], animated: false)
         
     }
     
