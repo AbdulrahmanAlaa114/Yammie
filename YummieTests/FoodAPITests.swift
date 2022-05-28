@@ -26,11 +26,9 @@ class FoodAPITests: XCTestCase {
 
         sut?.fetchAllCategories(completion: { result in
             
-            if let r = try? result.get()?.data{
+            if let response = try? result.get(){
                 expect.fulfill()
-                XCTAssertEqual(r.categories?.count, 5)
-                XCTAssertEqual(r.populars?.count, 5)
-                XCTAssertEqual(r.specials?.count, 2)
+                XCTAssertEqual(response.status, 200)
             }
             
         })
@@ -41,19 +39,56 @@ class FoodAPITests: XCTestCase {
     
     func testFetchCategoryDishesSuccess(){
         
-        let expect = XCTestExpectation(description: "callback1")
+        let expect = XCTestExpectation(description: "callback2")
 
         sut?.fetchCategoryDishes(info: ["categoryId" : "cat1"], completion: { result in
             
-            if let r = try? result.get()?.data{
+            if let response = try? result.get(){
                 expect.fulfill()
-                XCTAssertEqual(r.count, 11)
+                XCTAssertEqual(response.status, 200)
             }
         })
         
         wait(for: [expect], timeout: 10)
         
     }
+    
+    func testFetchOrders(){
+        
+        let expect = XCTestExpectation(description: "callback3")
+
+        sut?.fetchOrders(completion: { result in
+            
+            if let response = try? result.get(){
+                expect.fulfill()
+                
+                XCTAssertEqual(response.status, 200)
+            }
+        })
+        
+        wait(for: [expect], timeout: 10)
+    }
+    
+    func testPlaceOrder(){
+        
+        let expect = XCTestExpectation(description: "callback3")
+
+        let info = [
+            "name":"abdo",
+            "dishId":"item2"
+        ]
+        sut?.placeOrder(info: info, completion: { result in
+            
+            if let response = try? result.get(){
+                expect.fulfill()
+                
+                XCTAssertEqual(response.status, 201)
+            }
+        })
+        
+        wait(for: [expect], timeout: 10)
+    }
+    
     
     override func tearDownWithError() throws {
         sut = nil

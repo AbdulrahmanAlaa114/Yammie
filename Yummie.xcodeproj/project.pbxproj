@@ -22,7 +22,6 @@
 		042381D028404695002EC553 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042381CF28404695002EC553 /* UIViewController+Extension.swift */; };
 		042381D328406106002EC553 /* DesignSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042381D228406106002EC553 /* DesignSystem.swift */; };
 		042381D528406117002EC553 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042381D428406117002EC553 /* Colors.swift */; };
-		0431EBD528412BD200C2B761 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0431EBD328412BD200C2B761 /* ViewController.swift */; };
 		0431EBD628412BD200C2B761 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0431EBD428412BD200C2B761 /* Reachability.swift */; };
 		0431EBEE28415EFD00C2B761 /* StubGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0431EBED28415EFD00C2B761 /* StubGenerator.swift */; };
 		0431EBF128415FEF00C2B761 /* FoodAPIMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0431EBF028415FEF00C2B761 /* FoodAPIMock.swift */; };
@@ -74,6 +73,10 @@
 		049D073A284267E9000FC8A7 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049D0739284267E9000FC8A7 /* BaseViewModel.swift */; };
 		049D073C28427FF6000FC8A7 /* Dishes.json in Resources */ = {isa = PBXBuildFile; fileRef = 049D073B28427FF6000FC8A7 /* Dishes.json */; };
 		049D073E28428378000FC8A7 /* ListDishesViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049D073D28428378000FC8A7 /* ListDishesViewModelTest.swift */; };
+		049D0741284296CA000FC8A7 /* Orders.json in Resources */ = {isa = PBXBuildFile; fileRef = 049D0740284296CA000FC8A7 /* Orders.json */; };
+		04D46802284299D8006D6897 /* PlaceOrder.json in Resources */ = {isa = PBXBuildFile; fileRef = 04D46801284299D8006D6897 /* PlaceOrder.json */; };
+		04D4680428429E34006D6897 /* ListOrdersViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D4680328429E34006D6897 /* ListOrdersViewModelTest.swift */; };
+		04D4680828429FA0006D6897 /* DishDetailViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D4680728429FA0006D6897 /* DishDetailViewModelTest.swift */; };
 		454A322A2659AC3E9173D621 /* Pods_Yummie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EC441F34716D37AFC9EB235 /* Pods_Yummie.framework */; };
 /* End PBXBuildFile section */
 
@@ -103,7 +106,6 @@
 		042381CF28404695002EC553 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		042381D228406106002EC553 /* DesignSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem.swift; sourceTree = "<group>"; };
 		042381D428406117002EC553 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
-		0431EBD328412BD200C2B761 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		0431EBD428412BD200C2B761 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		0431EBDB2841580100C2B761 /* YummieTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YummieTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0431EBED28415EFD00C2B761 /* StubGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StubGenerator.swift; sourceTree = "<group>"; };
@@ -158,6 +160,10 @@
 		049D0739284267E9000FC8A7 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		049D073B28427FF6000FC8A7 /* Dishes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Dishes.json; sourceTree = "<group>"; };
 		049D073D28428378000FC8A7 /* ListDishesViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDishesViewModelTest.swift; sourceTree = "<group>"; };
+		049D0740284296CA000FC8A7 /* Orders.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Orders.json; sourceTree = "<group>"; };
+		04D46801284299D8006D6897 /* PlaceOrder.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = PlaceOrder.json; sourceTree = "<group>"; };
+		04D4680328429E34006D6897 /* ListOrdersViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOrdersViewModelTest.swift; sourceTree = "<group>"; };
+		04D4680728429FA0006D6897 /* DishDetailViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishDetailViewModelTest.swift; sourceTree = "<group>"; };
 		2EC441F34716D37AFC9EB235 /* Pods_Yummie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Yummie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E6F29161B34006AAF1A35FE /* Pods-Yummie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yummie.debug.xcconfig"; path = "Target Support Files/Pods-Yummie/Pods-Yummie.debug.xcconfig"; sourceTree = "<group>"; };
 		A1F9994191D887B362FF9359 /* Pods-Yummie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yummie.release.xcconfig"; path = "Target Support Files/Pods-Yummie/Pods-Yummie.release.xcconfig"; sourceTree = "<group>"; };
@@ -208,6 +214,7 @@
 				0406CA9A283FE7DB00AF6357 /* TargetType.swift */,
 				0406CA9B283FE7DB00AF6357 /* BaseResponse.swift */,
 				0406CA9C283FE7DB00AF6357 /* BaseAPI.swift */,
+				044F6547283EF85C00F2BE02 /* Coordinator */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -269,14 +276,12 @@
 		0431EBDC2841580100C2B761 /* YummieTests */ = {
 			isa = PBXGroup;
 			children = (
-				0450F52D2842411200239993 /* AllDishes.json */,
-				049D073B28427FF6000FC8A7 /* Dishes.json */,
-				0431EBED28415EFD00C2B761 /* StubGenerator.swift */,
-				0450F52F2842419E00239993 /* Bundel+UnitTest.swift */,
+				049D073F28429665000FC8A7 /* Mock */,
 				0450F52B28423E4000239993 /* FoodAPITests.swift */,
-				0431EBF028415FEF00C2B761 /* FoodAPIMock.swift */,
 				0450F52328422F9C00239993 /* HomeViewModelTests.swift */,
 				049D073D28428378000FC8A7 /* ListDishesViewModelTest.swift */,
+				04D4680328429E34006D6897 /* ListOrdersViewModelTest.swift */,
+				04D4680728429FA0006D6897 /* DishDetailViewModelTest.swift */,
 			);
 			path = YummieTests;
 			sourceTree = "<group>";
@@ -306,7 +311,6 @@
 			children = (
 				042381CC28403B77002EC553 /* Configuration */,
 				044F6542283EF82700F2BE02 /* Services */,
-				044F6547283EF85C00F2BE02 /* Coordinator */,
 				044F6541283EF81D00F2BE02 /* Models */,
 				044F653F283EF80700F2BE02 /* Views */,
 				044F6540283EF81300F2BE02 /* ViewModels */,
@@ -319,7 +323,6 @@
 		044F6538283EF7D700F2BE02 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				0431EBD328412BD200C2B761 /* ViewController.swift */,
 				0431EBD428412BD200C2B761 /* Reachability.swift */,
 				044F6539283EF7FA00F2BE02 /* String+Extension.swift */,
 				044F653A283EF7FB00F2BE02 /* UIView+Extension.swift */,
@@ -500,6 +503,20 @@
 			path = ListOrders;
 			sourceTree = "<group>";
 		};
+		049D073F28429665000FC8A7 /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				0450F52F2842419E00239993 /* Bundel+UnitTest.swift */,
+				0431EBED28415EFD00C2B761 /* StubGenerator.swift */,
+				0450F52D2842411200239993 /* AllDishes.json */,
+				04D46801284299D8006D6897 /* PlaceOrder.json */,
+				049D0740284296CA000FC8A7 /* Orders.json */,
+				049D073B28427FF6000FC8A7 /* Dishes.json */,
+				0431EBF028415FEF00C2B761 /* FoodAPIMock.swift */,
+			);
+			path = Mock;
+			sourceTree = "<group>";
+		};
 		88CED4896238FABEF95D080D /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -600,6 +617,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04D46802284299D8006D6897 /* PlaceOrder.json in Resources */,
+				049D0741284296CA000FC8A7 /* Orders.json in Resources */,
 				0450F52E2842411200239993 /* AllDishes.json in Resources */,
 				049D073C28427FF6000FC8A7 /* Dishes.json in Resources */,
 			);
@@ -679,6 +698,8 @@
 				0450F5302842419E00239993 /* Bundel+UnitTest.swift in Sources */,
 				049D073E28428378000FC8A7 /* ListDishesViewModelTest.swift in Sources */,
 				0450F52C28423E4000239993 /* FoodAPITests.swift in Sources */,
+				04D4680428429E34006D6897 /* ListOrdersViewModelTest.swift in Sources */,
+				04D4680828429FA0006D6897 /* DishDetailViewModelTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -716,7 +737,6 @@
 				044F6582283EF8A700F2BE02 /* CardView.swift in Sources */,
 				044F657B283EF8A700F2BE02 /* DishPortraitCollectionViewCell.swift in Sources */,
 				0406CAA4283FE7DB00AF6357 /* BaseResponse.swift in Sources */,
-				0431EBD528412BD200C2B761 /* ViewController.swift in Sources */,
 				0455A3C4283FDD2C00FB0EF7 /* ListOrdersViewModel.swift in Sources */,
 				044F6550283EF85C00F2BE02 /* BaseCoordinator.swift in Sources */,
 				044F657F283EF8A700F2BE02 /* DIshLandscapeCollectionViewCell.swift in Sources */,

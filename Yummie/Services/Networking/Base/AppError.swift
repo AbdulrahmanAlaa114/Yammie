@@ -8,7 +8,7 @@
 import Foundation
 
 enum AppError: LocalizedError {
-    case statusCode
+//    case statusCode
     case errorDecoding
     case unknownError
     case invalidUrl
@@ -26,8 +26,8 @@ enum AppError: LocalizedError {
             return "HEYYY!!! Give me a valid URL"
         case .serverError(let error):
             return error
-        case .statusCode:
-            return "Status Code Not Found"
+//        case .statusCode:
+//            return "Status Code Not Found"
         }
     }
 }

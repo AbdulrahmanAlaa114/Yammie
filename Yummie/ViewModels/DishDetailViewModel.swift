@@ -33,8 +33,7 @@ class DishDetailViewModel: BaseViewModel{
     func placingOrder(){
         if Reachability()?.connection != Reachability.Connection.none{
             
-            
-            let api: FoodAPIProtocol = FoodAPI()
+        
             loadingBehavior.accept(true)
             let info = [
                 "dishId":"\(dish.id ?? "")",

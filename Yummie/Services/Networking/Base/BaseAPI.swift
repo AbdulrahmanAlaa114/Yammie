@@ -19,7 +19,7 @@ class BaseAPI<T: TargetType> {
         
         AF.request(target.url, method: method, parameters: params.0, encoding: params.1, headers: headers).responseJSON { (response) in
            
-            print(try? response.result.get())
+//            print(try? response.result.get())
 //            guard let statusCode = response.response?.statusCode else {
 //                // ADD Custom Error
 //                completion(.failure(AppError.statusCode))

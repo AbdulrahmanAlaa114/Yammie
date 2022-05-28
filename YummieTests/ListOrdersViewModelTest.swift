@@ -1,5 +1,5 @@
 //
-//  ListDishesViewModelTest.swift
+//  ListOrdersViewModelTest.swift
 //  YummieTests
 //
 //  Created by Abdulrahman on 28/05/2022.
@@ -8,41 +8,36 @@
 import XCTest
 @testable import Yummie
 
-class ListDishesViewModelTest: XCTestCase {
+class ListOrdersViewModelTest: XCTestCase {
     
-    var sut: ListDishesViewModel!
+    var sut: ListOrdersViewModel!
     var foodAPIMock: FoodAPIMock!
-    var category : DishCategory!
     
     override func setUpWithError() throws {
         
-        category = DishCategory(id: "cat1", name: "cat1", image: "")
         foodAPIMock = FoodAPIMock()
-        sut = ListDishesViewModel(category: category, api: foodAPIMock)
+        sut = ListOrdersViewModel(api: foodAPIMock)
         
     }
 
     override func tearDownWithError() throws {
-        
-        category = nil
+       foodAPIMock = nil
         sut = nil
-        foodAPIMock = nil
-        
     }
-    
+
     func testGetData(){
         
         sut.getData()
-        XCTAssertTrue(foodAPIMock.isCallFetchCategoryDishes)
+        XCTAssertTrue(foodAPIMock.isCallfetchOrders)
         
     }
     
     func testGetDataSuccess(){
         
         sut.getData()
-        foodAPIMock.fetchCategoryDishesSuccess()
+        foodAPIMock.fetchOrdersSuccess()
         
-        XCTAssertEqual(foodAPIMock.dishes.data?.count, 10)
+        XCTAssertEqual(foodAPIMock.orders.data?.count, 4)
         
     }
     
@@ -50,12 +45,11 @@ class ListDishesViewModelTest: XCTestCase {
     func testGetDataFailure(){
         
         sut.getData()
-        let error = AppError.serverError("hi")
-        foodAPIMock.fetchCategoryDishesFailure(error: error)
+        let error = AppError.invalidUrl
+        foodAPIMock.fetchOrdersFailure(error: error)
         XCTAssertEqual(error.localizedDescription, sut.alertMessage)
     
     }
-
     
-
+ 
 }
