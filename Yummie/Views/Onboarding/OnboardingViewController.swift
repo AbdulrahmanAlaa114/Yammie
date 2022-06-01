@@ -56,7 +56,7 @@ class OnboardingViewController: UIViewController {
     }
     
     func registerCells() {
-        collectionView.register(UINib(nibName: OnboardingCollectionViewCell.identifier, bundle: nil), forCellWithReuseIdentifier: OnboardingCollectionViewCell.identifier)
+        collectionView.registerNib(cell: OnboardingCollectionViewCell.self)
     }
     
     func subscribeToNextButton() {

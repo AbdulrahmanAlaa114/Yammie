@@ -13,7 +13,7 @@ class ListDishesViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    var disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
     var viewModel: ListDishesViewModel!
     
     override func viewDidLoad() {
@@ -40,7 +40,7 @@ class ListDishesViewController: UIViewController {
     }
     
     private func registerCells() {
-        tableView.register(UINib(nibName: DishListTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: DishListTableViewCell.identifier)
+        tableView.registerNib(cell: DishListTableViewCell.self)
     }
     
     func subscribeToResponse() {

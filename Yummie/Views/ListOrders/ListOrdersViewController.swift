@@ -14,7 +14,7 @@ class ListOrdersViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var viewModel: ListOrdersViewModel!
-    var disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +40,7 @@ class ListOrdersViewController: UIViewController {
     }
     
     private func registerCells() {
-        tableView.register(UINib(nibName: DishListTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: DishListTableViewCell.identifier)
+        tableView.registerNib(cell: DishListTableViewCell.self)
     }
     
     func subscribeToResponse() {

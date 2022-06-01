@@ -1,5 +1,5 @@
 //
-//  DIshLandscapeCollectionViewCell.swift
+//  DishLandscapeCollectionViewCell.swift
 //  Yummie
 //
 //  Created by Emmanuel Okwara on 20/02/2021.
@@ -7,9 +7,9 @@
 
 import UIKit
 
-class DIshLandscapeCollectionViewCell: UICollectionViewCell {
+class DishLandscapeCollectionViewCell: UICollectionViewCell {
     
-    static let identifier = String(describing: DIshLandscapeCollectionViewCell.self)
+//    static let identifier = String(describing: DishLandscapeCollectionViewCell.self)
     
     @IBOutlet weak var dishImageView: UIImageView!
     @IBOutlet weak var titleLbl: UILabel!

@@ -19,7 +19,7 @@ class DishDetailViewController: UIViewController {
     @IBOutlet weak var placeOrderBtn: UIButton!
     
     var viewModel: DishDetailViewModel!
-    var disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()

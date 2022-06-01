@@ -16,12 +16,12 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var specialsCollectionView: UICollectionView!
     
     var viewModel: HomeViewModel!
-    let disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupView()
+        setupUI()
         subscribeToAlert() 
         subscribeToLoading()
         registerCells()
@@ -51,7 +51,7 @@ class HomeViewController: UIViewController {
         }).disposed(by: disposeBag)
     }
     
-    func setupView() {
+    func setupUI() {
         
         navigationController?.navigationBar.isHidden = false
         title = viewModel.title
@@ -84,7 +84,7 @@ class HomeViewController: UIViewController {
         self.viewModel.specialsObservable
             .bind(to: self.specialsCollectionView
                     .rx
-                    .items(cellIdentifier: DIshLandscapeCollectionViewCell.identifier, cellType: DIshLandscapeCollectionViewCell.self)) { _, dish, cell in
+                    .items(cellIdentifier: DishLandscapeCollectionViewCell.identifier, cellType: DishLandscapeCollectionViewCell.self)) { _, dish, cell in
                 cell.setup(dish: dish)
             }.disposed(by: disposeBag)
             
@@ -119,10 +119,11 @@ class HomeViewController: UIViewController {
     }
         
     private func registerCells() {
-        categoryCollectionView.register(UINib(nibName: CategoryCollectionViewCell.identifier, bundle: nil), forCellWithReuseIdentifier: CategoryCollectionViewCell.identifier)
-        popularCollectionView.register(UINib(nibName: DishPortraitCollectionViewCell.identifier, bundle: nil), forCellWithReuseIdentifier: DishPortraitCollectionViewCell.identifier)
-        specialsCollectionView.register(UINib(nibName: DIshLandscapeCollectionViewCell.identifier, bundle: nil), forCellWithReuseIdentifier: DIshLandscapeCollectionViewCell.identifier)
-       
+        
+        categoryCollectionView.registerNib(cell: CategoryCollectionViewCell.self)
+        popularCollectionView.registerNib(cell: DishPortraitCollectionViewCell.self)
+        specialsCollectionView.registerNib(cell: DishLandscapeCollectionViewCell.self)
+               
     }
 
 }
