@@ -230,35 +230,19 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
-		0406CAB12840179B00AF6357 /* Onboarding */ = {
-			isa = PBXGroup;
-			children = (
-				0406CAB42840179B00AF6357 /* OnboardingViewController.swift */,
-				0406CAB32840179B00AF6357 /* OnboardingViewController.xib */,
-			);
-			path = Onboarding;
-			sourceTree = "<group>";
-		};
-		040CCA8628425C28005B1F00 /* Onboarding */ = {
+		040CCA8628425C28005B1F00 /* custom cell */ = {
 			isa = PBXGroup;
 			children = (
 				0406CAB22840179B00AF6357 /* OnboardingCollectionViewCell.swift */,
 				0406CAB52840179B00AF6357 /* OnboardingCollectionViewCell.xib */,
 			);
-			path = Onboarding;
-			sourceTree = "<group>";
-		};
-		042381CA28403ACB002EC553 /* Launch Scrren */ = {
-			isa = PBXGroup;
-			children = (
-				0406CAA82840172400AF6357 /* LaunchScreen.storyboard */,
-			);
-			path = "Launch Scrren";
+			path = "custom cell";
 			sourceTree = "<group>";
 		};
 		042381CB28403AF0002EC553 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0406CAA82840172400AF6357 /* LaunchScreen.storyboard */,
 				042381D1284060E0002EC553 /* Design System */,
 				044F652D283EF65C00F2BE02 /* Assets.xcassets */,
 			);
@@ -318,13 +302,10 @@
 		044F6523283EF65700F2BE02 /* Yummie */ = {
 			isa = PBXGroup;
 			children = (
+				04D468232850D256006D6897 /* Utilities */,
 				042381CC28403B77002EC553 /* Configuration */,
+				04D4681D2850CF28006D6897 /* scenes */,
 				044F6542283EF82700F2BE02 /* Services */,
-				044F6547283EF85C00F2BE02 /* Coordinator */,
-				044F6541283EF81D00F2BE02 /* Models */,
-				044F653F283EF80700F2BE02 /* Views */,
-				044F6540283EF81300F2BE02 /* ViewModels */,
-				044F6538283EF7D700F2BE02 /* Extensions */,
 				042381CB28403AF0002EC553 /* Resources */,
 			);
 			path = Yummie;
@@ -344,43 +325,12 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		044F653F283EF80700F2BE02 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				044F6560283EF8A700F2BE02 /* CustomViews */,
-				042381CA28403ACB002EC553 /* Launch Scrren */,
-				0406CAB12840179B00AF6357 /* Onboarding */,
-				044F655D283EF8A700F2BE02 /* Home */,
-				0455A3BE283FDC5200FB0EF7 /* ListOrders */,
-				0455A3AC283FBCDB00FB0EF7 /* List Dishes */,
-				0455A3B1283FBDF700FB0EF7 /* DishDetail */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		044F6540283EF81300F2BE02 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				044F6544283EF84D00F2BE02 /* OnboardingViewModel.swift */,
-				044F6543283EF84D00F2BE02 /* HomeViewModel.swift */,
-				0455A3C3283FDD2C00FB0EF7 /* ListOrdersViewModel.swift */,
-				0455A3B6283FBFB900FB0EF7 /* ListDishesViewModel.swift */,
-				0455A3B8283FBFED00FB0EF7 /* DishDetailViewModel.swift */,
 				049D0739284267E9000FC8A7 /* BaseViewModel.swift */,
 			);
 			path = ViewModels;
-			sourceTree = "<group>";
-		};
-		044F6541283EF81D00F2BE02 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				044F658A283EF8BD00F2BE02 /* AllDishes.swift */,
-				044F6587283EF8BD00F2BE02 /* Dish.swift */,
-				044F6588283EF8BD00F2BE02 /* DishCategory.swift */,
-				044F6589283EF8BD00F2BE02 /* OnboaringSlide.swift */,
-				044F658B283EF8BD00F2BE02 /* Order.swift */,
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		044F6542283EF82700F2BE02 /* Services */ = {
@@ -391,46 +341,12 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
-		044F6547283EF85C00F2BE02 /* Coordinator */ = {
-			isa = PBXGroup;
-			children = (
-				044F654C283EF85C00F2BE02 /* Coordinator.swift */,
-				044F654B283EF85C00F2BE02 /* BaseCoordinator.swift */,
-				044F6549283EF85C00F2BE02 /* AppCoordinator.swift */,
-				044F6548283EF85C00F2BE02 /* OnboardingCoordinator.swift */,
-				044F654A283EF85C00F2BE02 /* HomeCoordinator.swift */,
-				0455A3BA283FC58800FB0EF7 /* ListDishesCoordinator.swift */,
-				0455A3BC283FD08B00FB0EF7 /* DishDetailCoordinator.swift */,
-				0455A3C5283FE07B00FB0EF7 /* ListOrdersCoordinator.swift */,
-			);
-			path = Coordinator;
-			sourceTree = "<group>";
-		};
-		044F655D283EF8A700F2BE02 /* Home */ = {
-			isa = PBXGroup;
-			children = (
-				044F655F283EF8A700F2BE02 /* HomeViewController.swift */,
-				044F655E283EF8A700F2BE02 /* HomeViewController.xib */,
-			);
-			path = Home;
-			sourceTree = "<group>";
-		};
 		044F6560283EF8A700F2BE02 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
-				044F6561283EF8A700F2BE02 /* TableViewCells */,
-				044F6565283EF8A700F2BE02 /* CollectionViewCells */,
 				044F6570283EF8A700F2BE02 /* CardView */,
 			);
 			path = CustomViews;
-			sourceTree = "<group>";
-		};
-		044F6561283EF8A700F2BE02 /* TableViewCells */ = {
-			isa = PBXGroup;
-			children = (
-				044F6562283EF8A700F2BE02 /* DishListTableViewCell */,
-			);
-			path = TableViewCells;
 			sourceTree = "<group>";
 		};
 		044F6562283EF8A700F2BE02 /* DishListTableViewCell */ = {
@@ -445,7 +361,6 @@
 		044F6565283EF8A700F2BE02 /* CollectionViewCells */ = {
 			isa = PBXGroup;
 			children = (
-				040CCA8628425C28005B1F00 /* Onboarding */,
 				044F6566283EF8A700F2BE02 /* DishPortraitCollectionViewCell */,
 				044F6569283EF8A700F2BE02 /* CategoryCollectionViewCell */,
 				044F656C283EF8A700F2BE02 /* DishLandscapeCollectionViewCell */,
@@ -488,33 +403,6 @@
 			path = CardView;
 			sourceTree = "<group>";
 		};
-		0455A3AC283FBCDB00FB0EF7 /* List Dishes */ = {
-			isa = PBXGroup;
-			children = (
-				0455A3AD283FBD0F00FB0EF7 /* ListDishesViewController.swift */,
-				0455A3AE283FBD0F00FB0EF7 /* ListDishesViewController.xib */,
-			);
-			path = "List Dishes";
-			sourceTree = "<group>";
-		};
-		0455A3B1283FBDF700FB0EF7 /* DishDetail */ = {
-			isa = PBXGroup;
-			children = (
-				0455A3B2283FBE1F00FB0EF7 /* DishDetailViewController.swift */,
-				0455A3B3283FBE1F00FB0EF7 /* DishDetailViewController.xib */,
-			);
-			path = DishDetail;
-			sourceTree = "<group>";
-		};
-		0455A3BE283FDC5200FB0EF7 /* ListOrders */ = {
-			isa = PBXGroup;
-			children = (
-				0455A3BF283FDC7000FB0EF7 /* ListOrdersViewController.swift */,
-				0455A3C0283FDC7000FB0EF7 /* ListOrdersViewController.xib */,
-			);
-			path = ListOrders;
-			sourceTree = "<group>";
-		};
 		049D073F28429665000FC8A7 /* Mock */ = {
 			isa = PBXGroup;
 			children = (
@@ -547,6 +435,102 @@
 				04D4680B2842AF26006D6897 /* ListOrdersCoordinatorTest.swift */,
 				04D4680F2842B15F006D6897 /* ListDishesCoordinatorTest.swift */,
 				04D468172844561A006D6897 /* OnboardingCoordinatorTest.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		04D4681D2850CF28006D6897 /* scenes */ = {
+			isa = PBXGroup;
+			children = (
+				04D4681E2850CF46006D6897 /* Onboaring */,
+				04D4681F2850CF5B006D6897 /* Home */,
+				04D468222850CFB2006D6897 /* List Dishes */,
+				04D468202850CF67006D6897 /* Orders */,
+				04D468212850CF80006D6897 /* Dish Detailes */,
+			);
+			path = scenes;
+			sourceTree = "<group>";
+		};
+		04D4681E2850CF46006D6897 /* Onboaring */ = {
+			isa = PBXGroup;
+			children = (
+				040CCA8628425C28005B1F00 /* custom cell */,
+				044F6548283EF85C00F2BE02 /* OnboardingCoordinator.swift */,
+				0406CAB42840179B00AF6357 /* OnboardingViewController.swift */,
+				0406CAB32840179B00AF6357 /* OnboardingViewController.xib */,
+				044F6544283EF84D00F2BE02 /* OnboardingViewModel.swift */,
+				044F6589283EF8BD00F2BE02 /* OnboaringSlide.swift */,
+			);
+			path = Onboaring;
+			sourceTree = "<group>";
+		};
+		04D4681F2850CF5B006D6897 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				044F6565283EF8A700F2BE02 /* CollectionViewCells */,
+				044F654A283EF85C00F2BE02 /* HomeCoordinator.swift */,
+				044F655F283EF8A700F2BE02 /* HomeViewController.swift */,
+				044F655E283EF8A700F2BE02 /* HomeViewController.xib */,
+				044F6543283EF84D00F2BE02 /* HomeViewModel.swift */,
+				044F658A283EF8BD00F2BE02 /* AllDishes.swift */,
+				044F6588283EF8BD00F2BE02 /* DishCategory.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		04D468202850CF67006D6897 /* Orders */ = {
+			isa = PBXGroup;
+			children = (
+				0455A3C5283FE07B00FB0EF7 /* ListOrdersCoordinator.swift */,
+				0455A3BF283FDC7000FB0EF7 /* ListOrdersViewController.swift */,
+				0455A3C0283FDC7000FB0EF7 /* ListOrdersViewController.xib */,
+				0455A3C3283FDD2C00FB0EF7 /* ListOrdersViewModel.swift */,
+				044F658B283EF8BD00F2BE02 /* Order.swift */,
+			);
+			path = Orders;
+			sourceTree = "<group>";
+		};
+		04D468212850CF80006D6897 /* Dish Detailes */ = {
+			isa = PBXGroup;
+			children = (
+				0455A3BC283FD08B00FB0EF7 /* DishDetailCoordinator.swift */,
+				0455A3B2283FBE1F00FB0EF7 /* DishDetailViewController.swift */,
+				0455A3B3283FBE1F00FB0EF7 /* DishDetailViewController.xib */,
+				0455A3B8283FBFED00FB0EF7 /* DishDetailViewModel.swift */,
+				044F6587283EF8BD00F2BE02 /* Dish.swift */,
+			);
+			path = "Dish Detailes";
+			sourceTree = "<group>";
+		};
+		04D468222850CFB2006D6897 /* List Dishes */ = {
+			isa = PBXGroup;
+			children = (
+				044F6562283EF8A700F2BE02 /* DishListTableViewCell */,
+				0455A3BA283FC58800FB0EF7 /* ListDishesCoordinator.swift */,
+				0455A3AD283FBD0F00FB0EF7 /* ListDishesViewController.swift */,
+				0455A3AE283FBD0F00FB0EF7 /* ListDishesViewController.xib */,
+				0455A3B6283FBFB900FB0EF7 /* ListDishesViewModel.swift */,
+			);
+			path = "List Dishes";
+			sourceTree = "<group>";
+		};
+		04D468232850D256006D6897 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				044F6538283EF7D700F2BE02 /* Extensions */,
+				04D468242850D2B1006D6897 /* Coordinator */,
+				044F6540283EF81300F2BE02 /* ViewModels */,
+				044F6560283EF8A700F2BE02 /* CustomViews */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		04D468242850D2B1006D6897 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				044F654C283EF85C00F2BE02 /* Coordinator.swift */,
+				044F654B283EF85C00F2BE02 /* BaseCoordinator.swift */,
+				044F6549283EF85C00F2BE02 /* AppCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";

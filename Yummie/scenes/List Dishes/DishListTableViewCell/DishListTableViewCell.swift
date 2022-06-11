@@ -8,8 +8,6 @@
 import UIKit
 
 class DishListTableViewCell: UITableViewCell {
-
-    static let identifier = "DishListTableViewCell"
     
     @IBOutlet weak var dishImageView: UIImageView!
     @IBOutlet weak var titleLbl: UILabel!

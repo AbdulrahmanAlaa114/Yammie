@@ -9,8 +9,6 @@ import UIKit
 
 class DishPortraitCollectionViewCell: UICollectionViewCell {
     
-//    static let identifier = "DishPortraitCollectionViewCell"
-
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var dishImageView: UIImageView!
     @IBOutlet weak var caloriesLbl: UILabel!

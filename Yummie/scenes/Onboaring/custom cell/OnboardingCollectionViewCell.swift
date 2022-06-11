@@ -8,9 +8,7 @@
 import UIKit
 
 class OnboardingCollectionViewCell: UICollectionViewCell {
-
-    static let identifier = String(describing: OnboardingCollectionViewCell.self)
-    
+   
     @IBOutlet weak var slideImageView: UIImageView!
     @IBOutlet weak var slideTitleLbl: UILabel!
     @IBOutlet weak var slideDescriptionLbl: UILabel!
