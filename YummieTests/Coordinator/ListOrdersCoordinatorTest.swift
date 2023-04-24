@@ -9,9 +9,8 @@ import XCTest
 @testable import Yummie
 
 class ListOrdersCoordinatorTest: XCTestCase {
-    
     var sut: ListOrdersCoordinator!
-    
+
     override func setUpWithError() throws {
         sut = ListOrdersCoordinator(navigationController: UINavigationController())
     }
@@ -25,9 +24,8 @@ class ListOrdersCoordinatorTest: XCTestCase {
         sut.goToDishDetail(dish: dish)
         XCTAssertEqual(sut.childCoordinators.count, 1)
     }
-    
+
     func testStart() {
         sut.start()
     }
-    
 }

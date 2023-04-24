@@ -61,7 +61,7 @@ final class UnfairLock: Lock {
     private let unfairLock: os_unfair_lock_t
 
     init() {
-        unfairLock = .allocate(capacity: 1)
+        self.unfairLock = .allocate(capacity: 1)
         unfairLock.initialize(to: os_unfair_lock())
     }
 
@@ -84,11 +84,11 @@ final class UnfairLock: Lock {
 @propertyWrapper
 @dynamicMemberLookup
 final class Protected<T> {
-    #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
+#if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
     private let lock = UnfairLock()
-    #elseif os(Linux) || os(Windows)
+#elseif os(Linux) || os(Windows)
     private let lock = NSLock()
-    #endif
+#endif
     private var value: T
 
     init(_ value: T) {
@@ -104,7 +104,7 @@ final class Protected<T> {
     var projectedValue: Protected<T> { self }
 
     init(wrappedValue: T) {
-        value = wrappedValue
+        self.value = wrappedValue
     }
 
     /// Synchronously read or transform the contained value.

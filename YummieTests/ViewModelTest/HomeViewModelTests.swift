@@ -9,10 +9,9 @@ import XCTest
 @testable import Yummie
 
 class HomeViewModelTests: XCTestCase {
-
     var sut: HomeViewModel!
     var foodAPIMock: FoodAPIMock!
-    
+
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         foodAPIMock = FoodAPIMock()
@@ -25,44 +24,38 @@ class HomeViewModelTests: XCTestCase {
     }
 
     func testGetData() {
-        
         sut.getData()
         XCTAssertTrue(foodAPIMock.isCallfetchAllCategories)
-        
     }
-    
+
     func testGetDataSuccess() {
-        
         sut.getData()
         foodAPIMock.fetchAllCategoriesSuccess()
-        
+
         XCTAssertEqual(foodAPIMock.allDishes.data?.categories?.count, 4)
         XCTAssertEqual(foodAPIMock.allDishes.data?.populars?.count, 5)
         XCTAssertEqual(foodAPIMock.allDishes.data?.specials?.count, 2)
     }
-    
+
     func testGetDataFailure() {
-        
         sut.getData()
         let error = AppError.unknownError
         foodAPIMock.fetchAllCategoriesFailure(error: error)
         XCTAssertEqual(error.localizedDescription, sut.alertMessage)
-    
     }
-    
+
     func testSelectedCategory() {
         let category = DishCategory(id: "", name: "", image: "")
         sut.selected(category: category)
     }
-    
+
     func testSelectedDish() {
         let dish = Dish(id: "", name: "", description: "", image: "", calories: 0)
 
         sut.selected(dish: dish)
     }
-    
+
     func testListOrderTapped() {
         sut.listOrderTapped()
     }
-    
 }

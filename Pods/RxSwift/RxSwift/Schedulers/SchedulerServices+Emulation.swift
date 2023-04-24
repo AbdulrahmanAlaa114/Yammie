@@ -23,7 +23,13 @@ final class SchedulePeriodicRecursive<State> {
     private var state: State
     private let pendingTickCount = AtomicInt(0)
 
-    init(scheduler: SchedulerType, startAfter: RxTimeInterval, period: RxTimeInterval, action: @escaping RecursiveAction, state: State) {
+    init(
+        scheduler: SchedulerType,
+        startAfter: RxTimeInterval,
+        period: RxTimeInterval,
+        action: @escaping RecursiveAction,
+        state: State
+    ) {
         self.scheduler = scheduler
         self.startAfter = startAfter
         self.period = period
@@ -32,7 +38,7 @@ final class SchedulePeriodicRecursive<State> {
     }
 
     func start() -> Disposable {
-        self.scheduler.scheduleRecursive(SchedulePeriodicRecursiveCommand.tick, dueTime: self.startAfter, action: self.tick)
+        scheduler.scheduleRecursive(SchedulePeriodicRecursiveCommand.tick, dueTime: startAfter, action: tick)
     }
 
     func tick(_ command: SchedulePeriodicRecursiveCommand, scheduler: RecursiveScheduler) {
@@ -41,18 +47,18 @@ final class SchedulePeriodicRecursive<State> {
         // tick interval is short.
         switch command {
         case .tick:
-            scheduler.schedule(.tick, dueTime: self.period)
+            scheduler.schedule(.tick, dueTime: period)
 
             // The idea is that if on tick there wasn't any item enqueued, schedule to perform work immediately.
             // Else work will be scheduled after previous enqueued work completes.
-            if increment(self.pendingTickCount) == 0 {
-                self.tick(.dispatchStart, scheduler: scheduler)
+            if increment(pendingTickCount) == 0 {
+                tick(.dispatchStart, scheduler: scheduler)
             }
 
         case .dispatchStart:
-            self.state = self.action(self.state)
+            state = action(state)
             // Start work and schedule check is this last batch of work
-            if decrement(self.pendingTickCount) > 1 {
+            if decrement(pendingTickCount) > 1 {
                 // This gives priority to scheduler emulation, it's not perfect, but helps
                 scheduler.schedule(SchedulePeriodicRecursiveCommand.dispatchStart)
             }

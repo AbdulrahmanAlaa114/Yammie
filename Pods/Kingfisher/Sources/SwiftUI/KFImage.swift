@@ -25,8 +25,8 @@
 //  THE SOFTWARE.
 
 #if canImport(SwiftUI) && canImport(Combine)
-import SwiftUI
 import Combine
+import SwiftUI
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct KFImage: KFImageProtocol {
@@ -45,28 +45,28 @@ extension Image: KFImageHoldingView {
 }
 
 // MARK: - Image compatibility.
-@available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
-extension KFImage {
 
-    public func resizable(
+@available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
+public extension KFImage {
+    func resizable(
         capInsets: EdgeInsets = EdgeInsets(),
         resizingMode: Image.ResizingMode = .stretch) -> KFImage
     {
         configure { $0.resizable(capInsets: capInsets, resizingMode: resizingMode) }
     }
 
-    public func renderingMode(_ renderingMode: Image.TemplateRenderingMode?) -> KFImage {
+    func renderingMode(_ renderingMode: Image.TemplateRenderingMode?) -> KFImage {
         configure { $0.renderingMode(renderingMode) }
     }
 
-    public func interpolation(_ interpolation: Image.Interpolation) -> KFImage {
+    func interpolation(_ interpolation: Image.Interpolation) -> KFImage {
         configure { $0.interpolation(interpolation) }
     }
 
-    public func antialiased(_ isAntialiased: Bool) -> KFImage {
+    func antialiased(_ isAntialiased: Bool) -> KFImage {
         configure { $0.antialiased(isAntialiased) }
     }
-    
+
     /// Starts the loading process of `self` immediately.
     ///
     /// By default, a `KFImage` will not load its source until the `onAppear` is called. This is a lazily loading
@@ -78,8 +78,11 @@ extension KFImage {
     /// It does nothing now and please just remove it.
     ///
     /// - Returns: The `Self` value with changes applied.
-    @available(*, deprecated, message: "This is not necessary anymore since `@StateObject` is used. It does nothing now and please just remove it.")
-    public func loadImmediately(_ start: Bool = true) -> KFImage {
+    @available(
+        *,
+        deprecated,
+        message: "This is not necessary anymore since `@StateObject` is used. It does nothing now and please just remove it.")
+    func loadImmediately(_: Bool = true) -> KFImage {
         return self
     }
 }

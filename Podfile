@@ -6,13 +6,15 @@ target 'Yummie' do
   use_frameworks!
 
   # Pods for Yummie
+    pod 'Alamofire'
+    pod 'RxSwift'
+    pod 'RxCocoa'
+    pod "IQKeyboardManagerSwift"
+    pod "Kingfisher"
 
-  pod 'Alamofire'
-  pod 'RxSwift'
-  pod 'RxCocoa'
-  pod "IQKeyboardManagerSwift"
-  pod "Kingfisher"
-  pod "SwiftLint"
-
+  target 'YummieTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
 
 end

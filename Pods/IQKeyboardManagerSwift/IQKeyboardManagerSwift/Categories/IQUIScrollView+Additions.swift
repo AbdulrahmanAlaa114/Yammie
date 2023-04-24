@@ -26,8 +26,7 @@ import UIKit
 
 @available(iOSApplicationExtension, unavailable)
 @objc public extension UIScrollView {
-
-    private struct AssociatedKeys {
+    private enum AssociatedKeys {
         static var shouldIgnoreScrollingAdjustment = "shouldIgnoreScrollingAdjustment"
         static var shouldIgnoreContentInsetAdjustment = "shouldIgnoreContentInsetAdjustment"
         static var shouldRestoreScrollViewContentOffset = "shouldRestoreScrollViewContentOffset"
@@ -41,7 +40,12 @@ import UIKit
             return objc_getAssociatedObject(self, &AssociatedKeys.shouldIgnoreScrollingAdjustment) as? Bool ?? false
         }
         set(newValue) {
-            objc_setAssociatedObject(self, &AssociatedKeys.shouldIgnoreScrollingAdjustment, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(
+                self,
+                &AssociatedKeys.shouldIgnoreScrollingAdjustment,
+                newValue,
+                .OBJC_ASSOCIATION_RETAIN_NONATOMIC
+            )
         }
     }
 
@@ -53,7 +57,12 @@ import UIKit
             return objc_getAssociatedObject(self, &AssociatedKeys.shouldIgnoreContentInsetAdjustment) as? Bool ?? false
         }
         set(newValue) {
-            objc_setAssociatedObject(self, &AssociatedKeys.shouldIgnoreContentInsetAdjustment, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(
+                self,
+                &AssociatedKeys.shouldIgnoreContentInsetAdjustment,
+                newValue,
+                .OBJC_ASSOCIATION_RETAIN_NONATOMIC
+            )
         }
     }
 
@@ -62,26 +71,31 @@ import UIKit
      */
     var shouldRestoreScrollViewContentOffset: Bool {
         get {
-            return objc_getAssociatedObject(self, &AssociatedKeys.shouldRestoreScrollViewContentOffset) as? Bool ?? false
+            return objc_getAssociatedObject(self, &AssociatedKeys.shouldRestoreScrollViewContentOffset) as? Bool ??
+                false
         }
         set(newValue) {
-            objc_setAssociatedObject(self, &AssociatedKeys.shouldRestoreScrollViewContentOffset, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(
+                self,
+                &AssociatedKeys.shouldRestoreScrollViewContentOffset,
+                newValue,
+                .OBJC_ASSOCIATION_RETAIN_NONATOMIC
+            )
         }
     }
 }
 
 @available(iOSApplicationExtension, unavailable)
 internal extension UITableView {
-
     func previousIndexPath(of indexPath: IndexPath) -> IndexPath? {
         var previousRow = indexPath.row - 1
         var previousSection = indexPath.section
 
-        //Fixing indexPath
+        // Fixing indexPath
         if previousRow < 0 {
             previousSection -= 1
             if previousSection >= 0 {
-                previousRow = self.numberOfRows(inSection: previousSection) - 1
+                previousRow = numberOfRows(inSection: previousSection) - 1
             }
         }
 
@@ -95,16 +109,15 @@ internal extension UITableView {
 
 @available(iOSApplicationExtension, unavailable)
 internal extension UICollectionView {
-
     func previousIndexPath(of indexPath: IndexPath) -> IndexPath? {
         var previousRow = indexPath.row - 1
         var previousSection = indexPath.section
 
-        //Fixing indexPath
+        // Fixing indexPath
         if previousRow < 0 {
             previousSection -= 1
             if previousSection >= 0 {
-                previousRow = self.numberOfItems(inSection: previousSection) - 1
+                previousRow = numberOfItems(inSection: previousSection) - 1
             }
         }
 

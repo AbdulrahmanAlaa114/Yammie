@@ -36,9 +36,11 @@ struct RequestTaskMap {
         Array(tasksToRequests.values)
     }
 
-    init(tasksToRequests: [URLSessionTask: Request] = [:],
-         requestsToTasks: [Request: URLSessionTask] = [:],
-         taskEvents: [URLSessionTask: (completed: Bool, metricsGathered: Bool)] = [:]) {
+    init(
+        tasksToRequests: [URLSessionTask: Request] = [:],
+        requestsToTasks: [Request: URLSessionTask] = [:],
+        taskEvents: [URLSessionTask: (completed: Bool, metricsGathered: Bool)] = [:]
+    ) {
         self.tasksToRequests = tasksToRequests
         self.requestsToTasks = requestsToTasks
         self.taskEvents = taskEvents
@@ -87,27 +89,37 @@ struct RequestTaskMap {
     }
 
     var count: Int {
-        precondition(tasksToRequests.count == requestsToTasks.count,
-                     "RequestTaskMap.count invalid, requests.count: \(tasksToRequests.count) != tasks.count: \(requestsToTasks.count)")
+        precondition(
+            tasksToRequests.count == requestsToTasks.count,
+            "RequestTaskMap.count invalid, requests.count: \(tasksToRequests.count) != tasks.count: \(requestsToTasks.count)"
+        )
 
         return tasksToRequests.count
     }
 
     var eventCount: Int {
-        precondition(taskEvents.count == count, "RequestTaskMap.eventCount invalid, count: \(count) != taskEvents.count: \(taskEvents.count)")
+        precondition(
+            taskEvents.count == count,
+            "RequestTaskMap.eventCount invalid, count: \(count) != taskEvents.count: \(taskEvents.count)"
+        )
 
         return taskEvents.count
     }
 
     var isEmpty: Bool {
-        precondition(tasksToRequests.isEmpty == requestsToTasks.isEmpty,
-                     "RequestTaskMap.isEmpty invalid, requests.isEmpty: \(tasksToRequests.isEmpty) != tasks.isEmpty: \(requestsToTasks.isEmpty)")
+        precondition(
+            tasksToRequests.isEmpty == requestsToTasks.isEmpty,
+            "RequestTaskMap.isEmpty invalid, requests.isEmpty: \(tasksToRequests.isEmpty) != tasks.isEmpty: \(requestsToTasks.isEmpty)"
+        )
 
         return tasksToRequests.isEmpty
     }
 
     var isEventsEmpty: Bool {
-        precondition(taskEvents.isEmpty == isEmpty, "RequestTaskMap.isEventsEmpty invalid, isEmpty: \(isEmpty) != taskEvents.isEmpty: \(taskEvents.isEmpty)")
+        precondition(
+            taskEvents.isEmpty == isEmpty,
+            "RequestTaskMap.isEventsEmpty invalid, isEmpty: \(isEmpty) != taskEvents.isEmpty: \(taskEvents.isEmpty)"
+        )
 
         return taskEvents.isEmpty
     }
@@ -131,9 +143,9 @@ struct RequestTaskMap {
 
         switch (events.completed, events.metricsGathered) {
         case (true, _): fatalError("RequestTaskMap consistency error: duplicate completionReceivedForTask call.")
-        #if os(Linux) // Linux doesn't gather metrics, so unconditionally remove the reference and return true.
+#if os(Linux) // Linux doesn't gather metrics, so unconditionally remove the reference and return true.
         default: self[task] = nil; return true
-        #else
+#else
         case (false, false):
             if #available(macOS 10.12, iOS 10, watchOS 7, tvOS 10, *) {
                 taskEvents[task] = (completed: true, metricsGathered: false); return false
@@ -143,7 +155,7 @@ struct RequestTaskMap {
             }
         case (false, true):
             self[task] = nil; return true
-        #endif
+#endif
         }
     }
 }

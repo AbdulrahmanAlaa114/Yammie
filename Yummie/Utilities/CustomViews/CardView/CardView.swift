@@ -8,17 +8,16 @@
 import UIKit
 
 class CardView: UIView {
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         initialSetup()
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         initialSetup()
     }
-    
+
     private func initialSetup() {
         layer.shadowColor = DesignSystem.Colors.textPrimary.color.cgColor
         layer.shadowOffset = .zero

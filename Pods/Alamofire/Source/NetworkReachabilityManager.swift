@@ -91,7 +91,7 @@ open class NetworkReachabilityManager {
     open var flags: SCNetworkReachabilityFlags? {
         var flags = SCNetworkReachabilityFlags()
 
-        return (SCNetworkReachabilityGetFlags(reachability, &flags)) ? flags : nil
+        return SCNetworkReachabilityGetFlags(reachability, &flags) ? flags : nil
     }
 
     /// The current network reachability status.
@@ -164,8 +164,10 @@ open class NetworkReachabilityManager {
     ///
     /// - Returns: `true` if listening was started successfully, `false` otherwise.
     @discardableResult
-    open func startListening(onQueue queue: DispatchQueue = .main,
-                             onUpdatePerforming listener: @escaping Listener) -> Bool {
+    open func startListening(
+        onQueue queue: DispatchQueue = .main,
+        onUpdatePerforming listener: @escaping Listener
+    ) -> Bool {
         stopListening()
 
         $mutableState.write { state in
@@ -173,11 +175,13 @@ open class NetworkReachabilityManager {
             state.listener = listener
         }
 
-        var context = SCNetworkReachabilityContext(version: 0,
-                                                   info: Unmanaged.passUnretained(self).toOpaque(),
-                                                   retain: nil,
-                                                   release: nil,
-                                                   copyDescription: nil)
+        var context = SCNetworkReachabilityContext(
+            version: 0,
+            info: Unmanaged.passUnretained(self).toOpaque(),
+            retain: nil,
+            release: nil,
+            copyDescription: nil
+        )
         let callback: SCNetworkReachabilityCallBack = { _, flags, info in
             guard let info = info else { return }
 
@@ -241,11 +245,11 @@ extension SCNetworkReachabilityFlags {
     var canConnectWithoutUserInteraction: Bool { canConnectAutomatically && !contains(.interventionRequired) }
     var isActuallyReachable: Bool { isReachable && (!isConnectionRequired || canConnectWithoutUserInteraction) }
     var isCellular: Bool {
-        #if os(iOS) || os(tvOS)
+#if os(iOS) || os(tvOS)
         return contains(.isWWAN)
-        #else
+#else
         return false
-        #endif
+#endif
     }
 
     /// Human readable `String` for all states, to help with debugging.

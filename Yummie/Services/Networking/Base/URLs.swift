@@ -9,15 +9,14 @@
 import Foundation
 
 struct URLs {
-    
     // MARK: - The BasicPath
-    
+
     static let baseUrl = "https://yummie.glitch.me"
-    
+
     // MARK: - Complete Path
-    static let fetchAllCategories   = baseUrl + "/dish-categories"
-    static let placeOrder           = baseUrl + "/orders/"
-    static let fetchCategoryDishes  = baseUrl + "/dishes/"
-    static let fetchOrders          = baseUrl + "/orders"
-    
+
+    static let fetchAllCategories = baseUrl + "/dish-categories"
+    static let placeOrder = baseUrl + "/orders/"
+    static let fetchCategoryDishes = baseUrl + "/dishes/"
+    static let fetchOrders = baseUrl + "/orders"
 }

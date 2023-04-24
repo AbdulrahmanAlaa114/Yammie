@@ -8,15 +8,13 @@
 import UIKit
 
 final class AppCoordinator: BaseCoordinator {
-    
     private let window: UIWindow
-    
+
     init(window: UIWindow) {
         self.window = window
     }
-    
+
     override func start() {
-        
         let navigationController = UINavigationController()
 
         if UserDefaults.standard.hasOnboarded {
@@ -30,6 +28,5 @@ final class AppCoordinator: BaseCoordinator {
         }
         window.rootViewController = navigationController
         window.makeKeyAndVisible()
-        
     }
 }

@@ -33,15 +33,15 @@ import UIKit
 
 enum GraphicsContext {
     static func begin(size: CGSize, scale: CGFloat) {
-        #if os(macOS)
+#if os(macOS)
         NSGraphicsContext.saveGraphicsState()
-        #else
+#else
         UIGraphicsBeginImageContextWithOptions(size, false, scale)
-        #endif
+#endif
     }
-    
+
     static func current(size: CGSize, scale: CGFloat, inverting: Bool, cgImage: CGImage?) -> CGContext? {
-        #if os(macOS)
+#if os(macOS)
         guard let rep = NSBitmapImageRep(
             bitmapDataPlanes: nil,
             pixelsWide: Int(size.width),
@@ -52,8 +52,8 @@ enum GraphicsContext {
             isPlanar: false,
             colorSpaceName: .calibratedRGB,
             bytesPerRow: 0,
-            bitsPerPixel: 0) else
-        {
+            bitsPerPixel: 0)
+        else {
             assertionFailure("[Kingfisher] Image representation cannot be created.")
             return nil
         }
@@ -62,10 +62,10 @@ enum GraphicsContext {
             assertionFailure("[Kingfisher] Image context cannot be created.")
             return nil
         }
-        
+
         NSGraphicsContext.current = context
         return context.cgContext
-        #else
+#else
         guard let context = UIGraphicsGetCurrentContext() else {
             return nil
         }
@@ -74,15 +74,14 @@ enum GraphicsContext {
             context.translateBy(x: 0, y: -size.height)
         }
         return context
-        #endif
+#endif
     }
-    
+
     static func end() {
-        #if os(macOS)
+#if os(macOS)
         NSGraphicsContext.restoreGraphicsState()
-        #else
+#else
         UIGraphicsEndImageContext()
-        #endif
+#endif
     }
 }
-

@@ -8,12 +8,11 @@
 import UIKit
 
 class DishPortraitCollectionViewCell: UICollectionViewCell {
-    
-    @IBOutlet weak var titleLbl: UILabel!
-    @IBOutlet weak var dishImageView: UIImageView!
-    @IBOutlet weak var caloriesLbl: UILabel!
-    @IBOutlet weak var descriptionLbl: UILabel!
-    
+    @IBOutlet var titleLbl: UILabel!
+    @IBOutlet var dishImageView: UIImageView!
+    @IBOutlet var caloriesLbl: UILabel!
+    @IBOutlet var descriptionLbl: UILabel!
+
     func setup(dish: Dish) {
         titleLbl.text = dish.name
         dishImageView.kf.setImage(with: dish.image?.asUrl)

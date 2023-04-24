@@ -30,7 +30,7 @@ import AppKit
 import UIKit
 #endif
 
-extension Notification.Name {
+public extension Notification.Name {
     /// This notification will be sent when the disk cache got cleaned either there are cached files expired or the
     /// total size exceeding the max allowed size. The manually invoking of `clearDiskCache` method will not trigger
     /// this notification.
@@ -39,7 +39,7 @@ extension Notification.Name {
     /// A list of removed hashes (files) could be retrieved by accessing the array under
     /// `KingfisherDiskCacheCleanedHashKey` key in `userInfo` of the notification object you received.
     /// By checking the array, you could know the hash codes of files are removed.
-    public static let KingfisherDidCleanDiskCache =
+    static let KingfisherDidCleanDiskCache =
         Notification.Name("com.onevcat.Kingfisher.KingfisherDidCleanDiskCache")
 }
 
@@ -57,7 +57,7 @@ public enum CacheType {
     case memory
     /// The image is cached in disk.
     case disk
-    
+
     /// Whether the cache type represents the image is already cached or not.
     public var cached: Bool {
         switch self {
@@ -69,13 +69,12 @@ public enum CacheType {
 
 /// Represents the caching operation result.
 public struct CacheStoreResult {
-    
     /// The cache result for memory cache. Caching an image to memory will never fail.
-    public let memoryCacheResult: Result<(), Never>
-    
+    public let memoryCacheResult: Result<Void, Never>
+
     /// The cache result for disk cache. If an error happens during caching operation,
     /// you can get it from `.failure` case of this `diskCacheResult`.
-    public let diskCacheResult: Result<(), KingfisherError>
+    public let diskCacheResult: Result<Void, KingfisherError>
 }
 
 extension KFCrossPlatformImage: CacheCostCalculable {
@@ -95,33 +94,31 @@ extension Data: DataTransformable {
     public static let empty = Data()
 }
 
-
 /// Represents the getting image operation from the cache.
 ///
 /// - disk: The image can be retrieved from disk cache.
 /// - memory: The image can be retrieved memory cache.
 /// - none: The image does not exist in the cache.
 public enum ImageCacheResult {
-    
     /// The image can be retrieved from disk cache.
     case disk(KFCrossPlatformImage)
-    
+
     /// The image can be retrieved memory cache.
     case memory(KFCrossPlatformImage)
-    
+
     /// The image does not exist in the cache.
     case none
-    
+
     /// Extracts the image from cache result. It returns the associated `Image` value for
     /// `.disk` and `.memory` case. For `.none` case, `nil` is returned.
     public var image: KFCrossPlatformImage? {
         switch self {
-        case .disk(let image): return image
-        case .memory(let image): return image
+        case let .disk(image): return image
+        case let .memory(image): return image
         case .none: return nil
         }
     }
-    
+
     /// Returns the corresponding `CacheType` value based on the result type of `self`.
     public var cacheType: CacheType {
         switch self {
@@ -140,27 +137,27 @@ public enum ImageCacheResult {
 /// your own cache object and configure its storages as your need. This class also provide an interface for you to set
 /// the memory and disk storage config.
 open class ImageCache {
-
     // MARK: Singleton
+
     /// The default `ImageCache` object. Kingfisher will use this cache for its related methods if there is no
     /// other cache specified. The `name` of this default cache is "default", and you should not use this name
     /// for any of your customize cache.
     public static let `default` = ImageCache(name: "default")
 
-
     // MARK: Public Properties
+
     /// The `MemoryStorage.Backend` object used in this cache. This storage holds loaded images in memory with a
     /// reasonable expire duration and a maximum memory usage. To modify the configuration of a storage, just set
     /// the storage `config` and its properties.
     public let memoryStorage: MemoryStorage.Backend<KFCrossPlatformImage>
-    
+
     /// The `DiskStorage.Backend` object used in this cache. This storage stores loaded images in disk with a
     /// reasonable expire duration and a maximum disk usage. To modify the configuration of a storage, just set
     /// the storage `config` and its properties.
     public let diskStorage: DiskStorage.Backend<Data>
-    
+
     private let ioQueue: DispatchQueue
-    
+
     /// Closure that defines the disk cache path from a given path and cacheName.
     public typealias DiskCachePathClosure = (URL, String) -> URL
 
@@ -178,27 +175,27 @@ open class ImageCache {
         self.memoryStorage = memoryStorage
         self.diskStorage = diskStorage
         let ioQueueName = "com.onevcat.Kingfisher.ImageCache.ioQueue.\(UUID().uuidString)"
-        ioQueue = DispatchQueue(label: ioQueueName)
+        self.ioQueue = DispatchQueue(label: ioQueueName)
 
         let notifications: [(Notification.Name, Selector)]
-        #if !os(macOS) && !os(watchOS)
+#if !os(macOS) && !os(watchOS)
         notifications = [
             (UIApplication.didReceiveMemoryWarningNotification, #selector(clearMemoryCache)),
             (UIApplication.willTerminateNotification, #selector(cleanExpiredDiskCache)),
             (UIApplication.didEnterBackgroundNotification, #selector(backgroundCleanExpiredDiskCache))
         ]
-        #elseif os(macOS)
+#elseif os(macOS)
         notifications = [
             (NSApplication.willResignActiveNotification, #selector(cleanExpiredDiskCache)),
         ]
-        #else
+#else
         notifications = []
-        #endif
+#endif
         notifications.forEach {
             NotificationCenter.default.addObserver(self, selector: $0.1, name: $0.0, object: nil)
         }
     }
-    
+
     /// Creates an `ImageCache` with a given `name`. Both `MemoryStorage` and `DiskStorage` will be created
     /// with a default config based on the `name`.
     ///
@@ -226,18 +223,17 @@ open class ImageCache {
     public convenience init(
         name: String,
         cacheDirectoryURL: URL?,
-        diskCachePathClosure: DiskCachePathClosure? = nil
-    ) throws
+        diskCachePathClosure: DiskCachePathClosure? = nil) throws
     {
         if name.isEmpty {
-            fatalError("[Kingfisher] You should specify a name for the cache. A cache with empty name is not permitted.")
+            fatalError(
+                "[Kingfisher] You should specify a name for the cache. A cache with empty name is not permitted.")
         }
 
         let memoryStorage = ImageCache.createMemoryStorage()
 
         let config = ImageCache.createConfig(
-            name: name, cacheDirectoryURL: cacheDirectoryURL, diskCachePathClosure: diskCachePathClosure
-        )
+            name: name, cacheDirectoryURL: cacheDirectoryURL, diskCachePathClosure: diskCachePathClosure)
         let diskStorage = try DiskStorage.Backend<Data>(config: config)
         self.init(memoryStorage: memoryStorage, diskStorage: diskStorage)
     }
@@ -245,18 +241,17 @@ open class ImageCache {
     convenience init(
         noThrowName name: String,
         cacheDirectoryURL: URL?,
-        diskCachePathClosure: DiskCachePathClosure?
-    )
+        diskCachePathClosure: DiskCachePathClosure?)
     {
         if name.isEmpty {
-            fatalError("[Kingfisher] You should specify a name for the cache. A cache with empty name is not permitted.")
+            fatalError(
+                "[Kingfisher] You should specify a name for the cache. A cache with empty name is not permitted.")
         }
 
         let memoryStorage = ImageCache.createMemoryStorage()
 
         let config = ImageCache.createConfig(
-            name: name, cacheDirectoryURL: cacheDirectoryURL, diskCachePathClosure: diskCachePathClosure
-        )
+            name: name, cacheDirectoryURL: cacheDirectoryURL, diskCachePathClosure: diskCachePathClosure)
         let diskStorage = DiskStorage.Backend<Data>(noThrowConfig: config, creatingDirectory: true)
         self.init(memoryStorage: memoryStorage, diskStorage: diskStorage)
     }
@@ -264,7 +259,8 @@ open class ImageCache {
     private static func createMemoryStorage() -> MemoryStorage.Backend<KFCrossPlatformImage> {
         let totalMemory = ProcessInfo.processInfo.physicalMemory
         let costLimit = totalMemory / 4
-        let memoryStorage = MemoryStorage.Backend<KFCrossPlatformImage>(config:
+        let memoryStorage = MemoryStorage.Backend<KFCrossPlatformImage>(
+            config:
             .init(totalCostLimit: (costLimit > Int.max) ? Int.max : Int(costLimit)))
         return memoryStorage
     }
@@ -272,40 +268,39 @@ open class ImageCache {
     private static func createConfig(
         name: String,
         cacheDirectoryURL: URL?,
-        diskCachePathClosure: DiskCachePathClosure? = nil
-    ) -> DiskStorage.Config
+        diskCachePathClosure: DiskCachePathClosure? = nil) -> DiskStorage.Config
     {
         var diskConfig = DiskStorage.Config(
             name: name,
             sizeLimit: 0,
-            directory: cacheDirectoryURL
-        )
+            directory: cacheDirectoryURL)
         if let closure = diskCachePathClosure {
             diskConfig.cachePathBlock = closure
         }
         return diskConfig
     }
-    
+
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
 
     // MARK: Storing Images
 
-    open func store(_ image: KFCrossPlatformImage,
-                    original: Data? = nil,
-                    forKey key: String,
-                    options: KingfisherParsedOptionsInfo,
-                    toDisk: Bool = true,
-                    completionHandler: ((CacheStoreResult) -> Void)? = nil)
+    open func store(
+        _ image: KFCrossPlatformImage,
+        original: Data? = nil,
+        forKey key: String,
+        options: KingfisherParsedOptionsInfo,
+        toDisk: Bool = true,
+        completionHandler: ((CacheStoreResult) -> Void)? = nil)
     {
         let identifier = options.processor.identifier
         let callbackQueue = options.callbackQueue
-        
+
         let computedKey = key.computedKey(with: identifier)
         // Memory storage should not throw.
         memoryStorage.storeNoThrow(value: image, forKey: computedKey, expiration: options.memoryCacheExpiration)
-        
+
         guard toDisk else {
             if let completionHandler = completionHandler {
                 let result = CacheStoreResult(memoryCacheResult: .success(()), diskCacheResult: .success(()))
@@ -313,7 +308,7 @@ open class ImageCache {
             }
             return
         }
-        
+
         ioQueue.async {
             let serializer = options.cacheSerializer
             if let data = serializer.data(with: image, original: original) {
@@ -327,7 +322,7 @@ open class ImageCache {
                     completionHandler: completionHandler)
             } else {
                 guard let completionHandler = completionHandler else { return }
-                
+
                 let diskError = KingfisherError.cacheError(
                     reason: .cannotSerializeImage(image: image, original: original, serializer: serializer))
                 let result = CacheStoreResult(
@@ -359,14 +354,15 @@ open class ImageCache {
     ///                    from an internal file IO queue. To change this behavior, specify another `CallbackQueue`
     ///                    value.
     ///   - completionHandler: A closure which is invoked when the cache operation finishes.
-    open func store(_ image: KFCrossPlatformImage,
-                      original: Data? = nil,
-                      forKey key: String,
-                      processorIdentifier identifier: String = "",
-                      cacheSerializer serializer: CacheSerializer = DefaultCacheSerializer.default,
-                      toDisk: Bool = true,
-                      callbackQueue: CallbackQueue = .untouch,
-                      completionHandler: ((CacheStoreResult) -> Void)? = nil)
+    open func store(
+        _ image: KFCrossPlatformImage,
+        original: Data? = nil,
+        forKey key: String,
+        processorIdentifier identifier: String = "",
+        cacheSerializer serializer: CacheSerializer = DefaultCacheSerializer.default,
+        toDisk: Bool = true,
+        callbackQueue: CallbackQueue = .untouch,
+        completionHandler: ((CacheStoreResult) -> Void)? = nil)
     {
         struct TempProcessor: ImageProcessor {
             let identifier: String
@@ -374,16 +370,21 @@ open class ImageCache {
                 return nil
             }
         }
-        
+
         let options = KingfisherParsedOptionsInfo([
             .processor(TempProcessor(identifier: identifier)),
             .cacheSerializer(serializer),
             .callbackQueue(callbackQueue)
         ])
-        store(image, original: original, forKey: key, options: options,
-              toDisk: toDisk, completionHandler: completionHandler)
+        store(
+            image,
+            original: original,
+            forKey: key,
+            options: options,
+            toDisk: toDisk,
+            completionHandler: completionHandler)
     }
-    
+
     open func storeToDisk(
         _ data: Data,
         forKey key: String,
@@ -402,7 +403,7 @@ open class ImageCache {
                 completionHandler: completionHandler)
         }
     }
-    
+
     private func syncStoreToDisk(
         _ data: Data,
         forKey key: String,
@@ -415,7 +416,7 @@ open class ImageCache {
         let computedKey = key.computedKey(with: identifier)
         let result: CacheStoreResult
         do {
-            try self.diskStorage.store(value: data, forKey: computedKey, expiration: expiration, writeOptions: writeOptions)
+            try diskStorage.store(value: data, forKey: computedKey, expiration: expiration, writeOptions: writeOptions)
             result = CacheStoreResult(memoryCacheResult: .success(()), diskCacheResult: .success(()))
         } catch {
             let diskError: KingfisherError
@@ -424,11 +425,10 @@ open class ImageCache {
             } else {
                 diskError = .cacheError(reason: .cannotConvertToData(object: data, error: error))
             }
-            
+
             result = CacheStoreResult(
                 memoryCacheResult: .success(()),
-                diskCacheResult: .failure(diskError)
-            )
+                diskCacheResult: .failure(diskError))
         }
         if let completionHandler = completionHandler {
             callbackQueue.execute { completionHandler(result) }
@@ -449,21 +449,22 @@ open class ImageCache {
     ///               If `false`, the image won't be removed from the disk storage. Default is `true`.
     ///   - callbackQueue: The callback queue on which `completionHandler` is invoked. Default is `.untouch`.
     ///   - completionHandler: A closure which is invoked when the cache removing operation finishes.
-    open func removeImage(forKey key: String,
-                          processorIdentifier identifier: String = "",
-                          fromMemory: Bool = true,
-                          fromDisk: Bool = true,
-                          callbackQueue: CallbackQueue = .untouch,
-                          completionHandler: (() -> Void)? = nil)
+    open func removeImage(
+        forKey key: String,
+        processorIdentifier identifier: String = "",
+        fromMemory: Bool = true,
+        fromDisk: Bool = true,
+        callbackQueue: CallbackQueue = .untouch,
+        completionHandler: (() -> Void)? = nil)
     {
         let computedKey = key.computedKey(with: identifier)
 
         if fromMemory {
             memoryStorage.remove(forKey: computedKey)
         }
-        
+
         if fromDisk {
-            ioQueue.async{
+            ioQueue.async {
                 try? self.diskStorage.remove(forKey: computedKey)
                 if let completionHandler = completionHandler {
                     callbackQueue.execute { completionHandler() }
@@ -503,12 +504,11 @@ open class ImageCache {
         } else if options.fromMemoryCacheOrRefresh {
             callbackQueue.execute { completionHandler(.success(.none)) }
         } else {
-
             // Begin to disk search.
-            self.retrieveImageInDiskCache(forKey: key, options: options, callbackQueue: callbackQueue) {
+            retrieveImageInDiskCache(forKey: key, options: options, callbackQueue: callbackQueue) {
                 result in
                 switch result {
-                case .success(let image):
+                case let .success(image):
 
                     guard let image = image else {
                         // No image found in disk storage.
@@ -530,7 +530,7 @@ open class ImageCache {
                         _ in
                         callbackQueue.execute { completionHandler(.success(.disk(image))) }
                     }
-                case .failure(let error):
+                case let .failure(error):
                     callbackQueue.execute { completionHandler(.failure(error)) }
                 }
             }
@@ -550,10 +550,11 @@ open class ImageCache {
     ///
     /// Note: This method is marked as `open` for only compatible purpose. Do not overide this method. Instead, override
     ///       the version receives `KingfisherParsedOptionsInfo` instead.
-    open func retrieveImage(forKey key: String,
-                               options: KingfisherOptionsInfo? = nil,
-                        callbackQueue: CallbackQueue = .mainCurrentOrAsync,
-                     completionHandler: ((Result<ImageCacheResult, KingfisherError>) -> Void)?)
+    open func retrieveImage(
+        forKey key: String,
+        options: KingfisherOptionsInfo? = nil,
+        callbackQueue: CallbackQueue = .mainCurrentOrAsync,
+        completionHandler: ((Result<ImageCacheResult, KingfisherError>) -> Void)?)
     {
         retrieveImage(
             forKey: key,
@@ -574,7 +575,9 @@ open class ImageCache {
         options: KingfisherParsedOptionsInfo) -> KFCrossPlatformImage?
     {
         let computedKey = key.computedKey(with: options.processor.identifier)
-        return memoryStorage.value(forKey: computedKey, extendingExpiration: options.memoryCacheAccessExtendingExpiration)
+        return memoryStorage.value(
+            forKey: computedKey,
+            extendingExpiration: options.memoryCacheAccessExtendingExpiration)
     }
 
     /// Gets an image for a given key from the memory storage.
@@ -604,21 +607,25 @@ open class ImageCache {
         let loadingQueue: CallbackQueue = options.loadDiskFileSynchronously ? .untouch : .dispatch(ioQueue)
         loadingQueue.execute {
             do {
-                var image: KFCrossPlatformImage? = nil
-                if let data = try self.diskStorage.value(forKey: computedKey, extendingExpiration: options.diskCacheAccessExtendingExpiration) {
+                var image: KFCrossPlatformImage?
+                if let data = try self.diskStorage.value(
+                    forKey: computedKey,
+                    extendingExpiration: options.diskCacheAccessExtendingExpiration)
+                {
                     image = options.cacheSerializer.image(with: data, options: options)
                 }
-                callbackQueue.execute { completionHandler(.success(image)) }
-            } catch {
-                if let error = error as? KingfisherError {
-                    callbackQueue.execute { completionHandler(.failure(error)) }
-                } else {
-                    assertionFailure("The internal thrown error should be a `KingfisherError`.")
+                if options.backgroundDecode {
+                    image = image?.kf.decoded(scale: options.scaleFactor)
                 }
+                callbackQueue.execute { completionHandler(.success(image)) }
+            } catch let error as KingfisherError {
+                callbackQueue.execute { completionHandler(.failure(error)) }
+            } catch {
+                assertionFailure("The internal thrown error should be a `KingfisherError`.")
             }
         }
     }
-    
+
     /// Gets an image for a given key from the disk storage.
     ///
     /// - Parameters:
@@ -640,6 +647,7 @@ open class ImageCache {
     }
 
     // MARK: Cleaning
+
     /// Clears the memory & disk storage of this cache. This is an async operation.
     ///
     /// - Parameter handler: A closure which is invoked when the cache clearing operation finishes.
@@ -648,12 +656,12 @@ open class ImageCache {
         clearMemoryCache()
         clearDiskCache(completion: handler)
     }
-    
+
     /// Clears the memory storage of this cache.
     @objc public func clearMemoryCache() {
         memoryStorage.removeAll()
     }
-    
+
     /// Clears the disk storage of this cache. This is an async operation.
     ///
     /// - Parameter handler: A closure which is invoked when the cache clearing operation finishes.
@@ -662,13 +670,13 @@ open class ImageCache {
         ioQueue.async {
             do {
                 try self.diskStorage.removeAll()
-            } catch _ { }
+            } catch _ {}
             if let handler = handler {
                 DispatchQueue.main.async { handler() }
             }
         }
     }
-    
+
     /// Clears the expired images from memory & disk storage. This is an async operation.
     open func cleanExpiredCache(completion handler: (() -> Void)? = nil) {
         cleanExpiredMemoryCache()
@@ -679,7 +687,7 @@ open class ImageCache {
     open func cleanExpiredMemoryCache() {
         memoryStorage.removeExpired()
     }
-    
+
     /// Clears the expired images from disk storage. This is an async operation.
     @objc func cleanExpiredDiskCache() {
         cleanExpiredDiskCache(completion: nil)
@@ -728,12 +736,12 @@ open class ImageCache {
             sharedApplication.endBackgroundTask(task)
             task = UIBackgroundTaskIdentifier.invalid
         }
-        
+
         var backgroundTask: UIBackgroundTaskIdentifier!
         backgroundTask = sharedApplication.beginBackgroundTask {
             endBackgroundTask(&backgroundTask!)
         }
-        
+
         cleanExpiredDiskCache {
             endBackgroundTask(&backgroundTask!)
         }
@@ -761,7 +769,7 @@ open class ImageCache {
         if diskStorage.isCached(forKey: computedKey) { return .disk }
         return .none
     }
-    
+
     /// Returns whether the file exists in cache for a given `key` and `identifier` combination.
     ///
     /// - Parameters:
@@ -780,7 +788,7 @@ open class ImageCache {
     {
         return imageCachedType(forKey: key, processorIdentifier: identifier).cached
     }
-    
+
     /// Gets the hash used as cache file name for the key.
     ///
     /// - Parameters:
@@ -800,7 +808,7 @@ open class ImageCache {
         let computedKey = key.computedKey(with: identifier)
         return diskStorage.cacheFileName(forKey: computedKey)
     }
-    
+
     /// Calculates the size taken by the disk storage.
     /// It is the total file size of all cached files in the `diskStorage` on disk in bytes.
     ///
@@ -810,17 +818,29 @@ open class ImageCache {
             do {
                 let size = try self.diskStorage.totalSize()
                 DispatchQueue.main.async { handler(.success(size)) }
+            } catch let error as KingfisherError {
+                DispatchQueue.main.async { handler(.failure(error)) }
             } catch {
-                if let error = error as? KingfisherError {
-                    DispatchQueue.main.async { handler(.failure(error)) }
-                } else {
-                    assertionFailure("The internal thrown error should be a `KingfisherError`.")
-                }
-                
+                assertionFailure("The internal thrown error should be a `KingfisherError`.")
             }
         }
     }
-    
+
+#if swift(>=5.5)
+#if canImport(_Concurrency)
+    @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
+    open var diskStorageSize: UInt {
+        get async throws {
+            try await withCheckedThrowingContinuation { continuation in
+                calculateDiskStorageSize { result in
+                    continuation.resume(with: result)
+                }
+            }
+        }
+    }
+#endif
+#endif
+
     /// Gets the cache path for the key.
     /// It is useful for projects with web view or anyone that needs access to the local file path.
     ///
@@ -846,17 +866,13 @@ open class ImageCache {
     }
 }
 
-extension Dictionary {
-    func keysSortedByValue(_ isOrderedBefore: (Value, Value) -> Bool) -> [Key] {
-        return Array(self).sorted{ isOrderedBefore($0.1, $1.1) }.map{ $0.0 }
-    }
-}
-
 #if !os(macOS) && !os(watchOS)
+
 // MARK: - For App Extensions
-extension UIApplication: KingfisherCompatible { }
-extension KingfisherWrapper where Base: UIApplication {
-    public static var shared: UIApplication? {
+
+extension UIApplication: KingfisherCompatible {}
+public extension KingfisherWrapper where Base: UIApplication {
+    static var shared: UIApplication? {
         let selector = NSSelectorFromString("sharedApplication")
         guard Base.responds(to: selector) else { return nil }
         return Base.perform(selector).takeUnretainedValue() as? UIApplication

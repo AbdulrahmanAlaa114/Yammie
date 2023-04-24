@@ -9,7 +9,7 @@ import Foundation
 
 struct DishCategory: Codable {
     let id, name, image: String?
-    
+
     enum CodingKeys: String, CodingKey {
         case id
         case name = "title"

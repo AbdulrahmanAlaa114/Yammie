@@ -26,8 +26,8 @@
 
 #if !os(watchOS)
 
-import Foundation
 import AVKit
+import Foundation
 
 #if canImport(MobileCoreServices)
 import MobileCoreServices
@@ -37,7 +37,6 @@ import CoreServices
 
 /// A data provider to provide thumbnail data from a given AVKit asset.
 public struct AVAssetImageDataProvider: ImageDataProvider {
-
     /// The possible error might be caused by the `AVAssetImageDataProvider`.
     /// - userCancelled: The data provider process is cancelled.
     /// - invalidImage: The retrieved image is invalid.
@@ -81,6 +80,7 @@ public struct AVAssetImageDataProvider: ImageDataProvider {
     public init(assetURL: URL, time: CMTime) {
         let asset = AVAsset(url: assetURL)
         let generator = AVAssetImageGenerator(asset: asset)
+        generator.appliesPreferredTrackTransform = true
         self.init(assetImageGenerator: generator, time: time)
     }
 
@@ -100,7 +100,7 @@ public struct AVAssetImageDataProvider: ImageDataProvider {
 
     public func data(handler: @escaping (Result<Data, Error>) -> Void) {
         assetImageGenerator.generateCGImagesAsynchronously(forTimes: [NSValue(time: time)]) {
-            (requestedTime, image, imageTime, result, error) in
+            _, image, _, result, error in
             if let error = error {
                 handler(.failure(error))
                 return

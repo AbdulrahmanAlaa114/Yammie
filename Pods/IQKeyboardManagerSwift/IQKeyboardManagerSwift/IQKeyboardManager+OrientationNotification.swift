@@ -25,45 +25,55 @@
 import UIKit
 
 // MARK: UIStatusBar Notification methods
+
 @available(iOSApplicationExtension, unavailable)
 internal extension IQKeyboardManager {
-
-    /**  UIApplicationWillChangeStatusBarOrientationNotification. Need to set the textView to it's original position. If any frame changes made. (Bug ID: #92)*/
+    /**  UIApplicationWillChangeStatusBarOrientationNotification. Need to set the textView to it's original position. If any frame changes made. (Bug ID: #92) */
     @objc func willChangeStatusBarOrientation(_ notification: Notification) {
-
         let currentStatusBarOrientation: UIInterfaceOrientation
-        #if swift(>=5.1)
+#if swift(>=5.1)
         if #available(iOS 13, *) {
-            currentStatusBarOrientation = keyWindow()?.windowScene?.interfaceOrientation ?? UIInterfaceOrientation.unknown
+            currentStatusBarOrientation = keyWindow()?.windowScene?.interfaceOrientation ?? UIInterfaceOrientation
+                .unknown
         } else {
             currentStatusBarOrientation = UIApplication.shared.statusBarOrientation
         }
-        #else
+#else
         currentStatusBarOrientation = UIApplication.shared.statusBarOrientation
-        #endif
+#endif
 
-        guard let statusBarOrientation = notification.userInfo?[UIApplication.statusBarOrientationUserInfoKey] as? Int, currentStatusBarOrientation.rawValue != statusBarOrientation else {
+        guard let statusBarOrientation = notification.userInfo?[UIApplication.statusBarOrientationUserInfoKey] as? Int,
+              currentStatusBarOrientation.rawValue != statusBarOrientation
+        else {
             return
         }
 
         let startTime = CACurrentMediaTime()
-        showLog("****** \(#function) started ******", indentation: 1)
+        showLog("📱>>>>> \(#function) started >>>>>", indentation: 1)
+        showLog("Notification Object:\(notification.object ?? "NULL")")
 
-        //If textViewContentInsetChanged is saved then restore it.
-        if let textView = textFieldView as? UITextView, textView.responds(to: #selector(getter: UITextView.isEditable)) {
-
+        // If textViewContentInsetChanged is saved then restore it.
+        if let textView = textFieldView as? UIScrollView,
+           textView.responds(to: #selector(getter: UITextView.isEditable))
+        {
             if isTextViewContentInsetChanged {
-                self.isTextViewContentInsetChanged = false
-                if textView.contentInset != self.startingTextViewContentInsets {
-                    UIView.animate(withDuration: animationDuration, delay: 0, options: animationCurve, animations: { () -> Void in
+                isTextViewContentInsetChanged = false
+                if textView.contentInset != startingTextViewContentInsets {
+                    UIView.animate(
+                        withDuration: animationDuration,
+                        delay: 0,
+                        options: animationCurve,
+                        animations: { () in
 
-                        self.showLog("Restoring textView.contentInset to: \(self.startingTextViewContentInsets)")
+                            self.showLog("Restoring textView.contentInset to: \(self.startingTextViewContentInsets)")
 
-                        //Setting textField to it's initial contentInset
-                        textView.contentInset = self.startingTextViewContentInsets
-                        textView.scrollIndicatorInsets = self.startingTextViewScrollIndicatorInsets
+                            // Setting textField to it's initial contentInset
+                            textView.contentInset = self.startingTextViewContentInsets
+                            textView.scrollIndicatorInsets = self.startingTextViewScrollIndicatorInsets
 
-                    }, completion: { (_) -> Void in })
+                        },
+                        completion: { _ in }
+                    )
                 }
             }
         }
@@ -71,6 +81,6 @@ internal extension IQKeyboardManager {
         restorePosition()
 
         let elapsedTime = CACurrentMediaTime() - startTime
-        showLog("****** \(#function) ended: \(elapsedTime) seconds ******", indentation: -1)
+        showLog("📱<<<<< \(#function) ended: \(elapsedTime) seconds <<<<<", indentation: -1)
     }
 }

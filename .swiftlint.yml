@@ -1,9 +1,95 @@
 disabled_rules:
-    - trailing_whitespace
+#    - trailing_whitespace
     - empty_enum_arguments
     - line_length
-    - private_over_fileprivate
+#    - private_over_fileprivate
     
 excluded:
     - Pods
-    - Yummie/*/Reachability.swift
+    - Carthage
+    - Fastlane
+    - build
+    - DerivedData
+#    - Yummie/*/*/Reachability.swift
+#    - Yummie/Utilities/Extensions/Reachability.swift
+
+
+
+# SwiftLint configuration file
+
+# Rule identifiers can be found in the SwiftLint documentation:
+# https://github.com/realm/SwiftLint/blob/master/Rules.md
+
+## Use the default configuration ruleset:
+#included:
+#  - ./**/*.swift
+#
+## Exclude specific directories or files from linting:
+#excluded:
+#  - Carthage
+#  - Pods
+#  - Fastlane
+#  - build
+#  - DerivedData
+
+# List of rules to apply:
+opt_in_rules:
+  # Basic rules:
+  - trailing_whitespace
+  - line_length
+  - vertical_whitespace
+  - force_cast
+  - force_try
+  - force_unwrapping
+  - unused_optional_binding
+
+  # Style rules:
+  - closure_spacing
+  - colon
+  - comma
+#  - conditional_returns_on_newline
+  - control_statement
+  - discouraged_direct_init
+  - empty_count
+#  - empty_enum_arguments
+  - empty_parameters
+  - first_where
+  - function_body_length
+  - identifier_name
+  - implicit_return
+  - large_tuple
+  - leading_whitespace
+#  - missing_docs
+  - multiline_arguments
+  - multiline_function_chains
+  - multiline_literal_brackets
+  - multiline_parameters
+  - no_extension_access_modifier
+#  - no_grouping_extension
+  - number_separator
+  - object_literal
+  - operator_usage_whitespace
+#  - overridden_super_call
+#  - private_outlet
+  - redundant_discardable_let
+  - redundant_nil_coalescing
+  - redundant_optional_initialization
+  - redundant_set_access_control
+  - redundant_type_annotation
+  - redundant_void_return
+  - return_arrow_whitespace
+  - sorted_first_last
+  - statement_position
+  - switch_case_alignment
+  - trailing_closure
+  - trailing_semicolon
+  - unused_closure_parameter
+#  - unused_import
+  - unused_setter_value
+  - weak_delegate
+#
+# # Linting configuration:
+# line_length:
+#   warning: 120
+#   error: 200
+#

@@ -25,28 +25,28 @@
 //  THE SOFTWARE.
 
 #if canImport(SwiftUI) && canImport(Combine)
-import SwiftUI
 import Combine
+import SwiftUI
 
 /// A Kingfisher compatible SwiftUI `View` to load an image from a `Source`.
 /// Declaring a `KFImage` in a `View`'s body to trigger loading from the given `Source`.
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
-struct KFImageRenderer<HoldingView> : View where HoldingView: KFImageHoldingView {
-    
+struct KFImageRenderer<HoldingView>: View where HoldingView: KFImageHoldingView {
     @StateObject var binder: KFImage.ImageBinder = .init()
     let context: KFImage.Context<HoldingView>
-    
+
     var body: some View {
-        ZStack {
-            context.configurations
-                .reduce(HoldingView.created(from: binder.loadedImage, context: context)) {
-                    current, config in config(current)
-                }
-                .opacity(binder.loaded ? 1.0 : 0.0)
+        if context.startLoadingBeforeViewAppear && !binder.loadingOrSucceeded && !binder.animating {
+            binder.markLoading()
+            DispatchQueue.main.async { binder.start(context: context) }
+        }
+
+        return ZStack {
+            renderedImage().opacity(binder.loaded ? 1.0 : 0.0)
             if binder.loadedImage == nil {
-                Group {
-                    if let placeholder = context.placeholder, let view = placeholder(binder.progress) {
-                        view
+                ZStack {
+                    if let placeholder = context.placeholder {
+                        placeholder(binder.progress)
                     } else {
                         Color.clear
                     }
@@ -69,6 +69,29 @@ struct KFImageRenderer<HoldingView> : View where HoldingView: KFImageHoldingView
                 }
             }
         }
+        // Workaround for https://github.com/onevcat/Kingfisher/issues/1988
+        // on iOS 16 there seems to be a bug that when in a List, the `onAppear` of the `ZStack` above in the
+        // `binder.loadedImage == nil` not get called. Adding this empty `onAppear` fixes it and the life cycle can
+        // work again.
+        //
+        // There is another "fix": adding an `else` clause and put a `Color.clear` there. But I believe this `onAppear`
+        // should work better.
+        //
+        // It should be a bug in iOS 16, I guess it is some kinds of over-optimization in list cell loading caused it.
+        .onAppear()
+    }
+
+    @ViewBuilder
+    private func renderedImage() -> some View {
+        let configuredImage = context.configurations
+            .reduce(HoldingView.created(from: binder.loadedImage, context: context)) {
+                current, config in config(current)
+            }
+        if let contentConfiguration = context.contentConfiguration {
+            contentConfiguration(configuredImage)
+        } else {
+            configuredImage
+        }
     }
 }
 
@@ -76,11 +99,11 @@ struct KFImageRenderer<HoldingView> : View where HoldingView: KFImageHoldingView
 extension Image {
     // Creates an Image with either UIImage or NSImage.
     init(crossPlatformImage: KFCrossPlatformImage?) {
-        #if canImport(UIKit)
+#if canImport(UIKit)
         self.init(uiImage: crossPlatformImage ?? KFCrossPlatformImage())
-        #elseif canImport(AppKit)
+#elseif canImport(AppKit)
         self.init(nsImage: crossPlatformImage ?? KFCrossPlatformImage())
-        #endif
+#endif
     }
 }
 

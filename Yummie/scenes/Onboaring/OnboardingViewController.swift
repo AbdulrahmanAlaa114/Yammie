@@ -5,21 +5,21 @@
 //  Created by Abdulrahman on 09/05/2022.
 //
 
-import UIKit
-import RxSwift
 import RxCocoa
-class OnboardingViewController: UIViewController {
+import RxSwift
+import UIKit
 
-    @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var nextBtn: UIButton!
-    @IBOutlet weak var pageControl: UIPageControl!
-        
+class OnboardingViewController: UIViewController {
+    @IBOutlet var collectionView: UICollectionView!
+    @IBOutlet var nextBtn: UIButton!
+    @IBOutlet var pageControl: UIPageControl!
+
     let disposeBag = DisposeBag()
     var viewModel: OnboardingViewModel!
-   
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         navigationController?.navigationBar.isHidden = true
         registerCells()
         subscribeToCurrentPage()
@@ -27,70 +27,75 @@ class OnboardingViewController: UIViewController {
         subcribeToIndexPath()
         subscribeToNextButton()
         pageControl.numberOfPages = viewModel.slidesBahavior.value.count
-        
     }
-    
+
     func subscribeToCurrentPage() {
-        
         viewModel.currentPage.bind { [weak self] page in
-            guard let self = self else {return}
+            guard let self = self else { return }
             self.pageControl.currentPage = page
             if page == self.viewModel.slidesBahavior.value.count - 1 {
                 self.nextBtn.setTitle("Get Started", for: .normal)
             } else {
                 self.nextBtn.setTitle("Next", for: .normal)
             }
-        }.disposed(by: disposeBag)
+        }
+        .disposed(by: disposeBag)
     }
-    
+
     func subscribeToResponse() {
-    
-        self.viewModel.slidesBahavior
-            .bind(to: self.collectionView
+        viewModel.slidesBahavior
+            .bind(
+                to: collectionView
                     .rx
-                    .items(cellIdentifier: OnboardingCollectionViewCell.identifier, cellType: OnboardingCollectionViewCell.self)) { _, onboardingSlide, cell in
+                    .items(
+                        cellIdentifier: OnboardingCollectionViewCell.identifier,
+                        cellType: OnboardingCollectionViewCell.self
+                    )
+            ) { _, onboardingSlide, cell in
                 cell.setup(onboardingSlide)
-            }.disposed(by: disposeBag)
-        
+            }
+            .disposed(by: disposeBag)
+
         collectionView.rx.setDelegate(self).disposed(by: disposeBag)
     }
-    
+
     func registerCells() {
         collectionView.registerNib(cell: OnboardingCollectionViewCell.self)
     }
-    
+
     func subscribeToNextButton() {
-         nextBtn.rx.tap
-            .throttle(RxTimeInterval.milliseconds(100), scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [weak self](_) in
+        nextBtn.rx.tap.throttle(RxTimeInterval.milliseconds(100), scheduler: MainScheduler.instance)
+            .subscribe { [weak self] _ in
                 guard let self = self else { return }
                 self.viewModel.nextBtnTapped()
-            }).disposed(by: disposeBag)
+            }
+            .disposed(by: disposeBag)
     }
-    
+
     func subcribeToIndexPath() {
         viewModel.indexPath.bind { [weak self] indexPath in
             guard let self = self else { return }
             self.collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-        }.disposed(by: disposeBag)
+        }
+        .disposed(by: disposeBag)
     }
-    
+
     deinit {
         print("deinit OnboardingViewController")
     }
-    
 }
 
 extension OnboardingViewController: UICollectionViewDelegateFlowLayout {
-   
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: collectionView.frame.height - 50)
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout _: UICollectionViewLayout,
+        sizeForItemAt _: IndexPath
+    ) -> CGSize {
+        CGSize(width: collectionView.frame.width, height: collectionView.frame.height - 50)
     }
-    
+
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let width = scrollView.frame.width
         viewModel.currentPage.accept(Int(scrollView.contentOffset.x / width))
-        
     }
-
 }

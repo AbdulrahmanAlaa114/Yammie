@@ -28,8 +28,7 @@
 
 import WatchKit
 
-extension KingfisherWrapper where Base: WKInterfaceImage {
-
+public extension KingfisherWrapper where Base: WKInterfaceImage {
     // MARK: Setting Image
 
     /// Sets an image to the image view with a source.
@@ -50,7 +49,7 @@ extension KingfisherWrapper where Base: WKInterfaceImage {
     /// Both `progressBlock` and `completionHandler` will be also executed in the main thread.
     ///
     @discardableResult
-    public func setImage(
+    func setImage(
         with source: Source?,
         placeholder: KFCrossPlatformImage? = nil,
         options: KingfisherOptionsInfo? = nil,
@@ -63,10 +62,9 @@ extension KingfisherWrapper where Base: WKInterfaceImage {
             placeholder: placeholder,
             parsedOptions: options,
             progressBlock: progressBlock,
-            completionHandler: completionHandler
-        )
+            completionHandler: completionHandler)
     }
-    
+
     /// Sets an image to the image view with a requested resource.
     ///
     /// - Parameters:
@@ -85,7 +83,7 @@ extension KingfisherWrapper where Base: WKInterfaceImage {
     /// Both `progressBlock` and `completionHandler` will be also executed in the main thread.
     ///
     @discardableResult
-    public func setImage(
+    func setImage(
         with resource: Resource?,
         placeholder: KFCrossPlatformImage? = nil,
         options: KingfisherOptionsInfo? = nil,
@@ -100,7 +98,7 @@ extension KingfisherWrapper where Base: WKInterfaceImage {
             completionHandler: completionHandler)
     }
 
-    func setImage(
+    internal func setImage(
         with source: Source?,
         placeholder: KFCrossPlatformImage? = nil,
         parsedOptions: KingfisherParsedOptionsInfo,
@@ -127,20 +125,12 @@ extension KingfisherWrapper where Base: WKInterfaceImage {
             options.onDataReceived = (options.onDataReceived ?? []) + [ImageLoadingProgressSideEffect(block)]
         }
 
-        if let provider = ImageProgressiveProvider(options, refresh: { image in
-            self.base.setImage(image)
-        }) {
-            options.onDataReceived = (options.onDataReceived ?? []) + [provider]
-        }
-
-        options.onDataReceived?.forEach {
-            $0.onShouldApply = { issuedIdentifier == self.taskIdentifier }
-        }
-
         let task = KingfisherManager.shared.retrieveImage(
             with: source,
             options: options,
             downloadTaskUpdated: { mutatingSelf.imageTask = $0 },
+            progressiveImageSetter: { self.base.setImage($0) },
+            referenceTaskIdentifierChecker: { issuedIdentifier == self.taskIdentifier },
             completionHandler: { result in
                 CallbackQueue.mainCurrentOrAsync.execute {
                     guard issuedIdentifier == self.taskIdentifier else {
@@ -160,7 +150,7 @@ extension KingfisherWrapper where Base: WKInterfaceImage {
                     mutatingSelf.taskIdentifier = nil
 
                     switch result {
-                    case .success(let value):
+                    case let .success(value):
                         self.base.setImage(value.image)
                         completionHandler?(result)
 
@@ -171,8 +161,7 @@ extension KingfisherWrapper where Base: WKInterfaceImage {
                         completionHandler?(result)
                     }
                 }
-            }
-        )
+            })
 
         mutatingSelf.imageTask = task
         return task
@@ -182,7 +171,7 @@ extension KingfisherWrapper where Base: WKInterfaceImage {
 
     /// Cancel the image download task bounded to the image view if it is running.
     /// Nothing will happen if the downloading has already finished.
-    public func cancelDownloadTask() {
+    func cancelDownloadTask() {
         imageTask?.cancel()
     }
 }
@@ -191,8 +180,8 @@ private var taskIdentifierKey: Void?
 private var imageTaskKey: Void?
 
 // MARK: Properties
+
 extension KingfisherWrapper where Base: WKInterfaceImage {
-    
     public private(set) var taskIdentifier: Source.Identifier.Value? {
         get {
             let box: Box<Source.Identifier.Value>? = getAssociatedObject(base, &taskIdentifierKey)
@@ -206,7 +195,7 @@ extension KingfisherWrapper where Base: WKInterfaceImage {
 
     private var imageTask: DownloadTask? {
         get { return getAssociatedObject(base, &imageTaskKey) }
-        set { setRetainedAssociatedObject(base, &imageTaskKey, newValue)}
+        set { setRetainedAssociatedObject(base, &imageTaskKey, newValue) }
     }
 }
 #endif

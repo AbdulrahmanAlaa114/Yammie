@@ -6,54 +6,52 @@
 //
 
 import Foundation
-import RxSwift
 import RxRelay
+import RxSwift
 
 class DishDetailViewModel: BaseViewModel {
-    
     let dish: Dish
     var coordinator: DishDetailCoordinator?
-    var nameBehavior   = BehaviorRelay<String>(value: "")
+    var nameBehavior = BehaviorRelay<String>(value: "")
     var isPlaceOrderButtonEnapled: Observable<Bool> {
-        return nameBehavior.asObservable().map { (name) -> Bool in
+        nameBehavior.asObservable().map { name -> Bool in
             let isNameEmpty = name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
             return !isNameEmpty
         }
     }
+
     let api: FoodAPIProtocol
 
     init(dish: Dish, api: FoodAPIProtocol = FoodAPI()) {
         self.dish = dish
         self.api = api
     }
- 
-    func placingOrder() {
 
+    func placingOrder() {
         if Reachability()?.connection != Reachability.Connection.none {
-            
             loadingBehavior.accept(true)
             let info = [
                 "dishId": "\(dish.id ?? "")",
                 "name": nameBehavior.value
             ]
-            
-            api.placeOrder(info: info) { [weak self] (result) in
-                guard let self = self else {return}
+
+            api.placeOrder(info: info) { [weak self] result in
+                guard let self = self else { return }
                 switch result {
-                case .success(_):
-                    self.creatAlert(alertTitle: "Success",
-                                    alertMessage: "Your order has been received. 👨🏼‍🍳")
+                case .success:
+                    self.creatAlert(
+                        alertTitle: "Success",
+                        alertMessage: "Your order has been received. 👨🏼‍🍳"
+                    )
                     self.loadingBehavior.accept(false)
-                case .failure(let error):
+                case let .failure(error):
                     self.loadingBehavior.accept(false)
                     self.creatAlert(alertTitle: "Error", alertMessage: error.localizedDescription)
-                    
                 }
             }
         }
-        
     }
-    
+
     deinit {
         coordinator?.removeFromParant()
         print("deinit DishDetailViewModel")

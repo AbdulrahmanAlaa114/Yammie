@@ -25,16 +25,14 @@
 //  THE SOFTWARE.
 
 #if canImport(SwiftUI) && canImport(Combine)
-import SwiftUI
 import Combine
+import SwiftUI
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 extension KFImage {
-
     /// Represents a binder for `KFImage`. It takes responsibility as an `ObjectBinding` and performs
     /// image downloading and progress reporting based on `KingfisherManager`.
     class ImageBinder: ObservableObject {
-        
         init() {}
 
         var downloadTask: DownloadTask?
@@ -46,9 +44,23 @@ extension KFImage {
 
         // Do not use @Published due to https://github.com/onevcat/Kingfisher/issues/1717. Revert to @Published once
         // we can drop iOS 12.
-        var loaded = false                           { willSet { objectWillChange.send() } }
+        private(set) var loaded = false
+
+        private(set) var animating = false
+
         var loadedImage: KFCrossPlatformImage? = nil { willSet { objectWillChange.send() } }
-        var progress: Progress = .init()             { willSet { objectWillChange.send() } }
+        var progress: Progress = .init()
+
+        func markLoading() {
+            loading = true
+        }
+
+        func markLoaded(sendChangeEvent: Bool) {
+            loaded = true
+            if sendChangeEvent {
+                objectWillChange.send()
+            }
+        }
 
         func start<HoldingView: KFImageHoldingView>(context: Context<HoldingView>) {
             guard let source = context.source else {
@@ -58,13 +70,13 @@ extension KFImage {
                         self.loadedImage = image
                     }
                     self.loading = false
-                    self.loaded = true
+                    self.markLoaded(sendChangeEvent: false)
                 }
                 return
             }
 
             loading = true
-            
+
             progress = .init()
             downloadTask = KingfisherManager.shared
                 .retrieveImage(
@@ -82,37 +94,42 @@ extension KFImage {
                             self.downloadTask = nil
                             self.loading = false
                         }
-                        
+
                         switch result {
-                        case .success(let value):
+                        case let .success(value):
                             CallbackQueue.mainCurrentOrAsync.execute {
                                 if let fadeDuration = context.fadeTransitionDuration(cacheType: value.cacheType) {
+                                    self.animating = true
                                     let animation = Animation.linear(duration: fadeDuration)
-                                    withAnimation(animation) { self.loaded = true }
+                                    withAnimation(animation) {
+                                        // Trigger the view render to apply the animation.
+                                        self.markLoaded(sendChangeEvent: true)
+                                    }
                                 } else {
-                                    self.loaded = true
+                                    self.markLoaded(sendChangeEvent: false)
                                 }
                                 self.loadedImage = value.image
+                                self.animating = false
                             }
 
                             CallbackQueue.mainAsync.execute {
                                 context.onSuccessDelegate.call(value)
                             }
-                        case .failure(let error):
+                        case let .failure(error):
                             CallbackQueue.mainCurrentOrAsync.execute {
                                 if let image = context.options.onFailureImage {
                                     self.loadedImage = image
                                 }
-                                self.loaded = true
+                                self.markLoaded(sendChangeEvent: true)
                             }
-                            
+
                             CallbackQueue.mainAsync.execute {
                                 context.onFailureDelegate.call(error)
                             }
                         }
-                })
+                    })
         }
-        
+
         private func updateProgress(downloaded: Int64, total: Int64) {
             progress.totalUnitCount = total
             progress.completedUnitCount = downloaded

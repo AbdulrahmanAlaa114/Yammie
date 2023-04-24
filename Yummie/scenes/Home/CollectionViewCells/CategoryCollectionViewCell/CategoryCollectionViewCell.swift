@@ -5,14 +5,13 @@
 //  Created by Emmanuel Okwara on 20/02/2021.
 //
 
-import UIKit
 import Kingfisher
+import UIKit
 
 class CategoryCollectionViewCell: UICollectionViewCell {
-    
-    @IBOutlet weak var categoryImageView: UIImageView!
-    @IBOutlet weak var categoryTitleLbl: UILabel!
-    
+    @IBOutlet var categoryImageView: UIImageView!
+    @IBOutlet var categoryTitleLbl: UILabel!
+
     func setup(category: DishCategory) {
         categoryTitleLbl.text = category.name
         categoryImageView.kf.setImage(with: category.image?.asUrl)

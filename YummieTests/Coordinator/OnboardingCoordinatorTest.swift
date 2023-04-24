@@ -9,9 +9,8 @@ import XCTest
 @testable import Yummie
 
 class OnboardingCoordinatorTest: XCTestCase {
-            
     var sut: OnboardingCoordinator!
-    
+
     override func setUpWithError() throws {
         sut = OnboardingCoordinator(navigationController: UINavigationController())
     }
@@ -23,11 +22,9 @@ class OnboardingCoordinatorTest: XCTestCase {
     func testStart() {
         sut.start()
     }
-    
+
     func testStartHome() {
-        
         sut.startHome()
         XCTAssertEqual(sut.childCoordinators.count, 1)
     }
-
 }

@@ -8,18 +8,15 @@
 import Foundation
 
 class BaseCoordinator: Coordinator {
-    
     var childCoordinators: [Coordinator] = []
-    
+
     var parantCoordinator: BaseCoordinator?
-    
+
     func start() {
         fatalError("Children shoud implement 'start'")
     }
-    
+
     func removeFromParant() {
-        
         parantCoordinator?.remove(coordinator: self)
-   
     }
 }

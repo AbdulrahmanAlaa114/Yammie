@@ -38,9 +38,11 @@ public protocol CachedResponseHandler {
     ///   - task:       The data task whose request resulted in the cached response.
     ///   - response:   The cached response to potentially store in the cache.
     ///   - completion: The closure to execute containing cached response, a modified response, or `nil`.
-    func dataTask(_ task: URLSessionDataTask,
-                  willCacheResponse response: CachedURLResponse,
-                  completion: @escaping (CachedURLResponse?) -> Void)
+    func dataTask(
+        _ task: URLSessionDataTask,
+        willCacheResponse response: CachedURLResponse,
+        completion: @escaping (CachedURLResponse?) -> Void
+    )
 }
 
 // MARK: -
@@ -75,9 +77,11 @@ public struct ResponseCacher {
 }
 
 extension ResponseCacher: CachedResponseHandler {
-    public func dataTask(_ task: URLSessionDataTask,
-                         willCacheResponse response: CachedURLResponse,
-                         completion: @escaping (CachedURLResponse?) -> Void) {
+    public func dataTask(
+        _ task: URLSessionDataTask,
+        willCacheResponse response: CachedURLResponse,
+        completion: @escaping (CachedURLResponse?) -> Void
+    ) {
         switch behavior {
         case .cache:
             completion(response)
@@ -91,18 +95,19 @@ extension ResponseCacher: CachedResponseHandler {
 }
 
 #if swift(>=5.5)
-extension CachedResponseHandler where Self == ResponseCacher {
+public extension CachedResponseHandler where Self == ResponseCacher {
     /// Provides a `ResponseCacher` which caches the response, if allowed. Equivalent to `ResponseCacher.cache`.
-    public static var cache: ResponseCacher { .cache }
+    static var cache: ResponseCacher { .cache }
 
     /// Provides a `ResponseCacher` which does not cache the response. Equivalent to `ResponseCacher.doNotCache`.
-    public static var doNotCache: ResponseCacher { .doNotCache }
+    static var doNotCache: ResponseCacher { .doNotCache }
 
     /// Creates a `ResponseCacher` which modifies the proposed `CachedURLResponse` using the provided closure.
     ///
     /// - Parameter closure: Closure used to modify the `CachedURLResponse`.
     /// - Returns:           The `ResponseCacher`.
-    public static func modify(using closure: @escaping ((URLSessionDataTask, CachedURLResponse) -> CachedURLResponse?)) -> ResponseCacher {
+    static func modify(using closure: @escaping ((URLSessionDataTask, CachedURLResponse) -> CachedURLResponse?))
+    -> ResponseCacher {
         ResponseCacher(behavior: .modify(closure))
     }
 }

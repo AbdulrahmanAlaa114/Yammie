@@ -7,6 +7,4 @@
 
 import Foundation
 
-struct DesignSystem {
-    
-}
+struct DesignSystem {}

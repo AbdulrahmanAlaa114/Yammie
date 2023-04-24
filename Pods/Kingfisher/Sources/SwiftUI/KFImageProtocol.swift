@@ -25,8 +25,8 @@
 //  THE SOFTWARE.
 
 #if canImport(SwiftUI) && canImport(Combine)
-import SwiftUI
 import Combine
+import SwiftUI
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public protocol KFImageProtocol: View, KFOptionSetter {
@@ -36,19 +36,19 @@ public protocol KFImageProtocol: View, KFOptionSetter {
 }
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
-extension KFImageProtocol {
-    public var body: some View {
+public extension KFImageProtocol {
+    var body: some View {
         ZStack {
             KFImageRenderer<HoldingView>(
                 context: context
             ).id(context)
         }
     }
-    
+
     /// Creates a Kingfisher compatible image view to load image from the given `Source`.
     /// - Parameters:
     ///   - source: The image `Source` defining where to load the target image.
-    public init(source: Source?) {
+    init(source: Source?) {
         let context = KFImage.Context<HoldingView>(source: source)
         self.init(context: context)
     }
@@ -56,15 +56,34 @@ extension KFImageProtocol {
     /// Creates a Kingfisher compatible image view to load image from the given `URL`.
     /// - Parameters:
     ///   - source: The image `Source` defining where to load the target image.
-    public init(_ url: URL?) {
+    init(_ url: URL?) {
         self.init(source: url?.convertToSource())
     }
-    
-    /// Configures current image with a `block`. This block will be lazily applied when creating the final `Image`.
-    /// - Parameter block: The block applies to loaded image.
+
+    /// Configures current image with a `block` and return another `Image` to use as the final content.
+    ///
+    /// This block will be lazily applied when creating the final `Image`.
+    ///
+    /// If multiple `configure` modifiers are added to the image, they will be evaluated by order. If you want to
+    /// configure the input image (which is usually an `Image` value) to a non-`Image` value, use `contentConfigure`.
+    ///
+    /// - Parameter block: The block applies to loaded image. The block should return an `Image` that is configured.
     /// - Returns: A `KFImage` view that configures internal `Image` with `block`.
-    public func configure(_ block: @escaping (HoldingView) -> HoldingView) -> Self {
+    func configure(_ block: @escaping (HoldingView) -> HoldingView) -> Self {
         context.configurations.append(block)
+        return self
+    }
+
+    /// Configures current image with a `block` and return a `View` to use as the final content.
+    ///
+    /// This block will be lazily applied when creating the final `Image`.
+    ///
+    /// If multiple `contentConfigure` modifiers are added to the image, only the last one will be stored and used.
+    ///
+    /// - Parameter block: The block applies to the loaded image. The block should return a `View` that is configured.
+    /// - Returns: A `KFImage` view that configures internal `Image` with `block`.
+    func contentConfigure<V: View>(_ block: @escaping (HoldingView) -> V) -> Self {
+        context.contentConfiguration = { AnyView(block($0)) }
         return self
     }
 }
@@ -76,18 +95,17 @@ public protocol KFImageHoldingView: View {
 }
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
-extension KFImageProtocol {
-    public var options: KingfisherParsedOptionsInfo {
+public extension KFImageProtocol {
+    var options: KingfisherParsedOptionsInfo {
         get { context.options }
         nonmutating set { context.options = newValue }
     }
 
-    public var onFailureDelegate: Delegate<KingfisherError, Void> { context.onFailureDelegate }
-    public var onSuccessDelegate: Delegate<RetrieveImageResult, Void> { context.onSuccessDelegate }
-    public var onProgressDelegate: Delegate<(Int64, Int64), Void> { context.onProgressDelegate }
+    var onFailureDelegate: Delegate<KingfisherError, Void> { context.onFailureDelegate }
+    var onSuccessDelegate: Delegate<RetrieveImageResult, Void> { context.onSuccessDelegate }
+    var onProgressDelegate: Delegate<(Int64, Int64), Void> { context.onProgressDelegate }
 
-    public var delegateObserver: AnyObject { context }
+    var delegateObserver: AnyObject { context }
 }
-
 
 #endif

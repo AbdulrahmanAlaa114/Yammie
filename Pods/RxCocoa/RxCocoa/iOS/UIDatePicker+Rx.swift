@@ -11,14 +11,14 @@
 import RxSwift
 import UIKit
 
-extension Reactive where Base: UIDatePicker {
+public extension Reactive where Base: UIDatePicker {
     /// Reactive wrapper for `date` property.
-    public var date: ControlProperty<Date> {
+    var date: ControlProperty<Date> {
         value
     }
 
     /// Reactive wrapper for `date` property.
-    public var value: ControlProperty<Date> {
+    var value: ControlProperty<Date> {
         return base.rx.controlPropertyWithDefaultEvents(
             getter: { datePicker in
                 datePicker.date
@@ -29,7 +29,7 @@ extension Reactive where Base: UIDatePicker {
     }
 
     /// Reactive wrapper for `countDownDuration` property.
-    public var countDownDuration: ControlProperty<TimeInterval> {
+    var countDownDuration: ControlProperty<TimeInterval> {
         return base.rx.controlPropertyWithDefaultEvents(
             getter: { datePicker in
                 datePicker.countDownDuration

@@ -1,14 +1,13 @@
 PODS:
-  - Alamofire (5.6.1)
-  - IQKeyboardManagerSwift (6.5.9)
-  - Kingfisher (7.2.2)
+  - Alamofire (5.6.4)
+  - IQKeyboardManagerSwift (6.5.11)
+  - Kingfisher (7.6.2)
   - RxCocoa (6.5.0):
     - RxRelay (= 6.5.0)
     - RxSwift (= 6.5.0)
   - RxRelay (6.5.0):
     - RxSwift (= 6.5.0)
   - RxSwift (6.5.0)
-  - SwiftLint (0.47.1)
 
 DEPENDENCIES:
   - Alamofire
@@ -16,7 +15,6 @@ DEPENDENCIES:
   - Kingfisher
   - RxCocoa
   - RxSwift
-  - SwiftLint
 
 SPEC REPOS:
   trunk:
@@ -26,17 +24,15 @@ SPEC REPOS:
     - RxCocoa
     - RxRelay
     - RxSwift
-    - SwiftLint
 
 SPEC CHECKSUMS:
-  Alamofire: 87bd8c952f9a4454320fce00d9cc3de57bcadaf5
-  IQKeyboardManagerSwift: 6e839c575c4aa1078d58a596e41244e77abe918f
-  Kingfisher: 184d4d1a8c36666e663caf8e08abe87898595c53
+  Alamofire: 4e95d97098eacb88856099c4fc79b526a299e48c
+  IQKeyboardManagerSwift: c7955c0bdbf7b2eb29bb7daaa44e3d90f55a9a85
+  Kingfisher: 6c5449c6450c5239166510ba04afe374a98afc4f
   RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
   RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
   RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
-  SwiftLint: f80f1be7fa96d30e0aa68e58d45d4ea1ccaac519
 
-PODFILE CHECKSUM: 5bac4c2c4fe6efa861ac35177396b22bfa1e0635
+PODFILE CHECKSUM: 65807a4ea924b3a093dcfa19a4b51d527bea60aa
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.12.0

@@ -8,7 +8,7 @@
 import Foundation
 
 extension Bundle {
-    public class var unitTest: Bundle {
-        return Bundle(for: FoodAPIMock.self)
+    class var unitTest: Bundle {
+        Bundle(for: FoodAPIMock.self)
     }
 }

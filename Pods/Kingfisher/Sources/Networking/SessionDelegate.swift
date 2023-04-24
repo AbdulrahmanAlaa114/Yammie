@@ -29,19 +29,16 @@ import Foundation
 // Represents the delegate object of downloader session. It also behave like a task manager for downloading.
 @objc(KFSessionDelegate) // Fix for ObjC header name conflicting. https://github.com/onevcat/Kingfisher/issues/1530
 open class SessionDelegate: NSObject {
-
     typealias SessionChallengeFunc = (
         URLSession,
         URLAuthenticationChallenge,
-        (URLSession.AuthChallengeDisposition, URLCredential?) -> Void
-    )
+        (URLSession.AuthChallengeDisposition, URLCredential?) -> Void)
 
     typealias SessionTaskChallengeFunc = (
         URLSession,
         URLSessionTask,
         URLAuthenticationChallenge,
-        (URLSession.AuthChallengeDisposition, URLCredential?) -> Void
-    )
+        (URLSession.AuthChallengeDisposition, URLCredential?) -> Void)
 
     private var tasks: [URL: SessionDataTask] = [:]
     private let lock = NSLock()
@@ -91,7 +88,6 @@ open class SessionDelegate: NSObject {
 
     func append(
         _ task: SessionDataTask,
-        url: URL,
         callback: SessionDataTask.TaskCallback) -> DownloadTask
     {
         let token = task.addCallback(callback)
@@ -149,7 +145,6 @@ open class SessionDelegate: NSObject {
 }
 
 extension SessionDelegate: URLSessionDataDelegate {
-
     open func urlSession(
         _ session: URLSession,
         dataTask: URLSessionDataTask,
@@ -174,12 +169,12 @@ extension SessionDelegate: URLSessionDataDelegate {
     }
 
     open func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
-        guard let task = self.task(for: dataTask) else {
+        guard let task = task(for: dataTask) else {
             return
         }
-        
+
         task.didReceiveData(data)
-        
+
         task.callbacks.forEach { callback in
             callback.options.onDataReceived?.forEach { sideEffect in
                 sideEffect.onDataReceived(session, task: task, data: data)
@@ -231,7 +226,7 @@ extension SessionDelegate: URLSessionDataDelegate {
     {
         onReceiveSessionTaskChallenge.call((session, task, challenge, completionHandler))
     }
-    
+
     open func urlSession(
         _ session: URLSession,
         task: URLSessionTask,
@@ -240,12 +235,12 @@ extension SessionDelegate: URLSessionDataDelegate {
         completionHandler: @escaping (URLRequest?) -> Void)
     {
         guard let sessionDataTask = self.task(for: task),
-              let redirectHandler = Array(sessionDataTask.callbacks).last?.options.redirectHandler else
-        {
+              let redirectHandler = Array(sessionDataTask.callbacks).last?.options.redirectHandler
+        else {
             completionHandler(request)
             return
         }
-        
+
         redirectHandler.handleHTTPRedirection(
             for: sessionDataTask,
             response: response,

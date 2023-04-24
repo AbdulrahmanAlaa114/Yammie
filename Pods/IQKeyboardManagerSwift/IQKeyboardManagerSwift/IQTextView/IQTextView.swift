@@ -25,21 +25,35 @@ import UIKit
 
 /** @abstract UITextView with placeholder support   */
 @available(iOSApplicationExtension, unavailable)
-open class IQTextView: UITextView {
-
-    @objc required public init?(coder aDecoder: NSCoder) {
+@objc open class IQTextView: UITextView {
+    @objc public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.refreshPlaceholder), name: UITextView.textDidChangeNotification, object: self)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(refreshPlaceholder),
+            name: UITextView.textDidChangeNotification,
+            object: self
+        )
     }
 
     @objc override public init(frame: CGRect, textContainer: NSTextContainer?) {
         super.init(frame: frame, textContainer: textContainer)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.refreshPlaceholder), name: UITextView.textDidChangeNotification, object: self)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(refreshPlaceholder),
+            name: UITextView.textDidChangeNotification,
+            object: self
+        )
     }
 
     @objc override open func awakeFromNib() {
         super.awakeFromNib()
-        NotificationCenter.default.addObserver(self, selector: #selector(self.refreshPlaceholder), name: UITextView.textDidChangeNotification, object: self)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(refreshPlaceholder),
+            name: UITextView.textDidChangeNotification,
+            object: self
+        )
     }
 
     deinit {
@@ -47,13 +61,22 @@ open class IQTextView: UITextView {
     }
 
     private var placeholderInsets: UIEdgeInsets {
-        return UIEdgeInsets(top: self.textContainerInset.top, left: self.textContainerInset.left + self.textContainer.lineFragmentPadding, bottom: self.textContainerInset.bottom, right: self.textContainerInset.right + self.textContainer.lineFragmentPadding)
+        return UIEdgeInsets(
+            top: textContainerInset.top,
+            left: textContainerInset.left + textContainer.lineFragmentPadding,
+            bottom: textContainerInset.bottom,
+            right: textContainerInset.right + textContainer.lineFragmentPadding
+        )
     }
 
     private var placeholderExpectedFrame: CGRect {
         let placeholderInsets = self.placeholderInsets
-        let maxWidth = self.frame.width-placeholderInsets.left-placeholderInsets.right
-        let expectedSize = IQ_PlaceholderLabel.sizeThatFits(CGSize(width: maxWidth, height: self.frame.height-placeholderInsets.top-placeholderInsets.bottom))
+        let maxWidth = self.frame.width - placeholderInsets.left - placeholderInsets.right
+        let expectedSize = IQ_PlaceholderLabel
+            .sizeThatFits(CGSize(
+                width: maxWidth,
+                height: self.frame.height - placeholderInsets.top - placeholderInsets.bottom
+            ))
 
         return CGRect(x: placeholderInsets.left, y: placeholderInsets.top, width: maxWidth, height: expectedSize.height)
     }
@@ -67,11 +90,12 @@ open class IQTextView: UITextView {
         label.font = self.font
         label.textAlignment = self.textAlignment
         label.backgroundColor = UIColor.clear
-        #if swift(>=5.1)
+        label.isAccessibilityElement = false
+#if swift(>=5.1)
         label.textColor = UIColor.systemGray
-        #else
+#else
         label.textColor = UIColor.lightText
-        #endif
+#endif
         label.alpha = 0
         self.addSubview(label)
 
@@ -80,7 +104,6 @@ open class IQTextView: UITextView {
 
     /** @abstract To set textView's placeholder text color. */
     @IBInspectable open var placeholderTextColor: UIColor? {
-
         get {
             return IQ_PlaceholderLabel.textColor
         }
@@ -92,7 +115,6 @@ open class IQTextView: UITextView {
 
     /** @abstract To set textView's placeholder text. Default is nil.    */
     @IBInspectable open var placeholder: String? {
-
         get {
             return IQ_PlaceholderLabel.text
         }
@@ -122,7 +144,6 @@ open class IQTextView: UITextView {
     }
 
     @objc internal func refreshPlaceholder() {
-
         if !text.isEmpty || !attributedText.string.isEmpty {
             IQ_PlaceholderLabel.alpha = 0
         } else {
@@ -131,23 +152,19 @@ open class IQTextView: UITextView {
     }
 
     @objc override open var text: String! {
-
         didSet {
             refreshPlaceholder()
         }
     }
 
-    open override var attributedText: NSAttributedString! {
-
+    override open var attributedText: NSAttributedString! {
         didSet {
             refreshPlaceholder()
         }
     }
 
     @objc override open var font: UIFont? {
-
         didSet {
-
             if let unwrappedFont = font {
                 IQ_PlaceholderLabel.font = unwrappedFont
             } else {
@@ -162,8 +179,7 @@ open class IQTextView: UITextView {
         }
     }
 
-    @objc override weak open var delegate: UITextViewDelegate? {
-
+    @objc override open weak var delegate: UITextViewDelegate? {
         get {
             refreshPlaceholder()
             return super.delegate

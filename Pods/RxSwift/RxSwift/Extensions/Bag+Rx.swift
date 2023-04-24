@@ -6,7 +6,6 @@
 //  Copyright © 2016 Krunoslav Zaher. All rights reserved.
 //
 
-
 // MARK: forEach
 
 @inline(__always)
@@ -18,7 +17,7 @@ func dispatch<Element>(_ bag: Bag<(Event<Element>) -> Void>, _ event: Event<Elem
     }
 
     let pairs = bag._pairs
-    for i in 0 ..< pairs.count {
+    for i in 0..<pairs.count {
         pairs[i].value(event)
     }
 
@@ -38,7 +37,7 @@ func disposeAll(in bag: Bag<Disposable>) {
     }
 
     let pairs = bag._pairs
-    for i in 0 ..< pairs.count {
+    for i in 0..<pairs.count {
         pairs[i].value.dispose()
     }
 

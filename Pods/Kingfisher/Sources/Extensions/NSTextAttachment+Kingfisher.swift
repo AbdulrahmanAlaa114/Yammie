@@ -32,8 +32,7 @@ import AppKit
 import UIKit
 #endif
 
-extension KingfisherWrapper where Base: NSTextAttachment {
-
+public extension KingfisherWrapper where Base: NSTextAttachment {
     // MARK: Setting Image
 
     /// Sets an image to the text attachment with a source.
@@ -80,14 +79,14 @@ extension KingfisherWrapper where Base: NSTextAttachment {
     /// ```
     ///
     @discardableResult
-    public func setImage(
+    func setImage(
         with source: Source?,
         attributedView: @autoclosure @escaping () -> KFCrossPlatformView,
         placeholder: KFCrossPlatformImage? = nil,
         options: KingfisherOptionsInfo? = nil,
         progressBlock: DownloadProgressBlock? = nil,
-        completionHandler: ((Result<RetrieveImageResult, KingfisherError>) -> Void)? = nil) -> DownloadTask?
-    {
+        completionHandler: ((Result<RetrieveImageResult, KingfisherError>) -> Void)? = nil
+    ) -> DownloadTask? {
         let options = KingfisherParsedOptionsInfo(KingfisherManager.shared.defaultOptions + (options ?? .empty))
         return setImage(
             with: source,
@@ -143,14 +142,14 @@ extension KingfisherWrapper where Base: NSTextAttachment {
     /// ```
     ///
     @discardableResult
-    public func setImage(
+    func setImage(
         with resource: Resource?,
         attributedView: @autoclosure @escaping () -> KFCrossPlatformView,
         placeholder: KFCrossPlatformImage? = nil,
         options: KingfisherOptionsInfo? = nil,
         progressBlock: DownloadProgressBlock? = nil,
-        completionHandler: ((Result<RetrieveImageResult, KingfisherError>) -> Void)? = nil) -> DownloadTask?
-    {
+        completionHandler: ((Result<RetrieveImageResult, KingfisherError>) -> Void)? = nil
+    ) -> DownloadTask? {
         let options = KingfisherParsedOptionsInfo(KingfisherManager.shared.defaultOptions + (options ?? .empty))
         return setImage(
             with: resource.map { .network($0) },
@@ -162,14 +161,14 @@ extension KingfisherWrapper where Base: NSTextAttachment {
         )
     }
 
-    func setImage(
+    internal func setImage(
         with source: Source?,
         attributedView: @escaping () -> KFCrossPlatformView,
         placeholder: KFCrossPlatformImage? = nil,
         parsedOptions: KingfisherParsedOptionsInfo,
         progressBlock: DownloadProgressBlock? = nil,
-        completionHandler: ((Result<RetrieveImageResult, KingfisherError>) -> Void)? = nil) -> DownloadTask?
-    {
+        completionHandler: ((Result<RetrieveImageResult, KingfisherError>) -> Void)? = nil
+    ) -> DownloadTask? {
         var mutatingSelf = self
         guard let source = source else {
             base.image = placeholder
@@ -190,19 +189,11 @@ extension KingfisherWrapper where Base: NSTextAttachment {
             options.onDataReceived = (options.onDataReceived ?? []) + [ImageLoadingProgressSideEffect(block)]
         }
 
-        if let provider = ImageProgressiveProvider(options, refresh: { image in
-            self.base.image = image
-        }) {
-            options.onDataReceived = (options.onDataReceived ?? []) + [provider]
-        }
-
-        options.onDataReceived?.forEach {
-            $0.onShouldApply = { issuedIdentifier == self.taskIdentifier }
-        }
-
         let task = KingfisherManager.shared.retrieveImage(
             with: source,
             options: options,
+            progressiveImageSetter: { self.base.image = $0 },
+            referenceTaskIdentifierChecker: { issuedIdentifier == self.taskIdentifier },
             completionHandler: { result in
                 CallbackQueue.mainCurrentOrAsync.execute {
                     guard issuedIdentifier == self.taskIdentifier else {
@@ -222,14 +213,14 @@ extension KingfisherWrapper where Base: NSTextAttachment {
                     mutatingSelf.taskIdentifier = nil
 
                     switch result {
-                    case .success(let value):
+                    case let .success(value):
                         self.base.image = value.image
                         let view = attributedView()
-                        #if canImport(UIKit)
+#if canImport(UIKit)
                         view.setNeedsDisplay()
-                        #else
+#else
                         view.setNeedsDisplay(view.bounds)
-                        #endif
+#endif
                     case .failure:
                         if let image = options.onFailureImage {
                             self.base.image = image
@@ -237,7 +228,7 @@ extension KingfisherWrapper where Base: NSTextAttachment {
                     }
                     completionHandler?(result)
                 }
-        }
+            }
         )
 
         mutatingSelf.imageTask = task
@@ -248,7 +239,7 @@ extension KingfisherWrapper where Base: NSTextAttachment {
 
     /// Cancel the image download task bounded to the text attachment if it is running.
     /// Nothing will happen if the downloading has already finished.
-    public func cancelDownloadTask() {
+    func cancelDownloadTask() {
         imageTask?.cancel()
     }
 }
@@ -257,8 +248,8 @@ private var taskIdentifierKey: Void?
 private var imageTaskKey: Void?
 
 // MARK: Properties
-extension KingfisherWrapper where Base: NSTextAttachment {
 
+extension KingfisherWrapper where Base: NSTextAttachment {
     public private(set) var taskIdentifier: Source.Identifier.Value? {
         get {
             let box: Box<Source.Identifier.Value>? = getAssociatedObject(base, &taskIdentifierKey)
@@ -272,7 +263,7 @@ extension KingfisherWrapper where Base: NSTextAttachment {
 
     private var imageTask: DownloadTask? {
         get { return getAssociatedObject(base, &imageTaskKey) }
-        set { setRetainedAssociatedObject(base, &imageTaskKey, newValue)}
+        set { setRetainedAssociatedObject(base, &imageTaskKey, newValue) }
     }
 }
 

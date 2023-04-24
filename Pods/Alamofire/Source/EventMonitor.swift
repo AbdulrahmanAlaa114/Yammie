@@ -27,7 +27,8 @@ import Foundation
 /// Protocol outlining the lifetime events inside Alamofire. It includes both events received from the various
 /// `URLSession` delegate protocols as well as various events from the lifetime of `Request` and its subclasses.
 public protocol EventMonitor {
-    /// The `DispatchQueue` onto which Alamofire's root `CompositeEventMonitor` will dispatch events. `.main` by default.
+    /// The `DispatchQueue` onto which Alamofire's root `CompositeEventMonitor` will dispatch events. `.main` by
+    /// default.
     var queue: DispatchQueue { get }
 
     // MARK: - URLSession Events
@@ -42,21 +43,27 @@ public protocol EventMonitor {
     /// Event called during `URLSessionTaskDelegate`'s `urlSession(_:task:didReceive:completionHandler:)` method.
     func urlSession(_ session: URLSession, task: URLSessionTask, didReceive challenge: URLAuthenticationChallenge)
 
-    /// Event called during `URLSessionTaskDelegate`'s `urlSession(_:task:didSendBodyData:totalBytesSent:totalBytesExpectedToSend:)` method.
-    func urlSession(_ session: URLSession,
-                    task: URLSessionTask,
-                    didSendBodyData bytesSent: Int64,
-                    totalBytesSent: Int64,
-                    totalBytesExpectedToSend: Int64)
+    /// Event called during `URLSessionTaskDelegate`'s
+    /// `urlSession(_:task:didSendBodyData:totalBytesSent:totalBytesExpectedToSend:)` method.
+    func urlSession(
+        _ session: URLSession,
+        task: URLSessionTask,
+        didSendBodyData bytesSent: Int64,
+        totalBytesSent: Int64,
+        totalBytesExpectedToSend: Int64
+    )
 
     /// Event called during `URLSessionTaskDelegate`'s `urlSession(_:task:needNewBodyStream:)` method.
     func urlSession(_ session: URLSession, taskNeedsNewBodyStream task: URLSessionTask)
 
-    /// Event called during `URLSessionTaskDelegate`'s `urlSession(_:task:willPerformHTTPRedirection:newRequest:completionHandler:)` method.
-    func urlSession(_ session: URLSession,
-                    task: URLSessionTask,
-                    willPerformHTTPRedirection response: HTTPURLResponse,
-                    newRequest request: URLRequest)
+    /// Event called during `URLSessionTaskDelegate`'s
+    /// `urlSession(_:task:willPerformHTTPRedirection:newRequest:completionHandler:)` method.
+    func urlSession(
+        _ session: URLSession,
+        task: URLSessionTask,
+        willPerformHTTPRedirection response: HTTPURLResponse,
+        newRequest request: URLRequest
+    )
 
     /// Event called during `URLSessionTaskDelegate`'s `urlSession(_:task:didFinishCollecting:)` method.
     func urlSession(_ session: URLSession, task: URLSessionTask, didFinishCollecting metrics: URLSessionTaskMetrics)
@@ -73,23 +80,34 @@ public protocol EventMonitor {
     /// Event called during `URLSessionDataDelegate`'s `urlSession(_:dataTask:didReceive:)` method.
     func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data)
 
-    /// Event called during `URLSessionDataDelegate`'s `urlSession(_:dataTask:willCacheResponse:completionHandler:)` method.
-    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, willCacheResponse proposedResponse: CachedURLResponse)
+    /// Event called during `URLSessionDataDelegate`'s `urlSession(_:dataTask:willCacheResponse:completionHandler:)`
+    /// method.
+    func urlSession(
+        _ session: URLSession,
+        dataTask: URLSessionDataTask,
+        willCacheResponse proposedResponse: CachedURLResponse
+    )
 
     // MARK: URLSessionDownloadDelegate Events
 
-    /// Event called during `URLSessionDownloadDelegate`'s `urlSession(_:downloadTask:didResumeAtOffset:expectedTotalBytes:)` method.
-    func urlSession(_ session: URLSession,
-                    downloadTask: URLSessionDownloadTask,
-                    didResumeAtOffset fileOffset: Int64,
-                    expectedTotalBytes: Int64)
+    /// Event called during `URLSessionDownloadDelegate`'s
+    /// `urlSession(_:downloadTask:didResumeAtOffset:expectedTotalBytes:)` method.
+    func urlSession(
+        _ session: URLSession,
+        downloadTask: URLSessionDownloadTask,
+        didResumeAtOffset fileOffset: Int64,
+        expectedTotalBytes: Int64
+    )
 
-    /// Event called during `URLSessionDownloadDelegate`'s `urlSession(_:downloadTask:didWriteData:totalBytesWritten:totalBytesExpectedToWrite:)` method.
-    func urlSession(_ session: URLSession,
-                    downloadTask: URLSessionDownloadTask,
-                    didWriteData bytesWritten: Int64,
-                    totalBytesWritten: Int64,
-                    totalBytesExpectedToWrite: Int64)
+    /// Event called during `URLSessionDownloadDelegate`'s
+    /// `urlSession(_:downloadTask:didWriteData:totalBytesWritten:totalBytesExpectedToWrite:)` method.
+    func urlSession(
+        _ session: URLSession,
+        downloadTask: URLSessionDownloadTask,
+        didWriteData bytesWritten: Int64,
+        totalBytesWritten: Int64,
+        totalBytesExpectedToWrite: Int64
+    )
 
     /// Event called during `URLSessionDownloadDelegate`'s `urlSession(_:downloadTask:didFinishDownloadingTo:)` method.
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL)
@@ -100,7 +118,8 @@ public protocol EventMonitor {
     /// `URLRequest` will be adapted before being issued.
     func request(_ request: Request, didCreateInitialURLRequest urlRequest: URLRequest)
 
-    /// Event called when the attempt to create a `URLRequest` from a `Request`'s original `URLRequestConvertible` value fails.
+    /// Event called when the attempt to create a `URLRequest` from a `Request`'s original `URLRequestConvertible` value
+    /// fails.
     func request(_ request: Request, didFailToCreateURLRequestWithError error: AFError)
 
     /// Event called when a `RequestAdapter` adapts the `Request`'s initial `URLRequest`.
@@ -152,16 +171,19 @@ public protocol EventMonitor {
     // MARK: DataRequest Events
 
     /// Event called when a `DataRequest` calls a `Validation`.
-    func request(_ request: DataRequest,
-                 didValidateRequest urlRequest: URLRequest?,
-                 response: HTTPURLResponse,
-                 data: Data?,
-                 withResult result: Request.ValidationResult)
+    func request(
+        _ request: DataRequest,
+        didValidateRequest urlRequest: URLRequest?,
+        response: HTTPURLResponse,
+        data: Data?,
+        withResult result: Request.ValidationResult
+    )
 
     /// Event called when a `DataRequest` creates a `DataResponse<Data?>` value without calling a `ResponseSerializer`.
     func request(_ request: DataRequest, didParseResponse response: DataResponse<Data?, AFError>)
 
-    /// Event called when a `DataRequest` calls a `ResponseSerializer` and creates a generic `DataResponse<Value, AFError>`.
+    /// Event called when a `DataRequest` calls a `ResponseSerializer` and creates a generic `DataResponse<Value,
+    /// AFError>`.
     func request<Value>(_ request: DataRequest, didParseResponse response: DataResponse<Value, AFError>)
 
     // MARK: DataStreamRequest Events
@@ -173,10 +195,12 @@ public protocol EventMonitor {
     ///   - urlRequest: `URLRequest` of the request being validated.
     ///   - response:   `HTTPURLResponse` of the request being validated.
     ///   - result:      Produced `ValidationResult`.
-    func request(_ request: DataStreamRequest,
-                 didValidateRequest urlRequest: URLRequest?,
-                 response: HTTPURLResponse,
-                 withResult result: Request.ValidationResult)
+    func request(
+        _ request: DataStreamRequest,
+        didValidateRequest urlRequest: URLRequest?,
+        response: HTTPURLResponse,
+        withResult result: Request.ValidationResult
+    )
 
     /// Event called when a `DataStreamSerializer` produces a value from streamed `Data`.
     ///
@@ -187,7 +211,8 @@ public protocol EventMonitor {
 
     // MARK: UploadRequest Events
 
-    /// Event called when an `UploadRequest` creates its `Uploadable` value, indicating the type of upload it represents.
+    /// Event called when an `UploadRequest` creates its `Uploadable` value, indicating the type of upload it
+    /// represents.
     func request(_ request: UploadRequest, didCreateUploadable uploadable: UploadRequest.Uploadable)
 
     /// Event called when an `UploadRequest` failed to create its `Uploadable` value due to an error.
@@ -200,112 +225,150 @@ public protocol EventMonitor {
     // MARK: DownloadRequest Events
 
     /// Event called when a `DownloadRequest`'s `URLSessionDownloadTask` finishes and the temporary file has been moved.
-    func request(_ request: DownloadRequest, didFinishDownloadingUsing task: URLSessionTask, with result: Result<URL, AFError>)
+    func request(
+        _ request: DownloadRequest,
+        didFinishDownloadingUsing task: URLSessionTask,
+        with result: Result<URL, AFError>
+    )
 
     /// Event called when a `DownloadRequest`'s `Destination` closure is called and creates the destination URL the
     /// downloaded file will be moved to.
     func request(_ request: DownloadRequest, didCreateDestinationURL url: URL)
 
     /// Event called when a `DownloadRequest` calls a `Validation`.
-    func request(_ request: DownloadRequest,
-                 didValidateRequest urlRequest: URLRequest?,
-                 response: HTTPURLResponse,
-                 fileURL: URL?,
-                 withResult result: Request.ValidationResult)
+    func request(
+        _ request: DownloadRequest,
+        didValidateRequest urlRequest: URLRequest?,
+        response: HTTPURLResponse,
+        fileURL: URL?,
+        withResult result: Request.ValidationResult
+    )
 
-    /// Event called when a `DownloadRequest` creates a `DownloadResponse<URL?, AFError>` without calling a `ResponseSerializer`.
+    /// Event called when a `DownloadRequest` creates a `DownloadResponse<URL?, AFError>` without calling a
+    /// `ResponseSerializer`.
     func request(_ request: DownloadRequest, didParseResponse response: DownloadResponse<URL?, AFError>)
 
-    /// Event called when a `DownloadRequest` calls a `DownloadResponseSerializer` and creates a generic `DownloadResponse<Value, AFError>`
+    /// Event called when a `DownloadRequest` calls a `DownloadResponseSerializer` and creates a generic
+    /// `DownloadResponse<Value, AFError>`
     func request<Value>(_ request: DownloadRequest, didParseResponse response: DownloadResponse<Value, AFError>)
 }
 
-extension EventMonitor {
+public extension EventMonitor {
     /// The default queue on which `CompositeEventMonitor`s will call the `EventMonitor` methods. `.main` by default.
-    public var queue: DispatchQueue { .main }
+    var queue: DispatchQueue { .main }
 
     // MARK: Default Implementations
 
-    public func urlSession(_ session: URLSession, didBecomeInvalidWithError error: Error?) {}
-    public func urlSession(_ session: URLSession,
-                           task: URLSessionTask,
-                           didReceive challenge: URLAuthenticationChallenge) {}
-    public func urlSession(_ session: URLSession,
-                           task: URLSessionTask,
-                           didSendBodyData bytesSent: Int64,
-                           totalBytesSent: Int64,
-                           totalBytesExpectedToSend: Int64) {}
-    public func urlSession(_ session: URLSession, taskNeedsNewBodyStream task: URLSessionTask) {}
-    public func urlSession(_ session: URLSession,
-                           task: URLSessionTask,
-                           willPerformHTTPRedirection response: HTTPURLResponse,
-                           newRequest request: URLRequest) {}
-    public func urlSession(_ session: URLSession,
-                           task: URLSessionTask,
-                           didFinishCollecting metrics: URLSessionTaskMetrics) {}
-    public func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {}
-    public func urlSession(_ session: URLSession, taskIsWaitingForConnectivity task: URLSessionTask) {}
-    public func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {}
-    public func urlSession(_ session: URLSession,
-                           dataTask: URLSessionDataTask,
-                           willCacheResponse proposedResponse: CachedURLResponse) {}
-    public func urlSession(_ session: URLSession,
-                           downloadTask: URLSessionDownloadTask,
-                           didResumeAtOffset fileOffset: Int64,
-                           expectedTotalBytes: Int64) {}
-    public func urlSession(_ session: URLSession,
-                           downloadTask: URLSessionDownloadTask,
-                           didWriteData bytesWritten: Int64,
-                           totalBytesWritten: Int64,
-                           totalBytesExpectedToWrite: Int64) {}
-    public func urlSession(_ session: URLSession,
-                           downloadTask: URLSessionDownloadTask,
-                           didFinishDownloadingTo location: URL) {}
-    public func request(_ request: Request, didCreateInitialURLRequest urlRequest: URLRequest) {}
-    public func request(_ request: Request, didFailToCreateURLRequestWithError error: AFError) {}
-    public func request(_ request: Request,
-                        didAdaptInitialRequest initialRequest: URLRequest,
-                        to adaptedRequest: URLRequest) {}
-    public func request(_ request: Request,
-                        didFailToAdaptURLRequest initialRequest: URLRequest,
-                        withError error: AFError) {}
-    public func request(_ request: Request, didCreateURLRequest urlRequest: URLRequest) {}
-    public func request(_ request: Request, didCreateTask task: URLSessionTask) {}
-    public func request(_ request: Request, didGatherMetrics metrics: URLSessionTaskMetrics) {}
-    public func request(_ request: Request, didFailTask task: URLSessionTask, earlyWithError error: AFError) {}
-    public func request(_ request: Request, didCompleteTask task: URLSessionTask, with error: AFError?) {}
-    public func requestIsRetrying(_ request: Request) {}
-    public func requestDidFinish(_ request: Request) {}
-    public func requestDidResume(_ request: Request) {}
-    public func request(_ request: Request, didResumeTask task: URLSessionTask) {}
-    public func requestDidSuspend(_ request: Request) {}
-    public func request(_ request: Request, didSuspendTask task: URLSessionTask) {}
-    public func requestDidCancel(_ request: Request) {}
-    public func request(_ request: Request, didCancelTask task: URLSessionTask) {}
-    public func request(_ request: DataRequest,
-                        didValidateRequest urlRequest: URLRequest?,
-                        response: HTTPURLResponse,
-                        data: Data?,
-                        withResult result: Request.ValidationResult) {}
-    public func request(_ request: DataRequest, didParseResponse response: DataResponse<Data?, AFError>) {}
-    public func request<Value>(_ request: DataRequest, didParseResponse response: DataResponse<Value, AFError>) {}
-    public func request(_ request: DataStreamRequest,
-                        didValidateRequest urlRequest: URLRequest?,
-                        response: HTTPURLResponse,
-                        withResult result: Request.ValidationResult) {}
-    public func request<Value>(_ request: DataStreamRequest, didParseStream result: Result<Value, AFError>) {}
-    public func request(_ request: UploadRequest, didCreateUploadable uploadable: UploadRequest.Uploadable) {}
-    public func request(_ request: UploadRequest, didFailToCreateUploadableWithError error: AFError) {}
-    public func request(_ request: UploadRequest, didProvideInputStream stream: InputStream) {}
-    public func request(_ request: DownloadRequest, didFinishDownloadingUsing task: URLSessionTask, with result: Result<URL, AFError>) {}
-    public func request(_ request: DownloadRequest, didCreateDestinationURL url: URL) {}
-    public func request(_ request: DownloadRequest,
-                        didValidateRequest urlRequest: URLRequest?,
-                        response: HTTPURLResponse,
-                        fileURL: URL?,
-                        withResult result: Request.ValidationResult) {}
-    public func request(_ request: DownloadRequest, didParseResponse response: DownloadResponse<URL?, AFError>) {}
-    public func request<Value>(_ request: DownloadRequest, didParseResponse response: DownloadResponse<Value, AFError>) {}
+    func urlSession(_ session: URLSession, didBecomeInvalidWithError error: Error?) {}
+    func urlSession(
+        _ session: URLSession,
+        task: URLSessionTask,
+        didReceive challenge: URLAuthenticationChallenge
+    ) {}
+    func urlSession(
+        _ session: URLSession,
+        task: URLSessionTask,
+        didSendBodyData bytesSent: Int64,
+        totalBytesSent: Int64,
+        totalBytesExpectedToSend: Int64
+    ) {}
+    func urlSession(_ session: URLSession, taskNeedsNewBodyStream task: URLSessionTask) {}
+    func urlSession(
+        _ session: URLSession,
+        task: URLSessionTask,
+        willPerformHTTPRedirection response: HTTPURLResponse,
+        newRequest request: URLRequest
+    ) {}
+    func urlSession(
+        _ session: URLSession,
+        task: URLSessionTask,
+        didFinishCollecting metrics: URLSessionTaskMetrics
+    ) {}
+    func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {}
+    func urlSession(_ session: URLSession, taskIsWaitingForConnectivity task: URLSessionTask) {}
+    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {}
+    func urlSession(
+        _ session: URLSession,
+        dataTask: URLSessionDataTask,
+        willCacheResponse proposedResponse: CachedURLResponse
+    ) {}
+    func urlSession(
+        _ session: URLSession,
+        downloadTask: URLSessionDownloadTask,
+        didResumeAtOffset fileOffset: Int64,
+        expectedTotalBytes: Int64
+    ) {}
+    func urlSession(
+        _ session: URLSession,
+        downloadTask: URLSessionDownloadTask,
+        didWriteData bytesWritten: Int64,
+        totalBytesWritten: Int64,
+        totalBytesExpectedToWrite: Int64
+    ) {}
+    func urlSession(
+        _ session: URLSession,
+        downloadTask: URLSessionDownloadTask,
+        didFinishDownloadingTo location: URL
+    ) {}
+    func request(_ request: Request, didCreateInitialURLRequest urlRequest: URLRequest) {}
+    func request(_ request: Request, didFailToCreateURLRequestWithError error: AFError) {}
+    func request(
+        _ request: Request,
+        didAdaptInitialRequest initialRequest: URLRequest,
+        to adaptedRequest: URLRequest
+    ) {}
+    func request(
+        _ request: Request,
+        didFailToAdaptURLRequest initialRequest: URLRequest,
+        withError error: AFError
+    ) {}
+    func request(_ request: Request, didCreateURLRequest urlRequest: URLRequest) {}
+    func request(_ request: Request, didCreateTask task: URLSessionTask) {}
+    func request(_ request: Request, didGatherMetrics metrics: URLSessionTaskMetrics) {}
+    func request(_ request: Request, didFailTask task: URLSessionTask, earlyWithError error: AFError) {}
+    func request(_ request: Request, didCompleteTask task: URLSessionTask, with error: AFError?) {}
+    func requestIsRetrying(_: Request) {}
+    func requestDidFinish(_: Request) {}
+    func requestDidResume(_: Request) {}
+    func request(_ request: Request, didResumeTask task: URLSessionTask) {}
+    func requestDidSuspend(_: Request) {}
+    func request(_ request: Request, didSuspendTask task: URLSessionTask) {}
+    func requestDidCancel(_: Request) {}
+    func request(_ request: Request, didCancelTask task: URLSessionTask) {}
+    func request(
+        _ request: DataRequest,
+        didValidateRequest urlRequest: URLRequest?,
+        response: HTTPURLResponse,
+        data: Data?,
+        withResult result: Request.ValidationResult
+    ) {}
+    func request(_ request: DataRequest, didParseResponse response: DataResponse<Data?, AFError>) {}
+    func request<Value>(_ request: DataRequest, didParseResponse response: DataResponse<Value, AFError>) {}
+    func request(
+        _ request: DataStreamRequest,
+        didValidateRequest urlRequest: URLRequest?,
+        response: HTTPURLResponse,
+        withResult result: Request.ValidationResult
+    ) {}
+    func request<Value>(_ request: DataStreamRequest, didParseStream result: Result<Value, AFError>) {}
+    func request(_ request: UploadRequest, didCreateUploadable uploadable: UploadRequest.Uploadable) {}
+    func request(_ request: UploadRequest, didFailToCreateUploadableWithError error: AFError) {}
+    func request(_ request: UploadRequest, didProvideInputStream stream: InputStream) {}
+    func request(
+        _ request: DownloadRequest,
+        didFinishDownloadingUsing task: URLSessionTask,
+        with result: Result<URL, AFError>
+    ) {}
+    func request(_ request: DownloadRequest, didCreateDestinationURL url: URL) {}
+    func request(
+        _ request: DownloadRequest,
+        didValidateRequest urlRequest: URLRequest?,
+        response: HTTPURLResponse,
+        fileURL: URL?,
+        withResult result: Request.ValidationResult
+    ) {}
+    func request(_ request: DownloadRequest, didParseResponse response: DownloadResponse<URL?, AFError>) {}
+    func request<Value>(_ request: DownloadRequest, didParseResponse response: DownloadResponse<Value, AFError>) {}
 }
 
 /// An `EventMonitor` which can contain multiple `EventMonitor`s and calls their methods on their queues.
@@ -330,23 +393,29 @@ public final class CompositeEventMonitor: EventMonitor {
         performEvent { $0.urlSession(session, didBecomeInvalidWithError: error) }
     }
 
-    public func urlSession(_ session: URLSession,
-                           task: URLSessionTask,
-                           didReceive challenge: URLAuthenticationChallenge) {
+    public func urlSession(
+        _ session: URLSession,
+        task: URLSessionTask,
+        didReceive challenge: URLAuthenticationChallenge
+    ) {
         performEvent { $0.urlSession(session, task: task, didReceive: challenge) }
     }
 
-    public func urlSession(_ session: URLSession,
-                           task: URLSessionTask,
-                           didSendBodyData bytesSent: Int64,
-                           totalBytesSent: Int64,
-                           totalBytesExpectedToSend: Int64) {
+    public func urlSession(
+        _ session: URLSession,
+        task: URLSessionTask,
+        didSendBodyData bytesSent: Int64,
+        totalBytesSent: Int64,
+        totalBytesExpectedToSend: Int64
+    ) {
         performEvent {
-            $0.urlSession(session,
-                          task: task,
-                          didSendBodyData: bytesSent,
-                          totalBytesSent: totalBytesSent,
-                          totalBytesExpectedToSend: totalBytesExpectedToSend)
+            $0.urlSession(
+                session,
+                task: task,
+                didSendBodyData: bytesSent,
+                totalBytesSent: totalBytesSent,
+                totalBytesExpectedToSend: totalBytesExpectedToSend
+            )
         }
     }
 
@@ -356,19 +425,27 @@ public final class CompositeEventMonitor: EventMonitor {
         }
     }
 
-    public func urlSession(_ session: URLSession,
-                           task: URLSessionTask,
-                           willPerformHTTPRedirection response: HTTPURLResponse,
-                           newRequest request: URLRequest) {
+    public func urlSession(
+        _ session: URLSession,
+        task: URLSessionTask,
+        willPerformHTTPRedirection response: HTTPURLResponse,
+        newRequest request: URLRequest
+    ) {
         performEvent {
-            $0.urlSession(session,
-                          task: task,
-                          willPerformHTTPRedirection: response,
-                          newRequest: request)
+            $0.urlSession(
+                session,
+                task: task,
+                willPerformHTTPRedirection: response,
+                newRequest: request
+            )
         }
     }
 
-    public func urlSession(_ session: URLSession, task: URLSessionTask, didFinishCollecting metrics: URLSessionTaskMetrics) {
+    public func urlSession(
+        _ session: URLSession,
+        task: URLSessionTask,
+        didFinishCollecting metrics: URLSessionTaskMetrics
+    ) {
         performEvent { $0.urlSession(session, task: task, didFinishCollecting: metrics) }
     }
 
@@ -385,41 +462,53 @@ public final class CompositeEventMonitor: EventMonitor {
         performEvent { $0.urlSession(session, dataTask: dataTask, didReceive: data) }
     }
 
-    public func urlSession(_ session: URLSession,
-                           dataTask: URLSessionDataTask,
-                           willCacheResponse proposedResponse: CachedURLResponse) {
+    public func urlSession(
+        _ session: URLSession,
+        dataTask: URLSessionDataTask,
+        willCacheResponse proposedResponse: CachedURLResponse
+    ) {
         performEvent { $0.urlSession(session, dataTask: dataTask, willCacheResponse: proposedResponse) }
     }
 
-    public func urlSession(_ session: URLSession,
-                           downloadTask: URLSessionDownloadTask,
-                           didResumeAtOffset fileOffset: Int64,
-                           expectedTotalBytes: Int64) {
+    public func urlSession(
+        _ session: URLSession,
+        downloadTask: URLSessionDownloadTask,
+        didResumeAtOffset fileOffset: Int64,
+        expectedTotalBytes: Int64
+    ) {
         performEvent {
-            $0.urlSession(session,
-                          downloadTask: downloadTask,
-                          didResumeAtOffset: fileOffset,
-                          expectedTotalBytes: expectedTotalBytes)
+            $0.urlSession(
+                session,
+                downloadTask: downloadTask,
+                didResumeAtOffset: fileOffset,
+                expectedTotalBytes: expectedTotalBytes
+            )
         }
     }
 
-    public func urlSession(_ session: URLSession,
-                           downloadTask: URLSessionDownloadTask,
-                           didWriteData bytesWritten: Int64,
-                           totalBytesWritten: Int64,
-                           totalBytesExpectedToWrite: Int64) {
+    public func urlSession(
+        _ session: URLSession,
+        downloadTask: URLSessionDownloadTask,
+        didWriteData bytesWritten: Int64,
+        totalBytesWritten: Int64,
+        totalBytesExpectedToWrite: Int64
+    ) {
         performEvent {
-            $0.urlSession(session,
-                          downloadTask: downloadTask,
-                          didWriteData: bytesWritten,
-                          totalBytesWritten: totalBytesWritten,
-                          totalBytesExpectedToWrite: totalBytesExpectedToWrite)
+            $0.urlSession(
+                session,
+                downloadTask: downloadTask,
+                didWriteData: bytesWritten,
+                totalBytesWritten: totalBytesWritten,
+                totalBytesExpectedToWrite: totalBytesExpectedToWrite
+            )
         }
     }
 
-    public func urlSession(_ session: URLSession,
-                           downloadTask: URLSessionDownloadTask,
-                           didFinishDownloadingTo location: URL) {
+    public func urlSession(
+        _ session: URLSession,
+        downloadTask: URLSessionDownloadTask,
+        didFinishDownloadingTo location: URL
+    ) {
         performEvent { $0.urlSession(session, downloadTask: downloadTask, didFinishDownloadingTo: location) }
     }
 
@@ -431,11 +520,19 @@ public final class CompositeEventMonitor: EventMonitor {
         performEvent { $0.request(request, didFailToCreateURLRequestWithError: error) }
     }
 
-    public func request(_ request: Request, didAdaptInitialRequest initialRequest: URLRequest, to adaptedRequest: URLRequest) {
+    public func request(
+        _ request: Request,
+        didAdaptInitialRequest initialRequest: URLRequest,
+        to adaptedRequest: URLRequest
+    ) {
         performEvent { $0.request(request, didAdaptInitialRequest: initialRequest, to: adaptedRequest) }
     }
 
-    public func request(_ request: Request, didFailToAdaptURLRequest initialRequest: URLRequest, withError error: AFError) {
+    public func request(
+        _ request: Request,
+        didFailToAdaptURLRequest initialRequest: URLRequest,
+        withError error: AFError
+    ) {
         performEvent { $0.request(request, didFailToAdaptURLRequest: initialRequest, withError: error) }
     }
 
@@ -491,16 +588,20 @@ public final class CompositeEventMonitor: EventMonitor {
         performEvent { $0.request(request, didCancelTask: task) }
     }
 
-    public func request(_ request: DataRequest,
-                        didValidateRequest urlRequest: URLRequest?,
-                        response: HTTPURLResponse,
-                        data: Data?,
-                        withResult result: Request.ValidationResult) {
-        performEvent { $0.request(request,
-                                  didValidateRequest: urlRequest,
-                                  response: response,
-                                  data: data,
-                                  withResult: result)
+    public func request(
+        _ request: DataRequest,
+        didValidateRequest urlRequest: URLRequest?,
+        response: HTTPURLResponse,
+        data: Data?,
+        withResult result: Request.ValidationResult
+    ) {
+        performEvent { $0.request(
+            request,
+            didValidateRequest: urlRequest,
+            response: response,
+            data: data,
+            withResult: result
+        )
         }
     }
 
@@ -512,14 +613,18 @@ public final class CompositeEventMonitor: EventMonitor {
         performEvent { $0.request(request, didParseResponse: response) }
     }
 
-    public func request(_ request: DataStreamRequest,
-                        didValidateRequest urlRequest: URLRequest?,
-                        response: HTTPURLResponse,
-                        withResult result: Request.ValidationResult) {
-        performEvent { $0.request(request,
-                                  didValidateRequest: urlRequest,
-                                  response: response,
-                                  withResult: result)
+    public func request(
+        _ request: DataStreamRequest,
+        didValidateRequest urlRequest: URLRequest?,
+        response: HTTPURLResponse,
+        withResult result: Request.ValidationResult
+    ) {
+        performEvent { $0.request(
+            request,
+            didValidateRequest: urlRequest,
+            response: response,
+            withResult: result
+        )
         }
     }
 
@@ -539,7 +644,11 @@ public final class CompositeEventMonitor: EventMonitor {
         performEvent { $0.request(request, didProvideInputStream: stream) }
     }
 
-    public func request(_ request: DownloadRequest, didFinishDownloadingUsing task: URLSessionTask, with result: Result<URL, AFError>) {
+    public func request(
+        _ request: DownloadRequest,
+        didFinishDownloadingUsing task: URLSessionTask,
+        with result: Result<URL, AFError>
+    ) {
         performEvent { $0.request(request, didFinishDownloadingUsing: task, with: result) }
     }
 
@@ -547,23 +656,30 @@ public final class CompositeEventMonitor: EventMonitor {
         performEvent { $0.request(request, didCreateDestinationURL: url) }
     }
 
-    public func request(_ request: DownloadRequest,
-                        didValidateRequest urlRequest: URLRequest?,
-                        response: HTTPURLResponse,
-                        fileURL: URL?,
-                        withResult result: Request.ValidationResult) {
-        performEvent { $0.request(request,
-                                  didValidateRequest: urlRequest,
-                                  response: response,
-                                  fileURL: fileURL,
-                                  withResult: result) }
+    public func request(
+        _ request: DownloadRequest,
+        didValidateRequest urlRequest: URLRequest?,
+        response: HTTPURLResponse,
+        fileURL: URL?,
+        withResult result: Request.ValidationResult
+    ) {
+        performEvent { $0.request(
+            request,
+            didValidateRequest: urlRequest,
+            response: response,
+            fileURL: fileURL,
+            withResult: result
+        ) }
     }
 
     public func request(_ request: DownloadRequest, didParseResponse response: DownloadResponse<URL?, AFError>) {
         performEvent { $0.request(request, didParseResponse: response) }
     }
 
-    public func request<Value>(_ request: DownloadRequest, didParseResponse response: DownloadResponse<Value, AFError>) {
+    public func request<Value>(
+        _ request: DownloadRequest,
+        didParseResponse response: DownloadResponse<Value, AFError>
+    ) {
         performEvent { $0.request(request, didParseResponse: response) }
     }
 }
@@ -664,13 +780,24 @@ open class ClosureEventMonitor: EventMonitor {
     open var requestDidCancelTask: ((Request, URLSessionTask) -> Void)?
 
     /// Closure called on the `request(_:didValidateRequest:response:data:withResult:)` event.
-    open var requestDidValidateRequestResponseDataWithResult: ((DataRequest, URLRequest?, HTTPURLResponse, Data?, Request.ValidationResult) -> Void)?
+    open var requestDidValidateRequestResponseDataWithResult: ((
+        DataRequest,
+        URLRequest?,
+        HTTPURLResponse,
+        Data?,
+        Request.ValidationResult
+    ) -> Void)?
 
     /// Closure called on the `request(_:didParseResponse:)` event.
     open var requestDidParseResponse: ((DataRequest, DataResponse<Data?, AFError>) -> Void)?
 
     /// Closure called on the `request(_:didValidateRequest:response:withResult:)` event.
-    open var requestDidValidateRequestResponseWithResult: ((DataStreamRequest, URLRequest?, HTTPURLResponse, Request.ValidationResult) -> Void)?
+    open var requestDidValidateRequestResponseWithResult: ((
+        DataStreamRequest,
+        URLRequest?,
+        HTTPURLResponse,
+        Request.ValidationResult
+    ) -> Void)?
 
     /// Closure called on the `request(_:didCreateUploadable:)` event.
     open var requestDidCreateUploadable: ((UploadRequest, UploadRequest.Uploadable) -> Void)?
@@ -682,13 +809,22 @@ open class ClosureEventMonitor: EventMonitor {
     open var requestDidProvideInputStream: ((UploadRequest, InputStream) -> Void)?
 
     /// Closure called on the `request(_:didFinishDownloadingUsing:with:)` event.
-    open var requestDidFinishDownloadingUsingTaskWithResult: ((DownloadRequest, URLSessionTask, Result<URL, AFError>) -> Void)?
+    open var requestDidFinishDownloadingUsingTaskWithResult: (
+        (DownloadRequest, URLSessionTask, Result<URL, AFError>)
+            -> Void
+    )?
 
     /// Closure called on the `request(_:didCreateDestinationURL:)` event.
     open var requestDidCreateDestinationURL: ((DownloadRequest, URL) -> Void)?
 
     /// Closure called on the `request(_:didValidateRequest:response:temporaryURL:destinationURL:withResult:)` event.
-    open var requestDidValidateRequestResponseFileURLWithResult: ((DownloadRequest, URLRequest?, HTTPURLResponse, URL?, Request.ValidationResult) -> Void)?
+    open var requestDidValidateRequestResponseFileURLWithResult: ((
+        DownloadRequest,
+        URLRequest?,
+        HTTPURLResponse,
+        URL?,
+        Request.ValidationResult
+    ) -> Void)?
 
     /// Closure called on the `request(_:didParseResponse:)` event.
     open var requestDidParseDownloadResponse: ((DownloadRequest, DownloadResponse<URL?, AFError>) -> Void)?
@@ -706,15 +842,21 @@ open class ClosureEventMonitor: EventMonitor {
         sessionDidBecomeInvalidWithError?(session, error)
     }
 
-    open func urlSession(_ session: URLSession, task: URLSessionTask, didReceive challenge: URLAuthenticationChallenge) {
+    open func urlSession(
+        _ session: URLSession,
+        task: URLSessionTask,
+        didReceive challenge: URLAuthenticationChallenge
+    ) {
         taskDidReceiveChallenge?(session, task, challenge)
     }
 
-    open func urlSession(_ session: URLSession,
-                         task: URLSessionTask,
-                         didSendBodyData bytesSent: Int64,
-                         totalBytesSent: Int64,
-                         totalBytesExpectedToSend: Int64) {
+    open func urlSession(
+        _ session: URLSession,
+        task: URLSessionTask,
+        didSendBodyData bytesSent: Int64,
+        totalBytesSent: Int64,
+        totalBytesExpectedToSend: Int64
+    ) {
         taskDidSendBodyData?(session, task, bytesSent, totalBytesSent, totalBytesExpectedToSend)
     }
 
@@ -722,14 +864,20 @@ open class ClosureEventMonitor: EventMonitor {
         taskNeedNewBodyStream?(session, task)
     }
 
-    open func urlSession(_ session: URLSession,
-                         task: URLSessionTask,
-                         willPerformHTTPRedirection response: HTTPURLResponse,
-                         newRequest request: URLRequest) {
+    open func urlSession(
+        _ session: URLSession,
+        task: URLSessionTask,
+        willPerformHTTPRedirection response: HTTPURLResponse,
+        newRequest request: URLRequest
+    ) {
         taskWillPerformHTTPRedirection?(session, task, response, request)
     }
 
-    open func urlSession(_ session: URLSession, task: URLSessionTask, didFinishCollecting metrics: URLSessionTaskMetrics) {
+    open func urlSession(
+        _ session: URLSession,
+        task: URLSessionTask,
+        didFinishCollecting metrics: URLSessionTaskMetrics
+    ) {
         taskDidFinishCollectingMetrics?(session, task, metrics)
     }
 
@@ -745,26 +893,38 @@ open class ClosureEventMonitor: EventMonitor {
         dataTaskDidReceiveData?(session, dataTask, data)
     }
 
-    open func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, willCacheResponse proposedResponse: CachedURLResponse) {
+    open func urlSession(
+        _ session: URLSession,
+        dataTask: URLSessionDataTask,
+        willCacheResponse proposedResponse: CachedURLResponse
+    ) {
         dataTaskWillCacheResponse?(session, dataTask, proposedResponse)
     }
 
-    open func urlSession(_ session: URLSession,
-                         downloadTask: URLSessionDownloadTask,
-                         didResumeAtOffset fileOffset: Int64,
-                         expectedTotalBytes: Int64) {
+    open func urlSession(
+        _ session: URLSession,
+        downloadTask: URLSessionDownloadTask,
+        didResumeAtOffset fileOffset: Int64,
+        expectedTotalBytes: Int64
+    ) {
         downloadTaskDidResumeAtOffset?(session, downloadTask, fileOffset, expectedTotalBytes)
     }
 
-    open func urlSession(_ session: URLSession,
-                         downloadTask: URLSessionDownloadTask,
-                         didWriteData bytesWritten: Int64,
-                         totalBytesWritten: Int64,
-                         totalBytesExpectedToWrite: Int64) {
+    open func urlSession(
+        _ session: URLSession,
+        downloadTask: URLSessionDownloadTask,
+        didWriteData bytesWritten: Int64,
+        totalBytesWritten: Int64,
+        totalBytesExpectedToWrite: Int64
+    ) {
         downloadTaskDidWriteData?(session, downloadTask, bytesWritten, totalBytesWritten, totalBytesExpectedToWrite)
     }
 
-    open func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
+    open func urlSession(
+        _ session: URLSession,
+        downloadTask: URLSessionDownloadTask,
+        didFinishDownloadingTo location: URL
+    ) {
         downloadTaskDidFinishDownloadingToURL?(session, downloadTask, location)
     }
 
@@ -778,11 +938,19 @@ open class ClosureEventMonitor: EventMonitor {
         requestDidFailToCreateURLRequestWithError?(request, error)
     }
 
-    open func request(_ request: Request, didAdaptInitialRequest initialRequest: URLRequest, to adaptedRequest: URLRequest) {
+    open func request(
+        _ request: Request,
+        didAdaptInitialRequest initialRequest: URLRequest,
+        to adaptedRequest: URLRequest
+    ) {
         requestDidAdaptInitialRequestToAdaptedRequest?(request, initialRequest, adaptedRequest)
     }
 
-    open func request(_ request: Request, didFailToAdaptURLRequest initialRequest: URLRequest, withError error: AFError) {
+    open func request(
+        _ request: Request,
+        didFailToAdaptURLRequest initialRequest: URLRequest,
+        withError error: AFError
+    ) {
         requestDidFailToAdaptURLRequestWithError?(request, initialRequest, error)
     }
 
@@ -838,11 +1006,13 @@ open class ClosureEventMonitor: EventMonitor {
         requestDidCancelTask?(request, task)
     }
 
-    open func request(_ request: DataRequest,
-                      didValidateRequest urlRequest: URLRequest?,
-                      response: HTTPURLResponse,
-                      data: Data?,
-                      withResult result: Request.ValidationResult) {
+    open func request(
+        _ request: DataRequest,
+        didValidateRequest urlRequest: URLRequest?,
+        response: HTTPURLResponse,
+        data: Data?,
+        withResult result: Request.ValidationResult
+    ) {
         requestDidValidateRequestResponseDataWithResult?(request, urlRequest, response, data, result)
     }
 
@@ -850,7 +1020,12 @@ open class ClosureEventMonitor: EventMonitor {
         requestDidParseResponse?(request, response)
     }
 
-    public func request(_ request: DataStreamRequest, didValidateRequest urlRequest: URLRequest?, response: HTTPURLResponse, withResult result: Request.ValidationResult) {
+    public func request(
+        _ request: DataStreamRequest,
+        didValidateRequest urlRequest: URLRequest?,
+        response: HTTPURLResponse,
+        withResult result: Request.ValidationResult
+    ) {
         requestDidValidateRequestResponseWithResult?(request, urlRequest, response, result)
     }
 
@@ -866,7 +1041,11 @@ open class ClosureEventMonitor: EventMonitor {
         requestDidProvideInputStream?(request, stream)
     }
 
-    open func request(_ request: DownloadRequest, didFinishDownloadingUsing task: URLSessionTask, with result: Result<URL, AFError>) {
+    open func request(
+        _ request: DownloadRequest,
+        didFinishDownloadingUsing task: URLSessionTask,
+        with result: Result<URL, AFError>
+    ) {
         requestDidFinishDownloadingUsingTaskWithResult?(request, task, result)
     }
 
@@ -874,16 +1053,20 @@ open class ClosureEventMonitor: EventMonitor {
         requestDidCreateDestinationURL?(request, url)
     }
 
-    open func request(_ request: DownloadRequest,
-                      didValidateRequest urlRequest: URLRequest?,
-                      response: HTTPURLResponse,
-                      fileURL: URL?,
-                      withResult result: Request.ValidationResult) {
-        requestDidValidateRequestResponseFileURLWithResult?(request,
-                                                            urlRequest,
-                                                            response,
-                                                            fileURL,
-                                                            result)
+    open func request(
+        _ request: DownloadRequest,
+        didValidateRequest urlRequest: URLRequest?,
+        response: HTTPURLResponse,
+        fileURL: URL?,
+        withResult result: Request.ValidationResult
+    ) {
+        requestDidValidateRequestResponseFileURLWithResult?(
+            request,
+            urlRequest,
+            response,
+            fileURL,
+            result
+        )
     }
 
     open func request(_ request: DownloadRequest, didParseResponse response: DownloadResponse<URL?, AFError>) {

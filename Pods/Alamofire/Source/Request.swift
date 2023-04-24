@@ -80,7 +80,8 @@ public class Request {
 
     // MARK: - Mutable State
 
-    /// Type encapsulating all mutable state that may need to be accessed from anything other than the `underlyingQueue`.
+    /// Type encapsulating all mutable state that may need to be accessed from anything other than the
+    /// `underlyingQueue`.
     struct MutableState {
         /// State of the `Request`.
         var state: State = .initialized
@@ -258,12 +259,14 @@ public class Request {
     ///   - eventMonitor:       `EventMonitor` called for event callbacks from internal `Request` actions.
     ///   - interceptor:        `RequestInterceptor` used throughout the request lifecycle.
     ///   - delegate:           `RequestDelegate` that provides an interface to actions not performed by the `Request`.
-    init(id: UUID = UUID(),
-         underlyingQueue: DispatchQueue,
-         serializationQueue: DispatchQueue,
-         eventMonitor: EventMonitor?,
-         interceptor: RequestInterceptor?,
-         delegate: RequestDelegate) {
+    init(
+        id: UUID = UUID(),
+        underlyingQueue: DispatchQueue,
+        serializationQueue: DispatchQueue,
+        eventMonitor: EventMonitor?,
+        interceptor: RequestInterceptor?,
+        delegate: RequestDelegate
+    ) {
         self.id = id
         self.underlyingQueue = underlyingQueue
         self.serializationQueue = serializationQueue
@@ -493,7 +496,7 @@ public class Request {
     func retryOrFinish(error: AFError?) {
         dispatchPrecondition(condition: .onQueue(underlyingQueue))
 
-        guard let error = error, let delegate = delegate else { finish(); return }
+        guard !isCancelled, let error = error, let delegate = delegate else { finish(); return }
 
         delegate.retryResult(for: self, dueTo: error) { retryResult in
             switch retryResult {
@@ -602,7 +605,8 @@ public class Request {
 
     /// Notifies the `Request` that the response serializer is complete.
     ///
-    /// - Parameter completion: The completion handler provided with the response serializer, called when all serializers
+    /// - Parameter completion: The completion handler provided with the response serializer, called when all
+    /// serializers
     ///                         are complete.
     func responseSerializerDidComplete(completion: @escaping () -> Void) {
         $mutableState.write { $0.responseSerializerCompletions.append(completion) }
@@ -741,7 +745,11 @@ public class Request {
     ///
     /// - Returns:       The instance.
     @discardableResult
-    public func authenticate(username: String, password: String, persistence: URLCredential.Persistence = .forSession) -> Self {
+    public func authenticate(
+        username: String,
+        password: String,
+        persistence: URLCredential.Persistence = .forSession
+    ) -> Self {
         let credential = URLCredential(user: username, password: password, persistence: persistence)
 
         return authenticate(with: credential)
@@ -884,7 +892,10 @@ public class Request {
     ///
     /// - Returns:   The instance.
     @discardableResult
-    public func onURLRequestCreation(on queue: DispatchQueue = .main, perform handler: @escaping (URLRequest) -> Void) -> Self {
+    public func onURLRequestCreation(
+        on queue: DispatchQueue = .main,
+        perform handler: @escaping (URLRequest) -> Void
+    ) -> Self {
         $mutableState.write { state in
             if let request = state.requests.last {
                 queue.async { handler(request) }
@@ -908,7 +919,10 @@ public class Request {
     ///
     /// - Returns:   The instance.
     @discardableResult
-    public func onURLSessionTaskCreation(on queue: DispatchQueue = .main, perform handler: @escaping (URLSessionTask) -> Void) -> Self {
+    public func onURLSessionTaskCreation(
+        on queue: DispatchQueue = .main,
+        perform handler: @escaping (URLSessionTask) -> Void
+    ) -> Self {
         $mutableState.write { state in
             if let task = state.tasks.last {
                 queue.async { handler(task) }
@@ -947,7 +961,7 @@ public class Request {
 // MARK: - Protocol Conformances
 
 extension Request: Equatable {
-    public static func ==(lhs: Request, rhs: Request) -> Bool {
+    public static func == (lhs: Request, rhs: Request) -> Bool {
         lhs.id == rhs.id
     }
 }
@@ -972,11 +986,11 @@ extension Request: CustomStringConvertible {
     }
 }
 
-extension Request {
+public extension Request {
     /// cURL representation of the instance.
     ///
     /// - Returns: The cURL equivalent of the instance.
-    public func cURLDescription() -> String {
+    func cURLDescription() -> String {
         guard
             let request = lastRequest,
             let url = request.url,
@@ -988,11 +1002,13 @@ extension Request {
         components.append("-X \(method)")
 
         if let credentialStorage = delegate?.sessionConfiguration.urlCredentialStorage {
-            let protectionSpace = URLProtectionSpace(host: host,
-                                                     port: url.port ?? 0,
-                                                     protocol: url.scheme,
-                                                     realm: host,
-                                                     authenticationMethod: NSURLAuthenticationMethodHTTPBasic)
+            let protectionSpace = URLProtectionSpace(
+                host: host,
+                port: url.port ?? 0,
+                protocol: url.scheme,
+                realm: host,
+                authenticationMethod: NSURLAuthenticationMethodHTTPBasic
+            )
 
             if let credentials = credentialStorage.credentials(for: protectionSpace)?.values {
                 for credential in credentials {
@@ -1009,7 +1025,8 @@ extension Request {
         if let configuration = delegate?.sessionConfiguration, configuration.httpShouldSetCookies {
             if
                 let cookieStorage = configuration.httpCookieStorage,
-                let cookies = cookieStorage.cookies(for: url), !cookies.isEmpty {
+                let cookies = cookieStorage.cookies(for: url), !cookies.isEmpty
+            {
                 let allCookies = cookies.map { "\($0.name)=\($0.value)" }.joined(separator: ";")
 
                 components.append("-b \"\(allCookies)\"")
@@ -1102,21 +1119,25 @@ public class DataRequest: Request {
     ///   - eventMonitor:       `EventMonitor` called for event callbacks from internal `Request` actions.
     ///   - interceptor:        `RequestInterceptor` used throughout the request lifecycle.
     ///   - delegate:           `RequestDelegate` that provides an interface to actions not performed by the `Request`.
-    init(id: UUID = UUID(),
-         convertible: URLRequestConvertible,
-         underlyingQueue: DispatchQueue,
-         serializationQueue: DispatchQueue,
-         eventMonitor: EventMonitor?,
-         interceptor: RequestInterceptor?,
-         delegate: RequestDelegate) {
+    init(
+        id: UUID = UUID(),
+        convertible: URLRequestConvertible,
+        underlyingQueue: DispatchQueue,
+        serializationQueue: DispatchQueue,
+        eventMonitor: EventMonitor?,
+        interceptor: RequestInterceptor?,
+        delegate: RequestDelegate
+    ) {
         self.convertible = convertible
 
-        super.init(id: id,
-                   underlyingQueue: underlyingQueue,
-                   serializationQueue: serializationQueue,
-                   eventMonitor: eventMonitor,
-                   interceptor: interceptor,
-                   delegate: delegate)
+        super.init(
+            id: id,
+            underlyingQueue: underlyingQueue,
+            serializationQueue: serializationQueue,
+            eventMonitor: eventMonitor,
+            interceptor: interceptor,
+            delegate: delegate
+        )
     }
 
     override func reset() {
@@ -1145,7 +1166,7 @@ public class DataRequest: Request {
         return session.dataTask(with: copiedRequest)
     }
 
-    /// Called to updated the `downloadProgress` of the instance.
+    /// Called to update the `downloadProgress` of the instance.
     func updateDownloadProgress() {
         let totalBytesReceived = Int64(data?.count ?? 0)
         let totalBytesExpected = task?.response?.expectedContentLength ?? NSURLSessionTransferSizeUnknown
@@ -1170,13 +1191,18 @@ public class DataRequest: Request {
 
             let result = validation(self.request, response, self.data)
 
-            if case let .failure(error) = result { self.error = error.asAFError(or: .responseValidationFailed(reason: .customValidationFailed(error: error))) }
+            if case let .failure(error) = result {
+                self.error = error
+                    .asAFError(or: .responseValidationFailed(reason: .customValidationFailed(error: error)))
+            }
 
-            self.eventMonitor?.request(self,
-                                       didValidateRequest: self.request,
-                                       response: response,
-                                       data: self.data,
-                                       withResult: result)
+            self.eventMonitor?.request(
+                self,
+                didValidateRequest: self.request,
+                response: response,
+                data: self.data,
+                withResult: result
+            )
         }
 
         $validators.write { $0.append(validator) }
@@ -1281,23 +1307,27 @@ public final class DataStreamRequest: Request {
     ///   - interceptor:                      `RequestInterceptor` used throughout the request lifecycle.
     ///   - delegate:                         `RequestDelegate` that provides an interface to actions not performed by
     ///                                       the `Request`.
-    init(id: UUID = UUID(),
-         convertible: URLRequestConvertible,
-         automaticallyCancelOnStreamError: Bool,
-         underlyingQueue: DispatchQueue,
-         serializationQueue: DispatchQueue,
-         eventMonitor: EventMonitor?,
-         interceptor: RequestInterceptor?,
-         delegate: RequestDelegate) {
+    init(
+        id: UUID = UUID(),
+        convertible: URLRequestConvertible,
+        automaticallyCancelOnStreamError: Bool,
+        underlyingQueue: DispatchQueue,
+        serializationQueue: DispatchQueue,
+        eventMonitor: EventMonitor?,
+        interceptor: RequestInterceptor?,
+        delegate: RequestDelegate
+    ) {
         self.convertible = convertible
         self.automaticallyCancelOnStreamError = automaticallyCancelOnStreamError
 
-        super.init(id: id,
-                   underlyingQueue: underlyingQueue,
-                   serializationQueue: serializationQueue,
-                   eventMonitor: eventMonitor,
-                   interceptor: interceptor,
-                   delegate: delegate)
+        super.init(
+            id: id,
+            underlyingQueue: underlyingQueue,
+            serializationQueue: serializationQueue,
+            eventMonitor: eventMonitor,
+            interceptor: interceptor,
+            delegate: delegate
+        )
     }
 
     override func task(for request: URLRequest, using session: URLSession) -> URLSessionTask {
@@ -1315,21 +1345,22 @@ public final class DataStreamRequest: Request {
 
     func didReceive(data: Data) {
         $streamMutableState.write { state in
-            #if !(os(Linux) || os(Windows))
+#if !(os(Linux) || os(Windows))
             if let stream = state.outputStream {
                 underlyingQueue.async {
                     var bytes = Array(data)
                     stream.write(&bytes, maxLength: bytes.count)
                 }
             }
-            #endif
+#endif
             state.numberOfExecutingStreams += state.streams.count
             let localState = state
             underlyingQueue.async { localState.streams.forEach { $0(data) } }
         }
     }
 
-    /// Validates the `URLRequest` and `HTTPURLResponse` received for the instance using the provided `Validation` closure.
+    /// Validates the `URLRequest` and `HTTPURLResponse` received for the instance using the provided `Validation`
+    /// closure.
     ///
     /// - Parameter validation: `Validation` closure used to validate the request and response.
     ///
@@ -1342,13 +1373,16 @@ public final class DataStreamRequest: Request {
             let result = validation(self.request, response)
 
             if case let .failure(error) = result {
-                self.error = error.asAFError(or: .responseValidationFailed(reason: .customValidationFailed(error: error)))
+                self.error = error
+                    .asAFError(or: .responseValidationFailed(reason: .customValidationFailed(error: error)))
             }
 
-            self.eventMonitor?.request(self,
-                                       didValidateRequest: self.request,
-                                       response: response,
-                                       withResult: result)
+            self.eventMonitor?.request(
+                self,
+                didValidateRequest: self.request,
+                response: response,
+                withResult: result
+            )
         }
 
         $validators.write { $0.append(validator) }
@@ -1356,7 +1390,7 @@ public final class DataStreamRequest: Request {
         return self
     }
 
-    #if !(os(Linux) || os(Windows))
+#if !(os(Linux) || os(Windows))
     /// Produces an `InputStream` that receives the `Data` received by the instance.
     ///
     /// - Note: The `InputStream` produced by this method must have `open()` called before being able to read `Data`.
@@ -1371,27 +1405,32 @@ public final class DataStreamRequest: Request {
 
         var inputStream: InputStream?
         $streamMutableState.write { state in
-            Foundation.Stream.getBoundStreams(withBufferSize: bufferSize,
-                                              inputStream: &inputStream,
-                                              outputStream: &state.outputStream)
+            Foundation.Stream.getBoundStreams(
+                withBufferSize: bufferSize,
+                inputStream: &inputStream,
+                outputStream: &state.outputStream
+            )
             state.outputStream?.open()
         }
 
         return inputStream
     }
-    #endif
+#endif
 
     func capturingError(from closure: () throws -> Void) {
         do {
             try closure()
         } catch {
-            self.error = error.asAFError(or: .responseSerializationFailed(reason: .customSerializationFailed(error: error)))
+            self.error = error
+                .asAFError(or: .responseSerializationFailed(reason: .customSerializationFailed(error: error)))
             cancel()
         }
     }
 
-    func appendStreamCompletion<Success, Failure>(on queue: DispatchQueue,
-                                                  stream: @escaping Handler<Success, Failure>) {
+    func appendStreamCompletion<Success, Failure>(
+        on queue: DispatchQueue,
+        stream: @escaping Handler<Success, Failure>
+    ) {
         appendResponseSerializer {
             self.underlyingQueue.async {
                 self.responseSerializerDidComplete {
@@ -1411,14 +1450,18 @@ public final class DataStreamRequest: Request {
         }
     }
 
-    func enqueueCompletion<Success, Failure>(on queue: DispatchQueue,
-                                             stream: @escaping Handler<Success, Failure>) {
+    func enqueueCompletion<Success, Failure>(
+        on queue: DispatchQueue,
+        stream: @escaping Handler<Success, Failure>
+    ) {
         queue.async {
             do {
-                let completion = Completion(request: self.request,
-                                            response: self.response,
-                                            metrics: self.metrics,
-                                            error: self.error)
+                let completion = Completion(
+                    request: self.request,
+                    response: self.response,
+                    metrics: self.metrics,
+                    error: self.error
+                )
                 try stream(.init(event: .complete(completion), token: .init(self)))
             } catch {
                 // Ignore error, as errors on Completion can't be handled anyway.
@@ -1427,30 +1470,30 @@ public final class DataStreamRequest: Request {
     }
 }
 
-extension DataStreamRequest.Stream {
+public extension DataStreamRequest.Stream {
     /// Incoming `Result` values from `Event.stream`.
-    public var result: Result<Success, Failure>? {
+    var result: Result<Success, Failure>? {
         guard case let .stream(result) = event else { return nil }
 
         return result
     }
 
     /// `Success` value of the instance, if any.
-    public var value: Success? {
+    var value: Success? {
         guard case let .success(value) = result else { return nil }
 
         return value
     }
 
     /// `Failure` value of the instance, if any.
-    public var error: Failure? {
+    var error: Failure? {
         guard case let .failure(error) = result else { return nil }
 
         return error
     }
 
     /// `Completion` value of the instance, if any.
-    public var completion: DataStreamRequest.Completion? {
+    var completion: DataStreamRequest.Completion? {
         guard case let .complete(completion) = event else { return nil }
 
         return completion
@@ -1485,8 +1528,10 @@ public class DownloadRequest: Request {
     ///
     /// - Note: Downloads from a local `file://` `URL`s do not use the `Destination` closure, as those downloads do not
     ///         return an `HTTPURLResponse`. Instead the file is merely moved within the temporary directory.
-    public typealias Destination = (_ temporaryURL: URL,
-                                    _ response: HTTPURLResponse) -> (destinationURL: URL, options: Options)
+    public typealias Destination = (
+        _ temporaryURL: URL,
+        _ response: HTTPURLResponse
+    ) -> (destinationURL: URL, options: Options)
 
     /// Creates a download file destination closure which uses the default file manager to move the temporary file to a
     /// file URL in the first available directory with the specified search path directory and search path domain mask.
@@ -1497,9 +1542,11 @@ public class DownloadRequest: Request {
     ///   - options:   `DownloadRequest.Options` used when moving the downloaded file to its destination. None by
     ///                default.
     /// - Returns: The `Destination` closure.
-    public class func suggestedDownloadDestination(for directory: FileManager.SearchPathDirectory = .documentDirectory,
-                                                   in domain: FileManager.SearchPathDomainMask = .userDomainMask,
-                                                   options: Options = []) -> Destination {
+    public class func suggestedDownloadDestination(
+        for directory: FileManager.SearchPathDirectory = .documentDirectory,
+        in domain: FileManager.SearchPathDomainMask = .userDomainMask,
+        options: Options = []
+    ) -> Destination {
         { temporaryURL, response in
             let directoryURLs = FileManager.default.urls(for: directory, in: domain)
             let url = directoryURLs.first?.appendingPathComponent(response.suggestedFilename!) ?? temporaryURL
@@ -1552,13 +1599,14 @@ public class DownloadRequest: Request {
     /// If the download is resumable and is eventually cancelled or fails, this value may be used to resume the download
     /// using the `download(resumingWith data:)` API.
     ///
-    /// - Note: For more information about `resumeData`, see [Apple's documentation](https://developer.apple.com/documentation/foundation/urlsessiondownloadtask/1411634-cancel).
+    /// - Note: For more information about `resumeData`, see [Apple's
+    /// documentation](https://developer.apple.com/documentation/foundation/urlsessiondownloadtask/1411634-cancel).
     public var resumeData: Data? {
-        #if !(os(Linux) || os(Windows))
+#if !(os(Linux) || os(Windows))
         return $mutableDownloadState.resumeData ?? error?.downloadResumeData
-        #else
+#else
         return $mutableDownloadState.resumeData
-        #endif
+#endif
     }
 
     /// If the download is successful, the `URL` where the file was downloaded.
@@ -1583,23 +1631,27 @@ public class DownloadRequest: Request {
     ///   - interceptor:        `RequestInterceptor` used throughout the request lifecycle.
     ///   - delegate:           `RequestDelegate` that provides an interface to actions not performed by the `Request`
     ///   - destination:        `Destination` closure used to move the downloaded file to its final location.
-    init(id: UUID = UUID(),
-         downloadable: Downloadable,
-         underlyingQueue: DispatchQueue,
-         serializationQueue: DispatchQueue,
-         eventMonitor: EventMonitor?,
-         interceptor: RequestInterceptor?,
-         delegate: RequestDelegate,
-         destination: @escaping Destination) {
+    init(
+        id: UUID = UUID(),
+        downloadable: Downloadable,
+        underlyingQueue: DispatchQueue,
+        serializationQueue: DispatchQueue,
+        eventMonitor: EventMonitor?,
+        interceptor: RequestInterceptor?,
+        delegate: RequestDelegate,
+        destination: @escaping Destination
+    ) {
         self.downloadable = downloadable
         self.destination = destination
 
-        super.init(id: id,
-                   underlyingQueue: underlyingQueue,
-                   serializationQueue: serializationQueue,
-                   eventMonitor: eventMonitor,
-                   interceptor: interceptor,
-                   delegate: delegate)
+        super.init(
+            id: id,
+            underlyingQueue: underlyingQueue,
+            serializationQueue: serializationQueue,
+            eventMonitor: eventMonitor,
+            interceptor: interceptor,
+            delegate: delegate
+        )
     }
 
     override func reset() {
@@ -1744,14 +1796,17 @@ public class DownloadRequest: Request {
             let result = validation(self.request, response, self.fileURL)
 
             if case let .failure(error) = result {
-                self.error = error.asAFError(or: .responseValidationFailed(reason: .customValidationFailed(error: error)))
+                self.error = error
+                    .asAFError(or: .responseValidationFailed(reason: .customValidationFailed(error: error)))
             }
 
-            self.eventMonitor?.request(self,
-                                       didValidateRequest: self.request,
-                                       response: response,
-                                       fileURL: self.fileURL,
-                                       withResult: result)
+            self.eventMonitor?.request(
+                self,
+                didValidateRequest: self.request,
+                response: response,
+                fileURL: self.fileURL,
+                withResult: result
+            )
         }
 
         $validators.write { $0.append(validator) }
@@ -1802,24 +1857,28 @@ public class UploadRequest: DataRequest {
     ///   - fileManager:        `FileManager` used to perform cleanup tasks, including the removal of multipart form
     ///                         encoded payloads written to disk.
     ///   - delegate:           `RequestDelegate` that provides an interface to actions not performed by the `Request`.
-    init(id: UUID = UUID(),
-         convertible: UploadConvertible,
-         underlyingQueue: DispatchQueue,
-         serializationQueue: DispatchQueue,
-         eventMonitor: EventMonitor?,
-         interceptor: RequestInterceptor?,
-         fileManager: FileManager,
-         delegate: RequestDelegate) {
-        upload = convertible
+    init(
+        id: UUID = UUID(),
+        convertible: UploadConvertible,
+        underlyingQueue: DispatchQueue,
+        serializationQueue: DispatchQueue,
+        eventMonitor: EventMonitor?,
+        interceptor: RequestInterceptor?,
+        fileManager: FileManager,
+        delegate: RequestDelegate
+    ) {
+        self.upload = convertible
         self.fileManager = fileManager
 
-        super.init(id: id,
-                   convertible: convertible,
-                   underlyingQueue: underlyingQueue,
-                   serializationQueue: serializationQueue,
-                   eventMonitor: eventMonitor,
-                   interceptor: interceptor,
-                   delegate: delegate)
+        super.init(
+            id: id,
+            convertible: convertible,
+            underlyingQueue: underlyingQueue,
+            serializationQueue: serializationQueue,
+            eventMonitor: eventMonitor,
+            interceptor: interceptor,
+            delegate: delegate
+        )
     }
 
     /// Called when the `Uploadable` value has been created from the `UploadConvertible`.

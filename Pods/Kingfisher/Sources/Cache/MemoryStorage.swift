@@ -30,7 +30,6 @@ import Foundation
 /// This is a namespace for the memory storage types. A `Backend` with a certain `Config` will be used to describe the
 /// storage. See these composed types for more information.
 public enum MemoryStorage {
-
     /// Represents a storage which stores a certain type of value in memory. It provides fast access,
     /// but limited storing size. The stored value type needs to conform to `CacheCostCalculable`,
     /// and its `cacheCost` will be used to determine the cost of size for the cache item.
@@ -52,7 +51,7 @@ public enum MemoryStorage {
         // See https://github.com/onevcat/Kingfisher/issues/1233
         var keys = Set<String>()
 
-        private var cleanTimer: Timer? = nil
+        private var cleanTimer: Timer?
         private let lock = NSLock()
 
         /// The config used in this storage. It is a value you can set and
@@ -73,7 +72,7 @@ public enum MemoryStorage {
             storage.totalCostLimit = config.totalCostLimit
             storage.countLimit = config.countLimit
 
-            cleanTimer = .scheduledTimer(withTimeInterval: config.cleanInterval, repeats: true) { [weak self] _ in
+            self.cleanTimer = .scheduledTimer(withTimeInterval: config.cleanInterval, repeats: true) { [weak self] _ in
                 guard let self = self else { return }
                 self.removeExpired()
             }
@@ -92,7 +91,7 @@ public enum MemoryStorage {
                     keys.remove(key)
                     continue
                 }
-                if object.estimatedExpiration.isPast {
+                if object.isExpired {
                     storage.removeObject(forKey: nsKey)
                     keys.remove(key)
                 }
@@ -125,17 +124,17 @@ public enum MemoryStorage {
             let expiration = expiration ?? config.expiration
             // The expiration indicates that already expired, no need to store.
             guard !expiration.isExpired else { return }
-            
+
             let object: StorageObject<T>
             if config.keepWhenEnteringBackground {
-                object = BackgroundKeepingStorageObject(value, key: key, expiration: expiration)
+                object = BackgroundKeepingStorageObject(value, expiration: expiration)
             } else {
-                object = StorageObject(value, key: key, expiration: expiration)
+                object = StorageObject(value, expiration: expiration)
             }
             storage.setObject(object, forKey: key as NSString, cost: value.cacheCost)
             keys.insert(key)
         }
-        
+
         /// Gets a value from the storage.
         ///
         /// - Parameters:
@@ -146,7 +145,7 @@ public enum MemoryStorage {
             guard let object = storage.object(forKey: key as NSString) else {
                 return nil
             }
-            if object.expired {
+            if object.isExpired {
                 return nil
             }
             object.extendExpiration(extendingExpiration)
@@ -182,10 +181,9 @@ public enum MemoryStorage {
     }
 }
 
-extension MemoryStorage {
+public extension MemoryStorage {
     /// Represents the config used in a `MemoryStorage`.
-    public struct Config {
-
+    struct Config {
         /// Total cost limit of the storage in bytes.
         public var totalCostLimit: Int
 
@@ -198,7 +196,7 @@ extension MemoryStorage {
 
         /// The time interval between the storage do clean work for swiping expired items.
         public var cleanInterval: TimeInterval
-        
+
         /// Whether the newly added items to memory cache should be purged when the app goes to background.
         ///
         /// By default, the cached items in memory will be purged as soon as the app goes to background to ensure
@@ -227,7 +225,6 @@ extension MemoryStorage {
 }
 
 extension MemoryStorage {
-    
     class BackgroundKeepingStorageObject<T>: StorageObject<T>, NSDiscardableContent {
         var accessing = true
         func beginContentAccess() -> Bool {
@@ -238,32 +235,30 @@ extension MemoryStorage {
             }
             return accessing
         }
-        
+
         func endContentAccess() {
             accessing = false
         }
-        
+
         func discardContentIfPossible() {
             value = nil
         }
-        
+
         func isContentDiscarded() -> Bool {
             return value == nil
         }
     }
-    
+
     class StorageObject<T> {
         var value: T?
         let expiration: StorageExpiration
-        let key: String
-        
+
         private(set) var estimatedExpiration: Date
-        
-        init(_ value: T, key: String, expiration: StorageExpiration) {
+
+        init(_ value: T, expiration: StorageExpiration) {
             self.value = value
-            self.key = key
             self.expiration = expiration
-            
+
             self.estimatedExpiration = expiration.estimatedExpirationSinceNow
         }
 
@@ -272,13 +267,13 @@ extension MemoryStorage {
             case .none:
                 return
             case .cacheTime:
-                self.estimatedExpiration = expiration.estimatedExpirationSinceNow
-            case .expirationTime(let expirationTime):
-                self.estimatedExpiration = expirationTime.estimatedExpirationSinceNow
+                estimatedExpiration = expiration.estimatedExpirationSinceNow
+            case let .expirationTime(expirationTime):
+                estimatedExpiration = expirationTime.estimatedExpirationSinceNow
             }
         }
-        
-        var expired: Bool {
+
+        var isExpired: Bool {
             return estimatedExpiration.isPast
         }
     }

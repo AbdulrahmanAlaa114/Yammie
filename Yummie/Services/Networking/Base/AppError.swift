@@ -16,14 +16,13 @@ enum AppError: LocalizedError {
 
     var errorDescription: String? {
         switch self {
-            
         case .errorDecoding:
             return "Response could not be decoded"
         case .unknownError:
             return "Bruhhh!!! I have no idea what go on"
         case .invalidUrl:
             return "HEYYY!!! Give me a valid URL"
-        case .serverError(let error):
+        case let .serverError(error):
             return error
 //        case .statusCode:
 //            return "Status Code Not Found"

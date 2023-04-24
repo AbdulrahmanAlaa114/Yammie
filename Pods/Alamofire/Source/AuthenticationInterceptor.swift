@@ -81,7 +81,11 @@ public protocol Authenticator: AnyObject {
     ///   - credential: The `Credential` to refresh.
     ///   - session:    The `Session` requiring the refresh.
     ///   - completion: The closure to be executed once the refresh is complete.
-    func refresh(_ credential: Credential, for session: Session, completion: @escaping (Result<Credential, Error>) -> Void)
+    func refresh(
+        _ credential: Credential,
+        for session: Session,
+        completion: @escaping (Result<Credential, Error>) -> Void
+    )
 
     /// Determines whether the `URLRequest` failed due to an authentication error based on the `HTTPURLResponse`.
     ///
@@ -97,7 +101,8 @@ public protocol Authenticator: AnyObject {
     /// For example, if your authentication server returns a 401 when an OAuth2 error occurs, and your downstream
     /// service also returns a 401 when you are not authorized to perform that operation, how do you know which layer
     /// of the backend returned you a 401? You do not want to trigger a refresh unless you know your authentication
-    /// server is actually the layer rejecting the request. Again, work with your authentication server team to understand
+    /// server is actually the layer rejecting the request. Again, work with your authentication server team to
+    /// understand
     /// how to identify an OAuth2 401 error vs. a downstream 401 error to avoid endless refresh loops.
     ///
     /// - Parameters:
@@ -106,7 +111,11 @@ public protocol Authenticator: AnyObject {
     ///   - error:      The `Error`.
     ///
     /// - Returns: `true` if the `URLRequest` failed due to an authentication error, `false` otherwise.
-    func didRequest(_ urlRequest: URLRequest, with response: HTTPURLResponse, failDueToAuthenticationError error: Error) -> Bool
+    func didRequest(
+        _ urlRequest: URLRequest,
+        with response: HTTPURLResponse,
+        failDueToAuthenticationError error: Error
+    ) -> Bool
 
     /// Determines whether the `URLRequest` is authenticated with the `Credential`.
     ///
@@ -238,16 +247,22 @@ public class AuthenticationInterceptor<AuthenticatorType>: RequestInterceptor wh
     ///   - authenticator: The `Authenticator` type.
     ///   - credential:    The `Credential` if it exists. `nil` by default.
     ///   - refreshWindow: The `RefreshWindow` used to identify excessive refresh calls. `RefreshWindow()` by default.
-    public init(authenticator: AuthenticatorType,
-                credential: Credential? = nil,
-                refreshWindow: RefreshWindow? = RefreshWindow()) {
+    public init(
+        authenticator: AuthenticatorType,
+        credential: Credential? = nil,
+        refreshWindow: RefreshWindow? = RefreshWindow()
+    ) {
         self.authenticator = authenticator
-        mutableState = MutableState(credential: credential, refreshWindow: refreshWindow)
+        self.mutableState = MutableState(credential: credential, refreshWindow: refreshWindow)
     }
 
     // MARK: Adapt
 
-    public func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
+    public func adapt(
+        _ urlRequest: URLRequest,
+        for session: Session,
+        completion: @escaping (Result<URLRequest, Error>) -> Void
+    ) {
         let adaptResult: AdaptResult = $mutableState.write { mutableState in
             // Queue the adapt operation if a refresh is already in place.
             guard !mutableState.isRefreshing else {
@@ -290,14 +305,20 @@ public class AuthenticationInterceptor<AuthenticatorType>: RequestInterceptor wh
 
     // MARK: Retry
 
-    public func retry(_ request: Request, for session: Session, dueTo error: Error, completion: @escaping (RetryResult) -> Void) {
+    public func retry(
+        _ request: Request,
+        for session: Session,
+        dueTo error: Error,
+        completion: @escaping (RetryResult) -> Void
+    ) {
         // Do not attempt retry if there was not an original request and response from the server.
         guard let urlRequest = request.request, let response = request.response else {
             completion(.doNotRetry)
             return
         }
 
-        // Do not attempt retry unless the `Authenticator` verifies failure was due to authentication error (i.e. 401 status code).
+        // Do not attempt retry unless the `Authenticator` verifies failure was due to authentication error (i.e. 401
+        // status code).
         guard authenticator.didRequest(urlRequest, with: response, failDueToAuthenticationError: error) else {
             completion(.doNotRetry)
             return

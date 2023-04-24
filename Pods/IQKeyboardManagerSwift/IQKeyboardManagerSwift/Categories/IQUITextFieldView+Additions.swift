@@ -25,18 +25,17 @@
 import UIKit
 
 /**
-Uses default keyboard distance for textField.
-*/
+ Uses default keyboard distance for textField.
+ */
 @available(iOSApplicationExtension, unavailable)
 public let kIQUseDefaultKeyboardDistance = CGFloat.greatestFiniteMagnitude
 
 /**
-UIView category for managing UITextField/UITextView
-*/
+ UIView category for managing UITextField/UITextView
+ */
 @available(iOSApplicationExtension, unavailable)
 @objc public extension UIView {
-
-    private struct AssociatedKeys {
+    private enum AssociatedKeys {
         static var keyboardDistanceFromTextField = "keyboardDistanceFromTextField"
         static var ignoreSwitchingByNextPrevious = "ignoreSwitchingByNextPrevious"
         static var enableMode = "enableMode"
@@ -48,10 +47,16 @@ UIView category for managing UITextField/UITextView
      */
     var keyboardDistanceFromTextField: CGFloat {
         get {
-            return objc_getAssociatedObject(self, &AssociatedKeys.keyboardDistanceFromTextField) as? CGFloat ?? kIQUseDefaultKeyboardDistance
+            return objc_getAssociatedObject(self, &AssociatedKeys.keyboardDistanceFromTextField) as? CGFloat ??
+                kIQUseDefaultKeyboardDistance
         }
         set(newValue) {
-            objc_setAssociatedObject(self, &AssociatedKeys.keyboardDistanceFromTextField, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(
+                self,
+                &AssociatedKeys.keyboardDistanceFromTextField,
+                newValue,
+                .OBJC_ASSOCIATION_RETAIN_NONATOMIC
+            )
         }
     }
 
@@ -63,7 +68,12 @@ UIView category for managing UITextField/UITextView
             return objc_getAssociatedObject(self, &AssociatedKeys.ignoreSwitchingByNextPrevious) as? Bool ?? false
         }
         set(newValue) {
-            objc_setAssociatedObject(self, &AssociatedKeys.ignoreSwitchingByNextPrevious, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(
+                self,
+                &AssociatedKeys.ignoreSwitchingByNextPrevious,
+                newValue,
+                .OBJC_ASSOCIATION_RETAIN_NONATOMIC
+            )
         }
     }
 
@@ -84,10 +94,16 @@ UIView category for managing UITextField/UITextView
      */
     var shouldResignOnTouchOutsideMode: IQEnableMode {
         get {
-            return objc_getAssociatedObject(self, &AssociatedKeys.shouldResignOnTouchOutsideMode) as? IQEnableMode ?? .default
+            return objc_getAssociatedObject(self, &AssociatedKeys.shouldResignOnTouchOutsideMode) as? IQEnableMode ??
+                .default
         }
         set(newValue) {
-            objc_setAssociatedObject(self, &AssociatedKeys.shouldResignOnTouchOutsideMode, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(
+                self,
+                &AssociatedKeys.shouldResignOnTouchOutsideMode,
+                newValue,
+                .OBJC_ASSOCIATION_RETAIN_NONATOMIC
+            )
         }
     }
 }

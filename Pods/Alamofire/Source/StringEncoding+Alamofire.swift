@@ -27,7 +27,8 @@ import Foundation
 extension String.Encoding {
     /// Creates an encoding from the IANA charset name.
     ///
-    /// - Notes: These mappings match those [provided by CoreFoundation](https://opensource.apple.com/source/CF/CF-476.18/CFStringUtilities.c.auto.html)
+    /// - Notes: These mappings match those [provided by
+    /// CoreFoundation](https://opensource.apple.com/source/CF/CF-476.18/CFStringUtilities.c.auto.html)
     ///
     /// - Parameter name: IANA charset name.
     init?(ianaCharsetName name: String) {

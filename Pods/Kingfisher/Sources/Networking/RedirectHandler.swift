@@ -28,7 +28,6 @@ import Foundation
 
 /// Represents and wraps a method for modifying request during an image download request redirection.
 public protocol ImageDownloadRedirectHandler {
-
     /// The `ImageDownloadRedirectHandler` contained will be used to change the request before redirection.
     /// This is the posibility you can modify the image download request during redirection. You can modify the
     /// request for some customizing purpose, such as adding auth token to the header, do basic HTTP auth or
@@ -54,7 +53,6 @@ public protocol ImageDownloadRedirectHandler {
 /// A wrapper for creating an `ImageDownloadRedirectHandler` easier.
 /// This type conforms to `ImageDownloadRedirectHandler` and wraps a redirect request modify block.
 public struct AnyRedirectHandler: ImageDownloadRedirectHandler {
-    
     let block: (SessionDataTask, HTTPURLResponse, URLRequest, @escaping (URLRequest?) -> Void) -> Void
 
     public func handleHTTPRedirection(
@@ -65,12 +63,15 @@ public struct AnyRedirectHandler: ImageDownloadRedirectHandler {
     {
         block(task, response, newRequest, completionHandler)
     }
-    
+
     /// Creates a value of `ImageDownloadRedirectHandler` which runs `modify` block.
     ///
     /// - Parameter modify: The request modifying block runs when a request modifying task comes.
     ///
-    public init(handle: @escaping (SessionDataTask, HTTPURLResponse, URLRequest, @escaping (URLRequest?) -> Void) -> Void) {
-        block = handle
+    public init(
+        handle: @escaping (SessionDataTask, HTTPURLResponse, URLRequest, @escaping (URLRequest?) -> Void)
+            -> Void)
+    {
+        self.block = handle
     }
 }

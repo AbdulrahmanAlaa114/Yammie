@@ -94,7 +94,7 @@ open class MultipartFormData {
     // MARK: - Properties
 
     /// Default memory threshold used when encoding `MultipartFormData`, in bytes.
-    public static let encodingMemoryThreshold: UInt64 = 10_000_000
+    public static let encodingMemoryThreshold: UInt64 = 10000000
 
     /// The `Content-Type` header value containing the boundary used to generate the `multipart/form-data`.
     open lazy var contentType: String = "multipart/form-data; boundary=\(self.boundary)"
@@ -121,14 +121,14 @@ open class MultipartFormData {
     public init(fileManager: FileManager = .default, boundary: String? = nil) {
         self.fileManager = fileManager
         self.boundary = boundary ?? BoundaryGenerator.randomBoundary()
-        bodyParts = []
+        self.bodyParts = []
 
         //
         // The optimal read/write buffer size in bytes for input and output streams is 1024 (1KB). For more
         // information, please refer to the following article:
         //   - https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/Streams/Articles/ReadingInputStreams.html
         //
-        streamBufferSize = 1024
+        self.streamBufferSize = 1024
     }
 
     // MARK: - Body Parts
@@ -175,7 +175,7 @@ open class MultipartFormData {
         let fileName = fileURL.lastPathComponent
         let pathExtension = fileURL.pathExtension
 
-        if !fileName.isEmpty && !pathExtension.isEmpty {
+        if !fileName.isEmpty, !pathExtension.isEmpty {
             let mime = mimeType(forPathExtension: pathExtension)
             append(fileURL, withName: name, fileName: fileName, mimeType: mime)
         } else {
@@ -213,7 +213,7 @@ open class MultipartFormData {
         //              Check 2 - is file URL reachable?
         //============================================================
 
-        #if !(os(Linux) || os(Windows))
+#if !(os(Linux) || os(Windows))
         do {
             let isReachable = try fileURL.checkPromisedItemIsReachable()
             guard isReachable else {
@@ -224,7 +224,7 @@ open class MultipartFormData {
             setBodyPartError(withReason: .bodyPartFileNotReachableWithError(atURL: fileURL, error: error))
             return
         }
-        #endif
+#endif
 
         //============================================================
         //            Check 3 - is file URL a directory?
@@ -233,7 +233,7 @@ open class MultipartFormData {
         var isDirectory: ObjCBool = false
         let path = fileURL.path
 
-        guard fileManager.fileExists(atPath: path, isDirectory: &isDirectory) && !isDirectory.boolValue else {
+        guard fileManager.fileExists(atPath: path, isDirectory: &isDirectory), !isDirectory.boolValue else {
             setBodyPartError(withReason: .bodyPartFileIsDirectory(at: fileURL))
             return
         }
@@ -283,11 +283,13 @@ open class MultipartFormData {
     ///   - name:     Name to associate with the stream content in the `Content-Disposition` HTTP header.
     ///   - fileName: Filename to associate with the stream content in the `Content-Disposition` HTTP header.
     ///   - mimeType: MIME type to associate with the stream content in the `Content-Type` HTTP header.
-    public func append(_ stream: InputStream,
-                       withLength length: UInt64,
-                       name: String,
-                       fileName: String,
-                       mimeType: String) {
+    public func append(
+        _ stream: InputStream,
+        withLength length: UInt64,
+        name: String,
+        fileName: String,
+        mimeType: String
+    ) {
         let headers = contentHeaders(withName: name, fileName: fileName, mimeType: mimeType)
         append(stream, withLength: length, headers: headers)
     }
@@ -422,8 +424,10 @@ open class MultipartFormData {
         }
 
         guard UInt64(encoded.count) == bodyPart.bodyContentLength else {
-            let error = AFError.UnexpectedInputStreamLength(bytesExpected: bodyPart.bodyContentLength,
-                                                            bytesRead: UInt64(encoded.count))
+            let error = AFError.UnexpectedInputStreamLength(
+                bytesExpected: bodyPart.bodyContentLength,
+                bytesRead: UInt64(encoded.count)
+            )
             throw AFError.multipartEncodingFailed(reason: .inputStreamReadFailed(error: error))
         }
 
@@ -510,7 +514,11 @@ open class MultipartFormData {
 
     // MARK: - Private - Content Headers
 
-    private func contentHeaders(withName name: String, fileName: String? = nil, mimeType: String? = nil) -> HTTPHeaders {
+    private func contentHeaders(
+        withName name: String,
+        fileName: String? = nil,
+        mimeType: String? = nil
+    ) -> HTTPHeaders {
         var disposition = "form-data; name=\"\(name)\""
         if let fileName = fileName { disposition += "; filename=\"\(fileName)\"" }
 
@@ -553,8 +561,13 @@ extension MultipartFormData {
             return UTType(filenameExtension: pathExtension)?.preferredMIMEType ?? "application/octet-stream"
         } else {
             if
-                let id = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, pathExtension as CFString, nil)?.takeRetainedValue(),
-                let contentType = UTTypeCopyPreferredTagWithClass(id, kUTTagClassMIMEType)?.takeRetainedValue() {
+                let id = UTTypeCreatePreferredIdentifierForTag(
+                    kUTTagClassFilenameExtension,
+                    pathExtension as CFString,
+                    nil
+                )?.takeRetainedValue(),
+                let contentType = UTTypeCopyPreferredTagWithClass(id, kUTTagClassMIMEType)?.takeRetainedValue()
+            {
                 return contentType as String
             }
 
@@ -569,13 +582,18 @@ extension MultipartFormData {
     // MARK: - Private - Mime Type
 
     private func mimeType(forPathExtension pathExtension: String) -> String {
-        #if !(os(Linux) || os(Windows))
+#if !(os(Linux) || os(Windows))
         if
-            let id = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, pathExtension as CFString, nil)?.takeRetainedValue(),
-            let contentType = UTTypeCopyPreferredTagWithClass(id, kUTTagClassMIMEType)?.takeRetainedValue() {
+            let id = UTTypeCreatePreferredIdentifierForTag(
+                kUTTagClassFilenameExtension,
+                pathExtension as CFString,
+                nil
+            )?.takeRetainedValue(),
+            let contentType = UTTypeCopyPreferredTagWithClass(id, kUTTagClassMIMEType)?.takeRetainedValue()
+        {
             return contentType as String
         }
-        #endif
+#endif
 
         return "application/octet-stream"
     }

@@ -6,50 +6,44 @@
 //
 
 import Foundation
-import RxSwift
 import RxRelay
+import RxSwift
 
 class ListOrdersViewModel: BaseViewModel {
-    
     private var ordersPublish = PublishSubject<[Order]>()
-    var orders: Observable<[Order]> { return ordersPublish }
+    var orders: Observable<[Order]> { ordersPublish }
     var title = "Orders"
     var coordinator: ListOrdersCoordinator?
     let api: FoodAPIProtocol
-   
+
     init(api: FoodAPIProtocol = FoodAPI()) {
         self.api = api
     }
-    
+
     func getData() {
-        
         if Reachability()?.connection != Reachability.Connection.none {
-            
             loadingBehavior.accept(true)
-            api.fetchOrders { [weak self] (result) in
-                guard let self = self else {return}
+            api.fetchOrders { [weak self] result in
+                guard let self = self else { return }
                 switch result {
-                case .success(let response):
-                    
+                case let .success(response):
+
                     self.ordersPublish.onNext(response?.data ?? [])
                     self.loadingBehavior.accept(false)
-                case .failure(let error):
+                case let .failure(error):
                     self.loadingBehavior.accept(false)
                     self.creatAlert(alertTitle: "Error", alertMessage: error.localizedDescription)
-                    
                 }
             }
         }
-        
     }
-    
+
     func selected(dish: Dish) {
         coordinator?.goToDishDetail(dish: dish)
     }
-    
+
     deinit {
         coordinator?.removeFromParant()
         print("deinit ListDishesViewModel")
     }
-    
 }

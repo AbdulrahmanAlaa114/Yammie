@@ -146,9 +146,11 @@ public struct URLEncoding: ParameterEncoding {
     ///                    default.
     ///   - arrayEncoding: `ArrayEncoding` to use. `.brackets` by default.
     ///   - boolEncoding:  `BoolEncoding` to use. `.numeric` by default.
-    public init(destination: Destination = .methodDependent,
-                arrayEncoding: ArrayEncoding = .brackets,
-                boolEncoding: BoolEncoding = .numeric) {
+    public init(
+        destination: Destination = .methodDependent,
+        arrayEncoding: ArrayEncoding = .brackets,
+        boolEncoding: BoolEncoding = .numeric
+    ) {
         self.destination = destination
         self.arrayEncoding = arrayEncoding
         self.boolEncoding = boolEncoding
@@ -239,6 +241,10 @@ public struct URLEncoding: ParameterEncoding {
 /// Uses `JSONSerialization` to create a JSON representation of the parameters object, which is set as the body of the
 /// request. The `Content-Type` HTTP header field of an encoded request is set to `application/json`.
 public struct JSONEncoding: ParameterEncoding {
+    public enum Error: Swift.Error {
+        case invalidJSONObject
+    }
+
     // MARK: Properties
 
     /// Returns a `JSONEncoding` instance with default writing options.
@@ -266,6 +272,10 @@ public struct JSONEncoding: ParameterEncoding {
 
         guard let parameters = parameters else { return urlRequest }
 
+        guard JSONSerialization.isValidJSONObject(parameters) else {
+            throw AFError.parameterEncodingFailed(reason: .jsonEncodingFailed(error: Error.invalidJSONObject))
+        }
+
         do {
             let data = try JSONSerialization.data(withJSONObject: parameters, options: options)
 
@@ -289,10 +299,17 @@ public struct JSONEncoding: ParameterEncoding {
     ///
     /// - Returns:      The encoded `URLRequest`.
     /// - Throws:       Any `Error` produced during encoding.
-    public func encode(_ urlRequest: URLRequestConvertible, withJSONObject jsonObject: Any? = nil) throws -> URLRequest {
+    public func encode(
+        _ urlRequest: URLRequestConvertible,
+        withJSONObject jsonObject: Any? = nil
+    ) throws -> URLRequest {
         var urlRequest = try urlRequest.asURLRequest()
 
         guard let jsonObject = jsonObject else { return urlRequest }
+
+        guard JSONSerialization.isValidJSONObject(jsonObject) else {
+            throw AFError.parameterEncodingFailed(reason: .jsonEncodingFailed(error: Error.invalidJSONObject))
+        }
 
         do {
             let data = try JSONSerialization.data(withJSONObject: jsonObject, options: options)
@@ -310,12 +327,22 @@ public struct JSONEncoding: ParameterEncoding {
     }
 }
 
+public extension JSONEncoding.Error {
+    var localizedDescription: String {
+        """
+        Invalid JSON object provided for parameter or object encoding. \
+        This is most likely due to a value which can't be represented in Objective-C.
+        """
+    }
+}
+
 // MARK: -
 
-extension NSNumber {
-    fileprivate var isBool: Bool {
+private extension NSNumber {
+    var isBool: Bool {
         // Use Obj-C type encoding to check whether the underlying type is a `Bool`, as it's guaranteed as part of
-        // swift-corelibs-foundation, per [this discussion on the Swift forums](https://forums.swift.org/t/alamofire-on-linux-possible-but-not-release-ready/34553/22).
+        // swift-corelibs-foundation, per [this discussion on the Swift
+        // forums](https://forums.swift.org/t/alamofire-on-linux-possible-but-not-release-ready/34553/22).
         String(cString: objCType) == "c"
     }
 }

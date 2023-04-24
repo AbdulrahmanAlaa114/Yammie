@@ -13,13 +13,14 @@ import Foundation
 
 import RxSwift
 #if os(iOS)
-    import UIKit
+import UIKit
 #endif
 
 /// RxCocoa errors.
-public enum RxCocoaError
-    : Swift.Error
-    , CustomDebugStringConvertible {
+public enum RxCocoaError:
+    Swift.Error,
+    CustomDebugStringConvertible
+{
     /// Unknown error has occurred.
     case unknown
     /// Invalid operation was attempted.
@@ -36,12 +37,11 @@ public enum RxCocoaError
     case castingError(object: Any, targetType: Any.Type)
 }
 
-
 // MARK: Debug descriptions
 
-extension RxCocoaError {
+public extension RxCocoaError {
     /// A textual representation of `self`, suitable for debugging.
-    public var debugDescription: String {
+    var debugDescription: String {
         switch self {
         case .unknown:
             return "Unknown error occurred."
@@ -61,8 +61,6 @@ extension RxCocoaError {
     }
 }
 
-
-
 // MARK: Error binding policies
 
 func bindingError(_ error: Swift.Error) {
@@ -74,22 +72,25 @@ func bindingError(_ error: Swift.Error) {
 #endif
 }
 
-/// Swift does not implement abstract methods. This method is used as a runtime check to ensure that methods which intended to be abstract (i.e., they should be implemented in subclasses) are not called directly on the superclass.
-func rxAbstractMethod(message: String = "Abstract method", file: StaticString = #file, line: UInt = #line) -> Swift.Never {
+/// Swift does not implement abstract methods. This method is used as a runtime check to ensure that methods which
+/// intended to be abstract (i.e., they should be implemented in subclasses) are not called directly on the superclass.
+func rxAbstractMethod(message: String = "Abstract method", file: StaticString = #file, line: UInt = #line) -> Swift
+.Never {
     rxFatalError(message, file: file, line: line)
 }
 
-func rxFatalError(_ lastMessage: @autoclosure () -> String, file: StaticString = #file, line: UInt = #line) -> Swift.Never  {
+func rxFatalError(_ lastMessage: @autoclosure () -> String, file: StaticString = #file, line: UInt = #line) -> Swift
+.Never {
     // The temptation to comment this line is great, but please don't, it's for your own good. The choice is yours.
     fatalError(lastMessage(), file: file, line: line)
 }
 
 func rxFatalErrorInDebug(_ lastMessage: @autoclosure () -> String, file: StaticString = #file, line: UInt = #line) {
-    #if DEBUG
-        fatalError(lastMessage(), file: file, line: line)
-    #else
-        print("\(file):\(line): \(lastMessage())")
-    #endif
+#if DEBUG
+    fatalError(lastMessage(), file: file, line: line)
+#else
+    print("\(file):\(line): \(lastMessage())")
+#endif
 }
 
 // MARK: casts or fatal error
@@ -128,7 +129,7 @@ func castOrFatalError<T>(_ value: AnyObject!, message: String) -> T {
     guard let result = maybeResult else {
         rxFatalError(message)
     }
-    
+
     return result
 }
 
@@ -137,7 +138,7 @@ func castOrFatalError<T>(_ value: Any!) -> T {
     guard let result = maybeResult else {
         rxFatalError("Failure converting from \(String(describing: value)) to \(T.self)")
     }
-    
+
     return result
 }
 
@@ -148,8 +149,7 @@ let delegateNotSet = "Delegate not set"
 
 // MARK: Shared with RxSwift
 
-func rxFatalError(_ lastMessage: String) -> Never  {
+func rxFatalError(_ lastMessage: String) -> Never {
     // The temptation to comment this line is great, but please don't, it's for your own good. The choice is yours.
     fatalError(lastMessage)
 }
-

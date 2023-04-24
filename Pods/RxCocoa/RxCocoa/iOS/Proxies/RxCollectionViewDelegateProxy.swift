@@ -8,15 +8,14 @@
 
 #if os(iOS) || os(tvOS)
 
-import UIKit
 import RxSwift
+import UIKit
 
 /// For more information take a look at `DelegateProxyType`.
-open class RxCollectionViewDelegateProxy
-    : RxScrollViewDelegateProxy {
-
+open class RxCollectionViewDelegateProxy:
+RxScrollViewDelegateProxy {
     /// Typed parent object.
-    public weak private(set) var collectionView: UICollectionView?
+    public private(set) weak var collectionView: UICollectionView?
 
     /// Initializes `RxCollectionViewDelegateProxy`
     ///

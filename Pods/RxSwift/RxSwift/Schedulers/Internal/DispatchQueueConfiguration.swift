@@ -18,11 +18,10 @@ extension DispatchQueueConfiguration {
     func schedule<StateType>(_ state: StateType, action: @escaping (StateType) -> Disposable) -> Disposable {
         let cancel = SingleAssignmentDisposable()
 
-        self.queue.async {
+        queue.async {
             if cancel.isDisposed {
                 return
             }
-
 
             cancel.setDisposable(action(state))
         }
@@ -30,13 +29,17 @@ extension DispatchQueueConfiguration {
         return cancel
     }
 
-    func scheduleRelative<StateType>(_ state: StateType, dueTime: RxTimeInterval, action: @escaping (StateType) -> Disposable) -> Disposable {
+    func scheduleRelative<StateType>(
+        _ state: StateType,
+        dueTime: RxTimeInterval,
+        action: @escaping (StateType) -> Disposable
+    ) -> Disposable {
         let deadline = DispatchTime.now() + dueTime
 
         let compositeDisposable = CompositeDisposable()
 
-        let timer = DispatchSource.makeTimerSource(queue: self.queue)
-        timer.schedule(deadline: deadline, leeway: self.leeway)
+        let timer = DispatchSource.makeTimerSource(queue: queue)
+        timer.schedule(deadline: deadline, leeway: leeway)
 
         // TODO:
         // This looks horrible, and yes, it is.
@@ -64,14 +67,19 @@ extension DispatchQueueConfiguration {
         return compositeDisposable
     }
 
-    func schedulePeriodic<StateType>(_ state: StateType, startAfter: RxTimeInterval, period: RxTimeInterval, action: @escaping (StateType) -> StateType) -> Disposable {
+    func schedulePeriodic<StateType>(
+        _ state: StateType,
+        startAfter: RxTimeInterval,
+        period: RxTimeInterval,
+        action: @escaping (StateType) -> StateType
+    ) -> Disposable {
         let initial = DispatchTime.now() + startAfter
 
         var timerState = state
 
-        let timer = DispatchSource.makeTimerSource(queue: self.queue)
-        timer.schedule(deadline: initial, repeating: period, leeway: self.leeway)
-        
+        let timer = DispatchSource.makeTimerSource(queue: queue)
+        timer.schedule(deadline: initial, repeating: period, leeway: leeway)
+
         // TODO:
         // This looks horrible, and yes, it is.
         // It looks like Apple has made a conceptual change here, and I'm unsure why.
@@ -91,7 +99,7 @@ extension DispatchQueueConfiguration {
             timerState = action(timerState)
         })
         timer.resume()
-        
+
         return cancelTimer
     }
 }

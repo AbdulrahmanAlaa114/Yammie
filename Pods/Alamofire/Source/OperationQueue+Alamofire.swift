@@ -34,11 +34,13 @@ extension OperationQueue {
     ///   - underlyingQueue: Underlying  `DispatchQueue`. `nil` by default.
     ///   - name:                        Name for the queue. `nil` by default.
     ///   - startSuspended:              Whether the queue starts suspended. `false` by default.
-    convenience init(qualityOfService: QualityOfService = .default,
-                     maxConcurrentOperationCount: Int = OperationQueue.defaultMaxConcurrentOperationCount,
-                     underlyingQueue: DispatchQueue? = nil,
-                     name: String? = nil,
-                     startSuspended: Bool = false) {
+    convenience init(
+        qualityOfService: QualityOfService = .default,
+        maxConcurrentOperationCount: Int = OperationQueue.defaultMaxConcurrentOperationCount,
+        underlyingQueue: DispatchQueue? = nil,
+        name: String? = nil,
+        startSuspended: Bool = false
+    ) {
         self.init()
         self.qualityOfService = qualityOfService
         self.maxConcurrentOperationCount = maxConcurrentOperationCount

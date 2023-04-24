@@ -29,7 +29,6 @@ import Foundation
 /// Represents a session data task in `ImageDownloader`. It consists of an underlying `URLSessionDataTask` and
 /// an array of `TaskCallback`. Multiple `TaskCallback`s could be added for a single downloading data task.
 public class SessionDataTask {
-
     /// Represents the type of token which used for cancelling a task.
     public typealias CancelToken = Int
 
@@ -75,7 +74,7 @@ public class SessionDataTask {
     init(task: URLSessionDataTask) {
         self.task = task
         self.originalURL = task.originalRequest?.url
-        mutableData = Data()
+        self.mutableData = Data()
     }
 
     func addCallback(_ callback: TaskCallback) -> CancelToken {
@@ -95,8 +94,8 @@ public class SessionDataTask {
         }
         return nil
     }
-    
-    func removeAllCallbacks() -> Void {
+
+    func removeAllCallbacks() {
         lock.lock()
         defer { lock.unlock() }
         callbacksStore.removeAll()

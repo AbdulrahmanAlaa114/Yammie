@@ -8,12 +8,10 @@
 import UIKit
 
 extension UICollectionView: Reusable {
-
-    func registerNib<Cell: UICollectionViewCell>(cell: Cell.Type) {
+    func registerNib<Cell: UICollectionViewCell>(cell _: Cell.Type) {
         let nibName = Cell.identifier
-        self.register(UINib(nibName: nibName, bundle: nil), forCellWithReuseIdentifier: nibName)
+        register(UINib(nibName: nibName, bundle: nil), forCellWithReuseIdentifier: nibName)
     }
-    
 }
 
 extension UICollectionViewCell: Reusable {}

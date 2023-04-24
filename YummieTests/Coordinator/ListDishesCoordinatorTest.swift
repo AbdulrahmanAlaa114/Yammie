@@ -9,12 +9,13 @@ import XCTest
 @testable import Yummie
 
 class ListDishesCoordinatorTest: XCTestCase {
-
     var sut: ListDishesCoordinator!
-   
+
     override func setUpWithError() throws {
-        
-        sut = ListDishesCoordinator(navigationController: UINavigationController(), category: DishCategory(id: "", name: "", image: ""))
+        sut = ListDishesCoordinator(
+            navigationController: UINavigationController(),
+            category: DishCategory(id: "", name: "", image: "")
+        )
     }
 
     override func tearDownWithError() throws {
@@ -26,5 +27,4 @@ class ListDishesCoordinatorTest: XCTestCase {
         sut.goToDishDetail(dish: dish)
         XCTAssertEqual(sut.childCoordinators.count, 1)
     }
-    
 }
