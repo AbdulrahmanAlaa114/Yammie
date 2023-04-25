@@ -13,6 +13,7 @@ enum AppError: LocalizedError {
     case unknownError
     case invalidUrl
     case serverError(String)
+    case noInternetConnection
 
     var errorDescription: String? {
         switch self {
@@ -26,6 +27,8 @@ enum AppError: LocalizedError {
             return error
 //        case .statusCode:
 //            return "Status Code Not Found"
+        case .noInternetConnection:
+            return "No internet connection"
         }
     }
 }

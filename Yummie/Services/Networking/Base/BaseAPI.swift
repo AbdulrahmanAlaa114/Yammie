@@ -15,42 +15,25 @@ class BaseAPI<T: TargetType> {
         responseClass _: M.Type,
         completion: @escaping (Result<M?, Error>) -> Void
     ) {
+        guard Reachability()?.connection != Reachability.Connection.none else {
+            completion(.failure(AppError.noInternetConnection))
+            return
+        }
         let method = Alamofire.HTTPMethod(rawValue: target.method.rawValue)
         let headers = Alamofire.HTTPHeaders(target.headers ?? [:])
         let params = buildParams(task: target.task)
-
         AF.request(target.url, method: method, parameters: params.0, encoding: params.1, headers: headers)
-            .responseJSON { response in
-
-//            print(try? response.result.get())
-//            guard let statusCode = response.response?.statusCode else {
-//                // ADD Custom Error
-//                completion(.failure(AppError.statusCode))
-//                return
-//            }
-
-//            if statusCode >= 200 && statusCode <= 299 {
-
-                guard let jsonResponse = try? response.result.get() else {
-                    completion(.failure(AppError.unknownError))
-                    return
+            .responseData { response in
+                switch response.result {
+                case let .success(result):
+                    guard let responseObj = try? JSONDecoder().decode(M.self, from: result) else {
+                        completion(.failure(AppError.errorDecoding))
+                        return
+                    }
+                    completion(.success(responseObj))
+                case let .failure(error):
+                    completion(.failure(error))
                 }
-                guard let theJSONData = try? JSONSerialization.data(withJSONObject: jsonResponse, options: []) else {
-                    completion(.failure(AppError.unknownError))
-                    return
-                }
-                guard let responseObj = try? JSONDecoder().decode(M.self, from: theJSONData) else {
-                    completion(.failure(AppError.errorDecoding))
-                    return
-                }
-
-                completion(.success(responseObj))
-
-//            }else{
-//
-//
-//
-//            }
             }
     }
 

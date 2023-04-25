@@ -26,30 +26,29 @@ class DishDetailViewModel: BaseViewModel {
         self.dish = dish
         self.api = api
     }
-
+    
     func placingOrder() {
-        if Reachability()?.connection != Reachability.Connection.none {
-            loadingBehavior.accept(true)
-            let info = [
-                "dishId": "\(dish.id ?? "")",
-                "name": nameBehavior.value
-            ]
-
-            api.placeOrder(info: info) { [weak self] result in
-                guard let self = self else { return }
-                switch result {
-                case .success:
-                    self.creatAlert(
-                        alertTitle: "Success",
-                        alertMessage: "Your order has been received. 👨🏼‍🍳"
-                    )
-                    self.loadingBehavior.accept(false)
-                case let .failure(error):
-                    self.loadingBehavior.accept(false)
-                    self.creatAlert(alertTitle: "Error", alertMessage: error.localizedDescription)
-                }
+        loadingBehavior.accept(true)
+        let info = [
+            "dishId": "\(dish.id ?? "")",
+            "name": nameBehavior.value
+        ]
+        
+        api.placeOrder(info: info) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success:
+                self.creatAlert(
+                    alertTitle: "Success",
+                    alertMessage: "Your order has been received. 👨🏼‍🍳"
+                )
+                self.loadingBehavior.accept(false)
+            case let .failure(error):
+                self.loadingBehavior.accept(false)
+                self.creatAlert(alertTitle: "Error", alertMessage: error.localizedDescription)
             }
         }
+        
     }
 
     deinit {

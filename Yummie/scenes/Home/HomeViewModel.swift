@@ -25,20 +25,18 @@ class HomeViewModel: BaseViewModel {
     }
 
     func getData() {
-        if Reachability()?.connection != Reachability.Connection.none {
-            loadingBehavior.accept(true)
-            api.fetchAllCategories { [weak self] result in
-                guard let self = self else { return }
-                switch result {
-                case let .success(response):
-                    self.categories.onNext(response?.data?.categories ?? [])
-                    self.populars.onNext(response?.data?.populars ?? [])
-                    self.specials.onNext(response?.data?.specials ?? [])
-                    self.loadingBehavior.accept(false)
-                case let .failure(error):
-                    self.loadingBehavior.accept(false)
-                    self.creatAlert(alertTitle: "Error", alertMessage: error.localizedDescription)
-                }
+        loadingBehavior.accept(true)
+        api.fetchAllCategories { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case let .success(response):
+                self.categories.onNext(response?.data?.categories ?? [])
+                self.populars.onNext(response?.data?.populars ?? [])
+                self.specials.onNext(response?.data?.specials ?? [])
+                self.loadingBehavior.accept(false)
+            case let .failure(error):
+                self.loadingBehavior.accept(false)
+                self.creatAlert(alertTitle: "Error", alertMessage: error.localizedDescription)
             }
         }
     }

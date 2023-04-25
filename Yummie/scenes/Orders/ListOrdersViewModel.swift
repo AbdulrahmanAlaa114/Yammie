@@ -21,19 +21,17 @@ class ListOrdersViewModel: BaseViewModel {
     }
 
     func getData() {
-        if Reachability()?.connection != Reachability.Connection.none {
-            loadingBehavior.accept(true)
-            api.fetchOrders { [weak self] result in
-                guard let self = self else { return }
-                switch result {
-                case let .success(response):
-
-                    self.ordersPublish.onNext(response?.data ?? [])
-                    self.loadingBehavior.accept(false)
-                case let .failure(error):
-                    self.loadingBehavior.accept(false)
-                    self.creatAlert(alertTitle: "Error", alertMessage: error.localizedDescription)
-                }
+        loadingBehavior.accept(true)
+        api.fetchOrders { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case let .success(response):
+                
+                self.ordersPublish.onNext(response?.data ?? [])
+                self.loadingBehavior.accept(false)
+            case let .failure(error):
+                self.loadingBehavior.accept(false)
+                self.creatAlert(alertTitle: "Error", alertMessage: error.localizedDescription)
             }
         }
     }
