@@ -20,8 +20,6 @@
 		0406CAB82840179B00AF6357 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0406CAB42840179B00AF6357 /* OnboardingViewController.swift */; };
 		0406CAB92840179B00AF6357 /* OnboardingCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0406CAB52840179B00AF6357 /* OnboardingCollectionViewCell.xib */; };
 		042381D028404695002EC553 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042381CF28404695002EC553 /* UIViewController+Extension.swift */; };
-		042381D328406106002EC553 /* DesignSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042381D228406106002EC553 /* DesignSystem.swift */; };
-		042381D528406117002EC553 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042381D428406117002EC553 /* Colors.swift */; };
 		0431EBEE28415EFD00C2B761 /* StubGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0431EBED28415EFD00C2B761 /* StubGenerator.swift */; };
 		0431EBF128415FEF00C2B761 /* FoodAPIMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0431EBF028415FEF00C2B761 /* FoodAPIMock.swift */; };
 		044F6525283EF65700F2BE02 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044F6524283EF65700F2BE02 /* AppDelegate.swift */; };
@@ -84,6 +82,9 @@
 		04D4681A2844561A006D6897 /* TableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D468192844561A006D6897 /* TableView+Extension.swift */; };
 		04D4681C2847A564006D6897 /* CollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D4681B2847A564006D6897 /* CollectionView+Extension.swift */; };
 		A4BAE0420360D30F48A2AE29 /* Pods_YummieTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DFCE70F461505FE8E619733 /* Pods_YummieTests.framework */; };
+		B4D84D9F29F74A3700702451 /* Assets.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4D84D9C29F74A3700702451 /* Assets.generated.swift */; };
+		B4D84DA029F74A3700702451 /* swiftgen.config.yml in Resources */ = {isa = PBXBuildFile; fileRef = B4D84D9D29F74A3700702451 /* swiftgen.config.yml */; };
+		B4D84DA129F74A3700702451 /* template.stencil in Resources */ = {isa = PBXBuildFile; fileRef = B4D84D9E29F74A3700702451 /* template.stencil */; };
 		C07B87F91FBCD31364E7EF71 /* Pods_Yummie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4770570C150F6FA25DD0C8C5 /* Pods_Yummie.framework */; };
 /* End PBXBuildFile section */
 
@@ -111,8 +112,6 @@
 		0406CAB42840179B00AF6357 /* OnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		0406CAB52840179B00AF6357 /* OnboardingCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OnboardingCollectionViewCell.xib; sourceTree = "<group>"; };
 		042381CF28404695002EC553 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
-		042381D228406106002EC553 /* DesignSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem.swift; sourceTree = "<group>"; };
-		042381D428406117002EC553 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		0431EBDB2841580100C2B761 /* YummieTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YummieTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0431EBED28415EFD00C2B761 /* StubGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StubGenerator.swift; sourceTree = "<group>"; };
 		0431EBF028415FEF00C2B761 /* FoodAPIMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodAPIMock.swift; sourceTree = "<group>"; };
@@ -181,6 +180,9 @@
 		4770570C150F6FA25DD0C8C5 /* Pods_Yummie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Yummie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EA8983F0BD3E9FAD415E6E3 /* Pods-Yummie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yummie.debug.xcconfig"; path = "Target Support Files/Pods-Yummie/Pods-Yummie.debug.xcconfig"; sourceTree = "<group>"; };
 		84811801949CD9D99045F03E /* Pods-YummieTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YummieTests.debug.xcconfig"; path = "Target Support Files/Pods-YummieTests/Pods-YummieTests.debug.xcconfig"; sourceTree = "<group>"; };
+		B4D84D9C29F74A3700702451 /* Assets.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.generated.swift; sourceTree = "<group>"; };
+		B4D84D9D29F74A3700702451 /* swiftgen.config.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = swiftgen.config.yml; sourceTree = "<group>"; };
+		B4D84D9E29F74A3700702451 /* template.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = template.stencil; sourceTree = "<group>"; };
 		E2E818A1FA929F9952C6D6CB /* Pods-Yummie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yummie.release.xcconfig"; path = "Target Support Files/Pods-Yummie/Pods-Yummie.release.xcconfig"; sourceTree = "<group>"; };
 		F3EF26539723C7ECA9677BD1 /* Pods-YummieTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YummieTests.release.xcconfig"; path = "Target Support Files/Pods-YummieTests/Pods-YummieTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -248,7 +250,6 @@
 			isa = PBXGroup;
 			children = (
 				0406CAA82840172400AF6357 /* LaunchScreen.storyboard */,
-				042381D1284060E0002EC553 /* Design System */,
 				044F652D283EF65C00F2BE02 /* Assets.xcassets */,
 			);
 			path = Resources;
@@ -262,15 +263,6 @@
 				044F6526283EF65700F2BE02 /* SceneDelegate.swift */,
 			);
 			path = Configuration;
-			sourceTree = "<group>";
-		};
-		042381D1284060E0002EC553 /* Design System */ = {
-			isa = PBXGroup;
-			children = (
-				042381D228406106002EC553 /* DesignSystem.swift */,
-				042381D428406117002EC553 /* Colors.swift */,
-			);
-			path = "Design System";
 			sourceTree = "<group>";
 		};
 		0431EBDC2841580100C2B761 /* YummieTests */ = {
@@ -307,6 +299,7 @@
 		044F6523283EF65700F2BE02 /* Yummie */ = {
 			isa = PBXGroup;
 			children = (
+				B4D84D9B29F74A3700702451 /* SwiftGen */,
 				04D468232850D256006D6897 /* Utilities */,
 				042381CC28403B77002EC553 /* Configuration */,
 				04D4681D2850CF28006D6897 /* scenes */,
@@ -560,6 +553,16 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		B4D84D9B29F74A3700702451 /* SwiftGen */ = {
+			isa = PBXGroup;
+			children = (
+				B4D84D9C29F74A3700702451 /* Assets.generated.swift */,
+				B4D84D9D29F74A3700702451 /* swiftgen.config.yml */,
+				B4D84D9E29F74A3700702451 /* template.stencil */,
+			);
+			path = SwiftGen;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -586,6 +589,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 044F6535283EF65C00F2BE02 /* Build configuration list for PBXNativeTarget "Yummie" */;
 			buildPhases = (
+				B4D84DA329F74AB300702451 /* SwiftGen */,
 				6FBDF10001022CA12484A889 /* [CP] Check Pods Manifest.lock */,
 				044F651D283EF65700F2BE02 /* Sources */,
 				044F651E283EF65700F2BE02 /* Frameworks */,
@@ -661,11 +665,13 @@
 				0455A3B0283FBD0F00FB0EF7 /* ListDishesViewController.xib in Resources */,
 				044F6579283EF8A700F2BE02 /* DishListTableViewCell.xib in Resources */,
 				0455A3C2283FDC7000FB0EF7 /* ListOrdersViewController.xib in Resources */,
+				B4D84DA029F74A3700702451 /* swiftgen.config.yml in Resources */,
 				044F657E283EF8A700F2BE02 /* CategoryCollectionViewCell.xib in Resources */,
 				044F657C283EF8A700F2BE02 /* DishPortraitCollectionViewCell.xib in Resources */,
 				044F652E283EF65C00F2BE02 /* Assets.xcassets in Resources */,
 				044F6580283EF8A700F2BE02 /* DishLandscapeCollectionViewCell.xib in Resources */,
 				044F6577283EF8A700F2BE02 /* HomeViewController.xib in Resources */,
+				B4D84DA129F74A3700702451 /* template.stencil in Resources */,
 				0406CAA92840172400AF6357 /* LaunchScreen.storyboard in Resources */,
 				0455A3B5283FBE1F00FB0EF7 /* DishDetailViewController.xib in Resources */,
 				0406CAB72840179B00AF6357 /* OnboardingViewController.xib in Resources */,
@@ -750,6 +756,24 @@
 			shellPath = /bin/sh;
 			shellScript = "if which swiftformat >/dev/null; then\n  swiftformat --exclude Pods,ThirdParty .\n  swiftformat .\n  swiftformat --exclude Pods,ThirdParty .\n\nelse\n  echo \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\ntouch \"${PROJECT_DIR}/output_dependency\"\n";
 		};
+		B4D84DA329F74AB300702451 /* SwiftGen */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftGen;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nexport PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftgen >& /dev/null; then\n  swiftgen config run --config Yummie/SwiftGen/swiftgen.config.yml\nelse\n  echo \"error: SwiftGen not installed, download from https://github.com/SwiftGen/SwiftGen\"\nfi\n";
+		};
 		BC9C1F6D36C9178527BC119C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -799,7 +823,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				044F653C283EF7FB00F2BE02 /* String+Extension.swift in Sources */,
-				042381D528406117002EC553 /* Colors.swift in Sources */,
 				044F657A283EF8A700F2BE02 /* DishListTableViewCell.swift in Sources */,
 				044F6590283EF8BE00F2BE02 /* Order.swift in Sources */,
 				0455A3C6283FE07B00FB0EF7 /* ListOrdersCoordinator.swift in Sources */,
@@ -824,6 +847,7 @@
 				0455A3B9283FBFED00FB0EF7 /* DishDetailViewModel.swift in Sources */,
 				044F654D283EF85C00F2BE02 /* OnboardingCoordinator.swift in Sources */,
 				044F6525283EF65700F2BE02 /* AppDelegate.swift in Sources */,
+				B4D84D9F29F74A3700702451 /* Assets.generated.swift in Sources */,
 				04D4681A2844561A006D6897 /* TableView+Extension.swift in Sources */,
 				0406CAB82840179B00AF6357 /* OnboardingViewController.swift in Sources */,
 				044F6582283EF8A700F2BE02 /* CardView.swift in Sources */,
@@ -842,7 +866,6 @@
 				0406CAA5283FE7DB00AF6357 /* BaseAPI.swift in Sources */,
 				044F653E283EF7FB00F2BE02 /* UserDefaults+Extension.swift in Sources */,
 				0455A3B7283FBFB900FB0EF7 /* ListDishesViewModel.swift in Sources */,
-				042381D328406106002EC553 /* DesignSystem.swift in Sources */,
 				044F6527283EF65700F2BE02 /* SceneDelegate.swift in Sources */,
 				044F654F283EF85C00F2BE02 /* HomeCoordinator.swift in Sources */,
 				044F658E283EF8BD00F2BE02 /* OnboaringSlide.swift in Sources */,

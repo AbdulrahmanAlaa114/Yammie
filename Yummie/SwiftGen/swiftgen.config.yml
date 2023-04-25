@@ -1,0 +1,11 @@
+input_dir: ${PROJECT_DIR}/Yummie
+output_dir: ${PROJECT_DIR}/Yummie/SwiftGen
+xcassets:
+  inputs:
+    - Resources/Assets.xcassets
+#    - Colors.xcassets
+  outputs:
+    - templatePath: ${PROJECT_DIR}/Yummie/SwiftGen/template.stencil
+      params:
+        publicAccess: true
+      output: Assets.generated.swift

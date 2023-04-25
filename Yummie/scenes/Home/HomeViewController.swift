@@ -64,7 +64,7 @@ class HomeViewController: UIViewController {
             target: self,
             action: #selector(goToListOrder)
         )
-        orderListBtn.tintColor = DesignSystem.Colors.primary.color
+        orderListBtn.tintColor = .primary
         navigationItem.rightBarButtonItem = orderListBtn
     }
 
