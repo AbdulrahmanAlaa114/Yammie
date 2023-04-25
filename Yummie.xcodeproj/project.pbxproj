@@ -81,11 +81,15 @@
 		04D468182844561A006D6897 /* OnboardingCoordinatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D468172844561A006D6897 /* OnboardingCoordinatorTest.swift */; };
 		04D4681A2844561A006D6897 /* TableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D468192844561A006D6897 /* TableView+Extension.swift */; };
 		04D4681C2847A564006D6897 /* CollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D4681B2847A564006D6897 /* CollectionView+Extension.swift */; };
-		A4BAE0420360D30F48A2AE29 /* Pods_YummieTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DFCE70F461505FE8E619733 /* Pods_YummieTests.framework */; };
 		B4D84D9F29F74A3700702451 /* Assets.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4D84D9C29F74A3700702451 /* Assets.generated.swift */; };
 		B4D84DA029F74A3700702451 /* swiftgen.config.yml in Resources */ = {isa = PBXBuildFile; fileRef = B4D84D9D29F74A3700702451 /* swiftgen.config.yml */; };
 		B4D84DA129F74A3700702451 /* template.stencil in Resources */ = {isa = PBXBuildFile; fileRef = B4D84D9E29F74A3700702451 /* template.stencil */; };
-		C07B87F91FBCD31364E7EF71 /* Pods_Yummie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4770570C150F6FA25DD0C8C5 /* Pods_Yummie.framework */; };
+		B4D84DA629F752C400702451 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = B4D84DA529F752C400702451 /* Alamofire */; };
+		B4D84DA929F7532600702451 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B4D84DA829F7532600702451 /* IQKeyboardManagerSwift */; };
+		B4D84DAC29F7535300702451 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = B4D84DAB29F7535300702451 /* RxCocoa */; };
+		B4D84DAE29F7535300702451 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = B4D84DAD29F7535300702451 /* RxRelay */; };
+		B4D84DB029F7535300702451 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B4D84DAF29F7535300702451 /* RxSwift */; };
+		B4D84DB329F753B200702451 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = B4D84DB229F753B200702451 /* Kingfisher */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -176,15 +180,9 @@
 		04D468172844561A006D6897 /* OnboardingCoordinatorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinatorTest.swift; sourceTree = "<group>"; };
 		04D468192844561A006D6897 /* TableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TableView+Extension.swift"; sourceTree = "<group>"; };
 		04D4681B2847A564006D6897 /* CollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollectionView+Extension.swift"; sourceTree = "<group>"; };
-		2DFCE70F461505FE8E619733 /* Pods_YummieTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YummieTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4770570C150F6FA25DD0C8C5 /* Pods_Yummie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Yummie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4EA8983F0BD3E9FAD415E6E3 /* Pods-Yummie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yummie.debug.xcconfig"; path = "Target Support Files/Pods-Yummie/Pods-Yummie.debug.xcconfig"; sourceTree = "<group>"; };
-		84811801949CD9D99045F03E /* Pods-YummieTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YummieTests.debug.xcconfig"; path = "Target Support Files/Pods-YummieTests/Pods-YummieTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B4D84D9C29F74A3700702451 /* Assets.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.generated.swift; sourceTree = "<group>"; };
 		B4D84D9D29F74A3700702451 /* swiftgen.config.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = swiftgen.config.yml; sourceTree = "<group>"; };
 		B4D84D9E29F74A3700702451 /* template.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = template.stencil; sourceTree = "<group>"; };
-		E2E818A1FA929F9952C6D6CB /* Pods-Yummie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yummie.release.xcconfig"; path = "Target Support Files/Pods-Yummie/Pods-Yummie.release.xcconfig"; sourceTree = "<group>"; };
-		F3EF26539723C7ECA9677BD1 /* Pods-YummieTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YummieTests.release.xcconfig"; path = "Target Support Files/Pods-YummieTests/Pods-YummieTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,7 +190,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A4BAE0420360D30F48A2AE29 /* Pods_YummieTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -200,7 +197,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C07B87F91FBCD31364E7EF71 /* Pods_Yummie.framework in Frameworks */,
+				B4D84DB329F753B200702451 /* Kingfisher in Frameworks */,
+				B4D84DAC29F7535300702451 /* RxCocoa in Frameworks */,
+				B4D84DA629F752C400702451 /* Alamofire in Frameworks */,
+				B4D84DB029F7535300702451 /* RxSwift in Frameworks */,
+				B4D84DAE29F7535300702451 /* RxRelay in Frameworks */,
+				B4D84DA929F7532600702451 /* IQKeyboardManagerSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,8 +284,6 @@
 				044F6523283EF65700F2BE02 /* Yummie */,
 				0431EBDC2841580100C2B761 /* YummieTests */,
 				044F6522283EF65700F2BE02 /* Products */,
-				88CED4896238FABEF95D080D /* Pods */,
-				5F9601998DC6FB3123D0E2BD /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -533,26 +533,6 @@
 			path = Coordinator;
 			sourceTree = "<group>";
 		};
-		5F9601998DC6FB3123D0E2BD /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				4770570C150F6FA25DD0C8C5 /* Pods_Yummie.framework */,
-				2DFCE70F461505FE8E619733 /* Pods_YummieTests.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		88CED4896238FABEF95D080D /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				4EA8983F0BD3E9FAD415E6E3 /* Pods-Yummie.debug.xcconfig */,
-				E2E818A1FA929F9952C6D6CB /* Pods-Yummie.release.xcconfig */,
-				84811801949CD9D99045F03E /* Pods-YummieTests.debug.xcconfig */,
-				F3EF26539723C7ECA9677BD1 /* Pods-YummieTests.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		B4D84D9B29F74A3700702451 /* SwiftGen */ = {
 			isa = PBXGroup;
 			children = (
@@ -570,7 +550,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0431EBE32841580100C2B761 /* Build configuration list for PBXNativeTarget "YummieTests" */;
 			buildPhases = (
-				BC9C1F6D36C9178527BC119C /* [CP] Check Pods Manifest.lock */,
 				0431EBD72841580100C2B761 /* Sources */,
 				0431EBD82841580100C2B761 /* Frameworks */,
 				0431EBD92841580100C2B761 /* Resources */,
@@ -590,19 +569,25 @@
 			buildConfigurationList = 044F6535283EF65C00F2BE02 /* Build configuration list for PBXNativeTarget "Yummie" */;
 			buildPhases = (
 				B4D84DA329F74AB300702451 /* SwiftGen */,
-				6FBDF10001022CA12484A889 /* [CP] Check Pods Manifest.lock */,
 				044F651D283EF65700F2BE02 /* Sources */,
 				044F651E283EF65700F2BE02 /* Frameworks */,
 				044F651F283EF65700F2BE02 /* Resources */,
 				04D468112844561A006D6897 /* SwiftLint */,
 				B4D84D9A29F736F900702451 /* SwiftFormat */,
-				42EF5D595C1F78AE82587CA5 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = Yummie;
+			packageProductDependencies = (
+				B4D84DA529F752C400702451 /* Alamofire */,
+				B4D84DA829F7532600702451 /* IQKeyboardManagerSwift */,
+				B4D84DAB29F7535300702451 /* RxCocoa */,
+				B4D84DAD29F7535300702451 /* RxRelay */,
+				B4D84DAF29F7535300702451 /* RxSwift */,
+				B4D84DB229F753B200702451 /* Kingfisher */,
+			);
 			productName = Yummie;
 			productReference = 044F6521283EF65700F2BE02 /* Yummie.app */;
 			productType = "com.apple.product-type.application";
@@ -635,6 +620,12 @@
 				Base,
 			);
 			mainGroup = 044F6518283EF65700F2BE02;
+			packageReferences = (
+				B4D84DA429F752C400702451 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				B4D84DA729F7532600702451 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+				B4D84DAA29F7535300702451 /* XCRemoteSwiftPackageReference "RxSwift" */,
+				B4D84DB129F753B200702451 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			productRefGroup = 044F6522283EF65700F2BE02 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -699,45 +690,6 @@
 			shellPath = /bin/sh;
 			shellScript = "if [[ \"$(uname -m)\" == arm64 ]]; then\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n\n";
 		};
-		42EF5D595C1F78AE82587CA5 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Yummie/Pods-Yummie-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Yummie/Pods-Yummie-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Yummie/Pods-Yummie-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		6FBDF10001022CA12484A889 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Yummie-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		B4D84D9A29F736F900702451 /* SwiftFormat */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -773,28 +725,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nexport PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftgen >& /dev/null; then\n  swiftgen config run --config Yummie/SwiftGen/swiftgen.config.yml\nelse\n  echo \"error: SwiftGen not installed, download from https://github.com/SwiftGen/SwiftGen\"\nfi\n";
-		};
-		BC9C1F6D36C9178527BC119C /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-YummieTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -885,7 +815,6 @@
 /* Begin XCBuildConfiguration section */
 		0431EBE12841580100C2B761 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 84811801949CD9D99045F03E /* Pods-YummieTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
@@ -905,7 +834,6 @@
 		};
 		0431EBE22841580100C2B761 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F3EF26539723C7ECA9677BD1 /* Pods-YummieTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
@@ -1041,7 +969,6 @@
 		};
 		044F6536283EF65C00F2BE02 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4EA8983F0BD3E9FAD415E6E3 /* Pods-Yummie.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1073,7 +1000,6 @@
 		};
 		044F6537283EF65C00F2BE02 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E2E818A1FA929F9952C6D6CB /* Pods-Yummie.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1134,6 +1060,74 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B4D84DA429F752C400702451 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		B4D84DA729F7532600702451 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		B4D84DAA29F7535300702451 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
+		B4D84DB129F753B200702451 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B4D84DA529F752C400702451 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B4D84DA429F752C400702451 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		B4D84DA829F7532600702451 /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B4D84DA729F7532600702451 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
+		};
+		B4D84DAB29F7535300702451 /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B4D84DAA29F7535300702451 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		B4D84DAD29F7535300702451 /* RxRelay */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B4D84DAA29F7535300702451 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxRelay;
+		};
+		B4D84DAF29F7535300702451 /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B4D84DAA29F7535300702451 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+		B4D84DB229F753B200702451 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B4D84DB129F753B200702451 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 044F6519283EF65700F2BE02 /* Project object */;
 }
