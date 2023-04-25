@@ -621,10 +621,10 @@
 			);
 			mainGroup = 044F6518283EF65700F2BE02;
 			packageReferences = (
-				B4D84DA429F752C400702451 /* XCRemoteSwiftPackageReference "Alamofire" */,
-				B4D84DA729F7532600702451 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
-				B4D84DAA29F7535300702451 /* XCRemoteSwiftPackageReference "RxSwift" */,
-				B4D84DB129F753B200702451 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				B4D84DA429F752C400702451 /* XCRemoteSwiftPackageReference "Alamofire.git" */,
+				B4D84DA729F7532600702451 /* XCRemoteSwiftPackageReference "IQKeyboardManager.git" */,
+				B4D84DAA29F7535300702451 /* XCRemoteSwiftPackageReference "RxSwift.git" */,
+				B4D84DB129F753B200702451 /* XCRemoteSwiftPackageReference "Kingfisher.git" */,
 			);
 			productRefGroup = 044F6522283EF65700F2BE02 /* Products */;
 			projectDirPath = "";
@@ -1062,7 +1062,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		B4D84DA429F752C400702451 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+		B4D84DA429F752C400702451 /* XCRemoteSwiftPackageReference "Alamofire.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
 			requirement = {
@@ -1070,7 +1070,7 @@
 				minimumVersion = 5.0.0;
 			};
 		};
-		B4D84DA729F7532600702451 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+		B4D84DA729F7532600702451 /* XCRemoteSwiftPackageReference "IQKeyboardManager.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
 			requirement = {
@@ -1078,7 +1078,7 @@
 				kind = branch;
 			};
 		};
-		B4D84DAA29F7535300702451 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+		B4D84DAA29F7535300702451 /* XCRemoteSwiftPackageReference "RxSwift.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
 			requirement = {
@@ -1086,7 +1086,7 @@
 				minimumVersion = 6.0.0;
 			};
 		};
-		B4D84DB129F753B200702451 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+		B4D84DB129F753B200702451 /* XCRemoteSwiftPackageReference "Kingfisher.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
 			requirement = {
@@ -1099,32 +1099,32 @@
 /* Begin XCSwiftPackageProductDependency section */
 		B4D84DA529F752C400702451 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = B4D84DA429F752C400702451 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			package = B4D84DA429F752C400702451 /* XCRemoteSwiftPackageReference "Alamofire.git" */;
 			productName = Alamofire;
 		};
 		B4D84DA829F7532600702451 /* IQKeyboardManagerSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = B4D84DA729F7532600702451 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			package = B4D84DA729F7532600702451 /* XCRemoteSwiftPackageReference "IQKeyboardManager.git" */;
 			productName = IQKeyboardManagerSwift;
 		};
 		B4D84DAB29F7535300702451 /* RxCocoa */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = B4D84DAA29F7535300702451 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			package = B4D84DAA29F7535300702451 /* XCRemoteSwiftPackageReference "RxSwift.git" */;
 			productName = RxCocoa;
 		};
 		B4D84DAD29F7535300702451 /* RxRelay */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = B4D84DAA29F7535300702451 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			package = B4D84DAA29F7535300702451 /* XCRemoteSwiftPackageReference "RxSwift.git" */;
 			productName = RxRelay;
 		};
 		B4D84DAF29F7535300702451 /* RxSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = B4D84DAA29F7535300702451 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			package = B4D84DAA29F7535300702451 /* XCRemoteSwiftPackageReference "RxSwift.git" */;
 			productName = RxSwift;
 		};
 		B4D84DB229F753B200702451 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = B4D84DB129F753B200702451 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			package = B4D84DB129F753B200702451 /* XCRemoteSwiftPackageReference "Kingfisher.git" */;
 			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
