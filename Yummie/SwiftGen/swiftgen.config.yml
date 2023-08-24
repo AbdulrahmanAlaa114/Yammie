@@ -9,3 +9,11 @@ xcassets:
       params:
         publicAccess: true
       output: Assets.generated.swift
+strings:
+  inputs: Resources/en.lproj/Localizable.strings
+  outputs:
+    - templateName: structured-swift5
+      output: Strings.swift
+
+
+#Resources/Base.lproj

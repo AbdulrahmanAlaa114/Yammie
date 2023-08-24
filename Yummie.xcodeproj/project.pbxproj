@@ -81,6 +81,8 @@
 		04D468182844561A006D6897 /* OnboardingCoordinatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D468172844561A006D6897 /* OnboardingCoordinatorTest.swift */; };
 		04D4681A2844561A006D6897 /* TableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D468192844561A006D6897 /* TableView+Extension.swift */; };
 		04D4681C2847A564006D6897 /* CollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D4681B2847A564006D6897 /* CollectionView+Extension.swift */; };
+		B4ABCD382A3E4132009F57BC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B4ABCD3A2A3E4132009F57BC /* Localizable.strings */; };
+		B4ABCD3D2A3E44D9009F57BC /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4ABCD3C2A3E44D9009F57BC /* Strings.swift */; };
 		B4D84D9F29F74A3700702451 /* Assets.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4D84D9C29F74A3700702451 /* Assets.generated.swift */; };
 		B4D84DA029F74A3700702451 /* swiftgen.config.yml in Resources */ = {isa = PBXBuildFile; fileRef = B4D84D9D29F74A3700702451 /* swiftgen.config.yml */; };
 		B4D84DA129F74A3700702451 /* template.stencil in Resources */ = {isa = PBXBuildFile; fileRef = B4D84D9E29F74A3700702451 /* template.stencil */; };
@@ -180,6 +182,9 @@
 		04D468172844561A006D6897 /* OnboardingCoordinatorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinatorTest.swift; sourceTree = "<group>"; };
 		04D468192844561A006D6897 /* TableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TableView+Extension.swift"; sourceTree = "<group>"; };
 		04D4681B2847A564006D6897 /* CollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollectionView+Extension.swift"; sourceTree = "<group>"; };
+		B4ABCD392A3E4132009F57BC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B4ABCD3B2A3E4135009F57BC /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B4ABCD3C2A3E44D9009F57BC /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		B4D84D9C29F74A3700702451 /* Assets.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.generated.swift; sourceTree = "<group>"; };
 		B4D84D9D29F74A3700702451 /* swiftgen.config.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = swiftgen.config.yml; sourceTree = "<group>"; };
 		B4D84D9E29F74A3700702451 /* template.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = template.stencil; sourceTree = "<group>"; };
@@ -253,6 +258,7 @@
 			children = (
 				0406CAA82840172400AF6357 /* LaunchScreen.storyboard */,
 				044F652D283EF65C00F2BE02 /* Assets.xcassets */,
+				B4ABCD3A2A3E4132009F57BC /* Localizable.strings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -537,6 +543,7 @@
 			isa = PBXGroup;
 			children = (
 				B4D84D9C29F74A3700702451 /* Assets.generated.swift */,
+				B4ABCD3C2A3E44D9009F57BC /* Strings.swift */,
 				B4D84D9D29F74A3700702451 /* swiftgen.config.yml */,
 				B4D84D9E29F74A3700702451 /* template.stencil */,
 			);
@@ -618,6 +625,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ar,
 			);
 			mainGroup = 044F6518283EF65700F2BE02;
 			packageReferences = (
@@ -662,6 +670,7 @@
 				044F652E283EF65C00F2BE02 /* Assets.xcassets in Resources */,
 				044F6580283EF8A700F2BE02 /* DishLandscapeCollectionViewCell.xib in Resources */,
 				044F6577283EF8A700F2BE02 /* HomeViewController.xib in Resources */,
+				B4ABCD382A3E4132009F57BC /* Localizable.strings in Resources */,
 				B4D84DA129F74A3700702451 /* template.stencil in Resources */,
 				0406CAA92840172400AF6357 /* LaunchScreen.storyboard in Resources */,
 				0455A3B5283FBE1F00FB0EF7 /* DishDetailViewController.xib in Resources */,
@@ -786,6 +795,7 @@
 				0455A3C4283FDD2C00FB0EF7 /* ListOrdersViewModel.swift in Sources */,
 				044F6550283EF85C00F2BE02 /* BaseCoordinator.swift in Sources */,
 				044F657F283EF8A700F2BE02 /* DishLandscapeCollectionViewCell.swift in Sources */,
+				B4ABCD3D2A3E44D9009F57BC /* Strings.swift in Sources */,
 				0406CAA7283FE7DB00AF6357 /* URLs.swift in Sources */,
 				0406CAA3283FE7DB00AF6357 /* TargetType.swift in Sources */,
 				044F653D283EF7FB00F2BE02 /* UIView+Extension.swift in Sources */,
@@ -811,6 +821,18 @@
 			targetProxy = 0431EBDF2841580100C2B761 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		B4ABCD3A2A3E4132009F57BC /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B4ABCD392A3E4132009F57BC /* en */,
+				B4ABCD3B2A3E4135009F57BC /* ar */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		0431EBE12841580100C2B761 /* Debug */ = {

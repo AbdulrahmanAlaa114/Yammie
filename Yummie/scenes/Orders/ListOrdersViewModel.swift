@@ -26,7 +26,7 @@ class ListOrdersViewModel: BaseViewModel {
             guard let self = self else { return }
             switch result {
             case let .success(response):
-                
+
                 self.ordersPublish.onNext(response?.data ?? [])
                 self.loadingBehavior.accept(false)
             case let .failure(error):

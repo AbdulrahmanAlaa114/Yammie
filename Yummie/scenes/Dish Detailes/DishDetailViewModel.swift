@@ -26,14 +26,14 @@ class DishDetailViewModel: BaseViewModel {
         self.dish = dish
         self.api = api
     }
-    
+
     func placingOrder() {
         loadingBehavior.accept(true)
         let info = [
             "dishId": "\(dish.id ?? "")",
             "name": nameBehavior.value
         ]
-        
+
         api.placeOrder(info: info) { [weak self] result in
             guard let self = self else { return }
             switch result {
@@ -48,7 +48,6 @@ class DishDetailViewModel: BaseViewModel {
                 self.creatAlert(alertTitle: "Error", alertMessage: error.localizedDescription)
             }
         }
-        
     }
 
     deinit {
