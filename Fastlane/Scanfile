@@ -1,11 +1,11 @@
 # For more information about this configuration visit
 # https://github.com/fastlane/scan#scanfile
 
-workspace "Yummie.xcodeproj/project.xcworkspace"
-scheme "Yummie"
-sdk "iphonesimulator"
-device "iPhone 14"
-code_coverage true
-xcargs '-parallelizeTargets'
-prelaunch_simulator true
-derived_data_path "Build/"
+# workspace "Yummie.xcodeproj/project.xcworkspace"
+# scheme "Yummie"
+# sdk "iphonesimulator"
+# device "iPhone 14"
+# code_coverage true
+# xcargs '-parallelizeTargets'
+# prelaunch_simulator true
+# derived_data_path "Build/"

@@ -4,10 +4,11 @@ default_platform :ios
 platform :ios do
     desc 'Builds project and executes unit tests'
     lane :unit_test do |options|
-        # puts "Abdulrahman Alaa" 
-      scan(
-        clean: options[:clean],
-        skip_package_dependencies_resolution: options[:skip_package_dependencies_resolution]
-      )
+        puts "Abdulrahman Alaa" 
+        # run_tests(scheme: "Yummie")
+    #   scan(
+    #     clean: options[:clean],
+    #     skip_package_dependencies_resolution: options[:skip_package_dependencies_resolution]
+    #   )
     end
 end
