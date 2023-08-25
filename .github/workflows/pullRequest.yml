@@ -35,4 +35,4 @@ jobs:
       - name: Run tests
         run: |
           set -o pipefail
-          fastlane tests unit_test
+          fastlane unit_test
