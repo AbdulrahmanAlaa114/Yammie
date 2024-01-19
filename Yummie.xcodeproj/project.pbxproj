@@ -575,12 +575,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 044F6535283EF65C00F2BE02 /* Build configuration list for PBXNativeTarget "Yummie" */;
 			buildPhases = (
-				B4D84DA329F74AB300702451 /* SwiftGen */,
 				044F651D283EF65700F2BE02 /* Sources */,
 				044F651E283EF65700F2BE02 /* Frameworks */,
 				044F651F283EF65700F2BE02 /* Resources */,
-				04D468112844561A006D6897 /* SwiftLint */,
-				B4D84D9A29F736F900702451 /* SwiftFormat */,
 			);
 			buildRules = (
 			);
@@ -679,63 +676,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		04D468112844561A006D6897 /* SwiftLint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = SwiftLint;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if [[ \"$(uname -m)\" == arm64 ]]; then\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n\n";
-		};
-		B4D84D9A29F736F900702451 /* SwiftFormat */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = SwiftFormat;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if which swiftformat >/dev/null; then\n  swiftformat --exclude Pods,ThirdParty .\n  swiftformat .\n  swiftformat --exclude Pods,ThirdParty .\n\nelse\n  echo \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\n";
-		};
-		B4D84DA329F74AB300702451 /* SwiftGen */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = SwiftGen;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nexport PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftgen >& /dev/null; then\n  swiftgen config run --config Yummie/SwiftGen/swiftgen.config.yml\nelse\n  echo \"error: SwiftGen not installed, download from https://github.com/SwiftGen/SwiftGen\"\nfi\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0431EBD72841580100C2B761 /* Sources */ = {
@@ -996,7 +936,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = HXWGTL339P;
+				DEVELOPMENT_TEAM = 6BJ64F9Q4B;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Yummie/Configuration/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1009,7 +949,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.AbdulrahmanAlaa.Yummie;
+				PRODUCT_BUNDLE_IDENTIFIER = com.AbdulrahmanAlaa.Yummie1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -1027,7 +967,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = HXWGTL339P;
+				DEVELOPMENT_TEAM = 6BJ64F9Q4B;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Yummie/Configuration/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1040,7 +980,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.AbdulrahmanAlaa.Yummie;
+				PRODUCT_BUNDLE_IDENTIFIER = com.AbdulrahmanAlaa.Yummie1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
