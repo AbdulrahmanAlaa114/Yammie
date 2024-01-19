@@ -3,10 +3,10 @@ name: Pull Request
 on:
   push:
     branches:
-      - development
+      - test-ci-cd
   pull_request:
     branches:
-      - development
+      - test-ci-cd
   workflow_dispatch:
 
 jobs:
